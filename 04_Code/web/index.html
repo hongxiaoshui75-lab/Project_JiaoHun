@@ -1,0 +1,20 @@
+<!doctype html>
+<!-- Plain HTML/CSS AVG. Primary: scene and readable dialogue, one advance/present action.
+Secondary: testimony/investigation controls. Tertiary: chapter/save/settings.
+Reuse existing --bg/--panel/--paper/--ink/--muted/--line/--accent/--gold.
+Spacing: 4/8/12/16/24/32px; stage 16:9; controls flow below the artwork. -->
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>萧山剪辫案 · 叫魂 Demo</title><link rel="stylesheet" href="/style.css"><script type="module" src="/app.mjs"></script></head>
+<body>
+<header class="masthead"><a class="brand" href="/" aria-label="萧山剪辫案首页"><span class="seal">案</span><span>叫魂<small>萧山剪辫案</small></span></a><nav class="top-actions" aria-label="游戏菜单"><button id="record">证佐凭据</button><button id="save">导出存档</button><button id="load">导入存档</button><button id="settings-open">设置</button><button id="restart" class="subtle">重新开始</button></nav></header>
+<main id="game">
+<div class="chapter"><span id="chapter-kind">卷宗</span><span id="will" aria-label="威信值"></span></div><div class="chapter-heading"><h1 id="stage-title">正在打开卷宗</h1><p class="setting">乾隆三十三年 · 杭州巡抚衙门</p></div>
+<section class="scene" aria-label="当前场景"><div id="stage" class="stage"><div id="background-layer" class="background-layer"></div><div class="scene-shade" aria-hidden="true"></div><div id="object-layer" class="object-layer"></div><div id="character-layer" class="character-layer"></div><div id="hotspot-layer" class="hotspot-layer" aria-label="场景调查热点"></div><div id="focus-layer" class="focus-layer"></div><div class="scene-heading"><span id="scene-label">查核</span><span aria-hidden="true">萧山 · 四僧案</span></div><div id="stage-caption" class="stage-caption"></div><p id="presentation-feedback" class="presentation-feedback" role="status" hidden></p></div><div id="scene-body" class="scene-controls"></div></section>
+<section class="dialogue-panel" aria-label="对白与操作"><div class="dialogue-heading"><p id="speaker" class="speaker">沈砚</p><span id="reading-help" class="reading-help"></span></div><p id="line" aria-live="polite" tabindex="0" title="点击补全文字，再点击继续"></p><div id="actions" class="actions"></div></section>
+<div class="case-panel"><p id="objective">先细看呈堂物件，再听各方陈述。</p><button id="journal" class="subtle">查阅证佐凭据</button></div><p id="notice" class="notice" role="status"></p>
+</main>
+<footer><span>剪刀与发辫，如何成为罪证？</span><span>自动保存于当前浏览器 · <kbd>←</kbd> <kbd>→</kbd> 切换证词 · <kbd>空格</kbd> 推进对白</span></footer>
+<dialog id="records" aria-labelledby="records-title"><div class="modal-heading"><h2 id="records-title">证佐凭据</h2><button id="close-records" aria-label="关闭证佐凭据">关闭</button></div><div class="tabs" role="group" aria-label="资料类别"><button data-tab="evidence">证物与证言</button><button data-tab="profiles">人物档案</button><button data-tab="hint">查办提示</button></div><div id="record-content"></div><div id="record-actions" class="actions"></div></dialog>
+<dialog id="settings" aria-labelledby="settings-title"><div class="modal-heading"><h2 id="settings-title">阅读设置</h2><button id="settings-close">关闭</button></div><label class="setting-row" for="text-speed">文字速度<select id="text-speed"><option value="32">适中</option><option value="16">较快</option><option value="0">立即显示</option></select></label><label class="setting-row" for="reduce-motion"><span>减少动态效果</span><input id="reduce-motion" type="checkbox"></label><p class="small-help">点击对白或按空格：先补全当前句，再推进下一句。设置保存在本机浏览器。</p></dialog>
+<input id="load-file" type="file" accept=".json,application/json" hidden>
+</body></html>

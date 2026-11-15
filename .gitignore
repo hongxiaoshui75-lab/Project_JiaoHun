@@ -1,0 +1,33 @@
+# Reproducible distribution and generated client copies
+/09_Builds/
+/04_Code/web/assets/
+/04_Code/web/assets.mjs
+/02_Art/review/ASSET_CATALOG.html
+
+# Local inspection files, transcripts and third-party references
+/99_Temp/
+/进度.txt
+/美术风格参考/
+/游戏图片素材/
+/游戏剧本原型/
+
+# Credentials, machine settings, dependencies and caches
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+.aws/
+.codex/
+.agents/
+node_modules/
+.cache/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Player saves belong outside the source tree
+jiaohun-save-*.json

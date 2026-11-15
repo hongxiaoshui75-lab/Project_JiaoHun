@@ -1,0 +1,380 @@
+{
+  "version": 1,
+  "direction": "古旧写实绘画",
+  "historicalBoundary": "黑布帽形制与帽缘比对为可替换游戏设计工作稿，不作为历史服饰定论。",
+  "assets": [
+    {
+      "id": "background.corridor",
+      "path": "02_Art/generated/background/corridor.png",
+      "bytes": 2620130,
+      "sha256": "8defa343df7566da7d71490f555b7536cc6e9d77de8f9a0beac7db901e576e40",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "background.court",
+      "path": "02_Art/generated/background/court.png",
+      "bytes": 2671349,
+      "sha256": "da00f71c37804d5509bc35367aff8a6f056e40ce2c8e29d7a4e0e3dd1057fa72",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "background.evidence_room",
+      "path": "02_Art/generated/background/evidence_room.png",
+      "bytes": 2541830,
+      "sha256": "eca60fa4cff88b1bb1aeecbb6d03811bc7f979932a4eeada38318c54a3ac26e7",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "background.exterior",
+      "path": "02_Art/generated/background/exterior.png",
+      "bytes": 2899938,
+      "sha256": "8f9aae33126cbb5c6754b754d7b8061423af3fa9d1ac6ee3dae60906011edb51",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "background.inspection_table",
+      "path": "02_Art/generated/background/inspection_table.png",
+      "bytes": 2494826,
+      "sha256": "35a2551d3532a0e3456f1ca4f8aa0f99c8b1308c355b3aace26abccc99247c3a",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "background.waiting_room",
+      "path": "02_Art/generated/background/waiting_room.png",
+      "bytes": 2384155,
+      "sha256": "b0aa35466f9ffe27e447b4fa0a973cdd005c33a654edb3387a48a68d548cecc7",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.alarmed",
+      "path": "02_Art/generated/character/cai/alarmed.png",
+      "bytes": 2567560,
+      "sha256": "3683a086c8661eb943e801700ff09f87380a9da7e157f1a14e9089c976991fbd",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.confession",
+      "path": "02_Art/generated/character/cai/confession.png",
+      "bytes": 2406715,
+      "sha256": "fcc6c8b697a5891f2435f6fd89965d48a1acd65f8d819b7faee5a47634db390e",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.defensive",
+      "path": "02_Art/generated/character/cai/defensive.png",
+      "bytes": 2400966,
+      "sha256": "dfc1e4e8571208d5970461844d41585509aab970cd80338d723a240bcfc50494",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.exhausted",
+      "path": "02_Art/generated/character/cai/exhausted.png",
+      "bytes": 2450038,
+      "sha256": "8d299af4f63c05b9e45bc3303fc4330a565f8213fdf3177ef443dafc1f4461d1",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.irritated",
+      "path": "02_Art/generated/character/cai/irritated.png",
+      "bytes": 2387190,
+      "sha256": "f7b109ea8d883d3b5563c86756f38790cd64426d1108608b384c73e6e58fae0a",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.neutral",
+      "path": "02_Art/generated/character/cai/neutral.png",
+      "bytes": 2507710,
+      "sha256": "4cfc67f8c930049e7f0a4ee36be777561167653c0dab11701139d01365442b84",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.cai.sweating",
+      "path": "02_Art/generated/character/cai/sweating.png",
+      "bytes": 2461665,
+      "sha256": "7d1f4102e12acbd48210621284d6d19be5cd1cc0418bc243f6b33cd80f5cca37",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.chaofan.concerned",
+      "path": "02_Art/generated/character/chaofan/concerned.png",
+      "bytes": 2126067,
+      "sha256": "d78f1564020667fa082a695e8f259aa70ff52869086d96f2a436782bf7d06b8d",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.chaofan.insistent",
+      "path": "02_Art/generated/character/chaofan/insistent.png",
+      "bytes": 2076692,
+      "sha256": "88f265a2c86688893f43e6265e87d82070e8eedac57cc9a9f77f3555f9a74c8e",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.chaofan.neutral",
+      "path": "02_Art/generated/character/chaofan/neutral.png",
+      "bytes": 2160977,
+      "sha256": "767c99f8b5b18261b7e0ba6ea6cdb5c10cd34038ef32a9b29b05351aa9d1bbff",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.jingxin.neutral",
+      "path": "02_Art/generated/character/jingxin/neutral.png",
+      "bytes": 2065592,
+      "sha256": "9c2fedff2eafc72b819abc37d3c0773beda5914379e8e0535ecc2d1c7b325a6a",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.jingxin.weary",
+      "path": "02_Art/generated/character/jingxin/weary.png",
+      "bytes": 2060540,
+      "sha256": "7bac0d0415fd640dd1fc2446c7d3a724de53ef123db96e51f85d217cc2ca6e5b",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.jucheng.neutral",
+      "path": "02_Art/generated/character/jucheng/neutral.png",
+      "bytes": 2139335,
+      "sha256": "57f83fef5ac193994657b8886f24d2071ee107575b7c0b1820de9240c9808452",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.jucheng.sad",
+      "path": "02_Art/generated/character/jucheng/sad.png",
+      "bytes": 1999671,
+      "sha256": "f5b7e2a69b6afa68b796d7571ff7e755f3bb2849cb8d63ea933b3ccb47ed7d39",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.jucheng.worried",
+      "path": "02_Art/generated/character/jucheng/worried.png",
+      "bytes": 2119438,
+      "sha256": "6a298990da86c03b0df0ebd9d99851540c6e005959a21bbe3247730d706bb446",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.shenyan.assertive",
+      "path": "02_Art/generated/character/shenyan/assertive.png",
+      "bytes": 2101719,
+      "sha256": "fbb2d31dc1429d7aee32cd10a19707d421ab7dedd6d249235bc0c0e0f9045dfa",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.shenyan.neutral",
+      "path": "02_Art/generated/character/shenyan/neutral.png",
+      "bytes": 2122789,
+      "sha256": "809f769f99dd818fa643ec2369e9d3879b6c7d80f5a0cc380164bb7f6d57f741",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.shenyan.resolved",
+      "path": "02_Art/generated/character/shenyan/resolved.png",
+      "bytes": 2040080,
+      "sha256": "954d864658dbcb94ebe100b8647dffc27df7bd22ac168bbf259b0d4a2372ee29",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.shenyan.thinking",
+      "path": "02_Art/generated/character/shenyan/thinking.png",
+      "bytes": 2001728,
+      "sha256": "e5397c0765f6e9f09572affe64e0d51e38dd8b48c3bc3e1170eedb63857e97e6",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.witness.neutral",
+      "path": "02_Art/generated/character/witness/neutral.png",
+      "bytes": 1975066,
+      "sha256": "0b7501f5b60071308b3b837041685b926eae82dea8450bc5a811618e84f564ca",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.witness.recalling",
+      "path": "02_Art/generated/character/witness/recalling.png",
+      "bytes": 1850246,
+      "sha256": "4840edf6ab391a8cf0db563297117d9e6607923a47c37977ff8e384f155b44e3",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.witness.uncertain",
+      "path": "02_Art/generated/character/witness/uncertain.png",
+      "bytes": 1892838,
+      "sha256": "d4ed701bc106dcf3450e64da4f01c433bf2005227f980dfd265f15ea8014c7da",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zeng.listening",
+      "path": "02_Art/generated/character/zeng/listening.png",
+      "bytes": 1775058,
+      "sha256": "d4f6084b7fd00816cfebba601b2b04c9da55a13a8cd214fcfab5b142dec2984d",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zeng.neutral",
+      "path": "02_Art/generated/character/zeng/neutral.png",
+      "bytes": 1830037,
+      "sha256": "9ee9c0d3966353281fb668c5d982e3afe90c71929be8fa3eb708138c23eec95d",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zeng.stern",
+      "path": "02_Art/generated/character/zeng/stern.png",
+      "bytes": 1754061,
+      "sha256": "5efa1a5a102076d6cf6add9baaa925566b387ecc262722d107f87fbbaace8e12",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zeng.verdict",
+      "path": "02_Art/generated/character/zeng/verdict.png",
+      "bytes": 1760449,
+      "sha256": "9ddda62e9058b5f606e67a482a0fe05c946d6d8bdfc1d1a4d01ae93865ac3104",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zhengyi.fearful",
+      "path": "02_Art/generated/character/zhengyi/fearful.png",
+      "bytes": 2539898,
+      "sha256": "07b65d7546faa68cc605323f6b11dd5c8075c959948d6ae463b8e93577ce1aca",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zhengyi.insistent",
+      "path": "02_Art/generated/character/zhengyi/insistent.png",
+      "bytes": 2436874,
+      "sha256": "089d37ca7ed3d4255485f4ebfe173707dedc8edbdeef50b536af0d9aed096fa1",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zhengyi.neutral",
+      "path": "02_Art/generated/character/zhengyi/neutral.png",
+      "bytes": 2458686,
+      "sha256": "aeb886b53bc64b3c6e8eebaa0765b4824b470b3a7fbab550247b23710eb6a7e4",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "character.zhengyi.relieved",
+      "path": "02_Art/generated/character/zhengyi/relieved.png",
+      "bytes": 2341648,
+      "sha256": "9c7d25c24748b52db46c64246f627d0d7e5a3a32811da1f15745be9d58ef40b4",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "detail.braid_tail",
+      "path": "02_Art/generated/detail/braid_tail.png",
+      "bytes": 3566685,
+      "sha256": "e27af9007b0dfef14c8b823db2fa3300673e0ea9735a42394872f4aab1e9d2d6",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "detail.comparison",
+      "path": "02_Art/generated/detail/comparison.png",
+      "bytes": 3314574,
+      "sha256": "3a3b55658bbf266198b11f94c65a6a3fe50ae21487e07ddec56506bdf6ac1bd3",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending",
+      "visualReview": "Revised 2026-11-15: disconnected samples with an empty linen gap; similarity does not establish unique origin."
+    },
+    {
+      "id": "detail.hat_cut",
+      "path": "02_Art/generated/detail/hat_cut.png",
+      "bytes": 3357004,
+      "sha256": "12b3f2d7d166715d18633848f0b828fd2e0dc07644d5d949fc1531392846fee3",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "detail.hat_fiber",
+      "path": "02_Art/generated/detail/hat_fiber.png",
+      "bytes": 3475930,
+      "sha256": "f9d1158c34f5809e6b09bb2c5db0f3211376122923a6e2cf8b2bebd28a0e4139",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "detail.lock",
+      "path": "02_Art/generated/detail/lock.png",
+      "bytes": 3368788,
+      "sha256": "dcb1e0d072886f69b665599f83738f2b57744327f353ca2d0318a3a14b2c0aaf",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "evidence.braids",
+      "path": "02_Art/generated/evidence/braids.png",
+      "bytes": 1095332,
+      "sha256": "77a209b40dc98e1bbfe66b962b071f30cdfebb8aaf003391ebd293c84dbb2e8b",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending",
+      "visualReview": "Revised 2026-11-15: upper natural hair, lower cloth-fiber imitation; source is not shown."
+    },
+    {
+      "id": "evidence.hat",
+      "path": "02_Art/generated/evidence/hat.png",
+      "bytes": 1980674,
+      "sha256": "92001704fe542af56d53a7bb1ebb67237f1ae92917de9f25cd7185dec174166a",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "evidence.luggage",
+      "path": "02_Art/generated/evidence/luggage.png",
+      "bytes": 2538496,
+      "sha256": "2a3a39074ea9726a3062cdb36c7eb2f0a41528fcfb25a98bfd51d46ed377458a",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "evidence.scissors",
+      "path": "02_Art/generated/evidence/scissors.png",
+      "bytes": 1979879,
+      "sha256": "dd2954dc4bcd472867001ab164a549a695554383dfa8824808ddd6e3a502ec6f",
+      "tool": "built-in image_gen",
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    }
+  ],
+  "aliases": {
+    "testimony_witness": "character.witness.neutral",
+    "testimony_jucheng": "character.jucheng.neutral",
+    "testimony_zhengyi": "character.zhengyi.neutral",
+    "testimony_chaofan": "character.chaofan.neutral",
+    "testimony_home": "character.zhengyi.neutral",
+    "testimony_luggage": "character.chaofan.neutral",
+    "inquiry_record": "background.court",
+    "fiber_report": "detail.comparison",
+    "hat_fiber": "detail.hat_fiber"
+  }
+}

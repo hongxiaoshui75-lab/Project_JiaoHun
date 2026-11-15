@@ -1,0 +1,1352 @@
+[
+  {
+    "path": "00_Docs/DEMO_PROJECT_REVIEW.md",
+    "bytes": 3022,
+    "sha256": "667672574d50b3305452c75db116b1d66ada5651358301832b78679231136fa0"
+  },
+  {
+    "path": "00_Docs/文件命名含义.txt",
+    "bytes": 760,
+    "sha256": "e159f8c7cc86df20ea6c391091849f196ae1ce2a33c4c6d07a65b3266b73c8ee"
+  },
+  {
+    "path": "04_Code/CONTRACT.md",
+    "bytes": 6536,
+    "sha256": "a96fd693823febe2d03d00d5af68921bc9e69fe39ac4342b9554f64e1a43271b"
+  },
+  {
+    "path": "04_Code/core/engine.mjs",
+    "bytes": 38100,
+    "sha256": "b682c1f0d42a5a20f391ad4be1c7df998de4eac06b417ef0801ef1e087ad8442"
+  },
+  {
+    "path": "04_Code/core/save.mjs",
+    "bytes": 5741,
+    "sha256": "f542f918b263ad90db61ec79ca3f18f8984bb20413a85a97e57b4ebba13935c5"
+  },
+  {
+    "path": "04_Code/package.json",
+    "bytes": 306,
+    "sha256": "794c13bfe8253913383c3426be6e8d257318e828df54322376f35d1c635397c6"
+  },
+  {
+    "path": "04_Code/README.md",
+    "bytes": 3517,
+    "sha256": "fdded374be86fb1d183e8a118f3b94bf2ac9d3a588164b7d47a75868347db877"
+  },
+  {
+    "path": "04_Code/server.mjs",
+    "bytes": 3013,
+    "sha256": "0e3462a3a53087a74a2d0c6a616406f36efbd0c2c0c7e41725c0e20206cb3e54"
+  },
+  {
+    "path": "04_Code/tests/build.test.mjs",
+    "bytes": 1984,
+    "sha256": "ea8fa8d8dedb52d5eeb2d5eac6949e281daf633ca0697aaa8ccdf1290c910329"
+  },
+  {
+    "path": "04_Code/tests/engine.test.mjs",
+    "bytes": 17489,
+    "sha256": "3317c32a2d0db031632d482a007d21167bd8ea4492be087ea43c168e40a1b5b1"
+  },
+  {
+    "path": "04_Code/tests/feedback.test.mjs",
+    "bytes": 1623,
+    "sha256": "72f9043c4fb17f41da6125605352c63cd2a26c7b83cf7b0b5281cd7267adaa87"
+  },
+  {
+    "path": "04_Code/tests/save.test.mjs",
+    "bytes": 11642,
+    "sha256": "79763bd1db16194c33d1537d8618883280020f964220e7d789c822f293484388"
+  },
+  {
+    "path": "04_Code/tests/server.test.mjs",
+    "bytes": 1726,
+    "sha256": "987354a4b1a5702c62f81d49240bf73967e819fe3648a07cf82f81c523a4cc73"
+  },
+  {
+    "path": "04_Code/tests/web.test.mjs",
+    "bytes": 15662,
+    "sha256": "2db74782d999ad4e9a3b60ffc4e975c57512160c1f7fc37eb5fcaa782cc5ef4b"
+  },
+  {
+    "path": "04_Code/tools/build.mjs",
+    "bytes": 3723,
+    "sha256": "38ee3cb8b2c54618d2c3d06e152ecc0073aa1ac0514e65277a9815d91df3be91"
+  },
+  {
+    "path": "04_Code/tools/zip.mjs",
+    "bytes": 2765,
+    "sha256": "f03795264cad6bde42676c3786a78618aa57da8fc486d2535adc3b62fe1eeade"
+  },
+  {
+    "path": "04_Code/web/app.mjs",
+    "bytes": 10045,
+    "sha256": "13d7df3fdb1835554f77265171e368a5cf179fecf7d6ba1ca3575be6e9e6868d"
+  },
+  {
+    "path": "04_Code/web/index.html",
+    "bytes": 2691,
+    "sha256": "0fcf7e32ec2bdb51cb9e104ec429b83bf64bd029c02ddd08ec818e0264628c06"
+  },
+  {
+    "path": "04_Code/web/style.css",
+    "bytes": 6252,
+    "sha256": "425e331090bb7730aa0f06dac4d96694cb68387d5738627aa089f798dceea258"
+  },
+  {
+    "path": "05_Content/CONTENT_NOTES.md",
+    "bytes": 2993,
+    "sha256": "bb250c353f9a5eacd3f34cd497fe59384b30d314afd27452e1a837e754d84a75"
+  },
+  {
+    "path": "05_Content/demo-content.mjs",
+    "bytes": 32439,
+    "sha256": "358229fbaa29adc4c3b373e446429ac96b1ef0882becda052265a56b4c1459e2"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/content/demo-content.mjs",
+    "bytes": 27712,
+    "sha256": "00faebd3dd993eac2a7001686b7831e6a37c85c230bbb38def74ce6381c7ce35"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/core/engine.mjs",
+    "bytes": 32084,
+    "sha256": "b2934d98822726d60af0540f52d2b9ffa312fc48055d6465565d3a35a1f4bb02"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/core/save.mjs",
+    "bytes": 5741,
+    "sha256": "f542f918b263ad90db61ec79ca3f18f8984bb20413a85a97e57b4ebba13935c5"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/Demo.html",
+    "bytes": 84439,
+    "sha256": "bdbeca424a6849f80a8f7f9167f043a6bb436df0b0dab430550d312d99c5a0ca"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/package.json",
+    "bytes": 179,
+    "sha256": "79a2d5c0a215032e65dd26305a0239413054da074036f258a14f02d7409cf7e8"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/README.txt",
+    "bytes": 655,
+    "sha256": "2794acebbd452e6873827c263f15fd127d2191f12c90d8aaa11a8651dccc32c6"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/server.mjs",
+    "bytes": 3007,
+    "sha256": "0f2a1a8f30d24a311122e49a80570e2d54e9128a1e9ea3907a6d258576222cac"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/Start_Demo.cmd",
+    "bytes": 50,
+    "sha256": "0e6f33dfc8cca04ad8db9112af179d2e7d9ffb087f888afbed7ed60e09b2f657"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/web/app.mjs",
+    "bytes": 10045,
+    "sha256": "13d7df3fdb1835554f77265171e368a5cf179fecf7d6ba1ca3575be6e9e6868d"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/web/index.html",
+    "bytes": 2691,
+    "sha256": "0fcf7e32ec2bdb51cb9e104ec429b83bf64bd029c02ddd08ec818e0264628c06"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo/web/style.css",
+    "bytes": 6252,
+    "sha256": "425e331090bb7730aa0f06dac4d96694cb68387d5738627aa089f798dceea258"
+  },
+  {
+    "path": "09_Builds/JiaoHun_Demo.zip",
+    "bytes": 58281
+  },
+  {
+    "path": "10_QA/DEMO_TEST_REPORT.md",
+    "bytes": 2875,
+    "sha256": "a37e232a7426ef605994f4ffc5e1e86801020525d00360b2481d6e0d4bcf5c1b"
+  },
+  {
+    "path": "99_Temp/inspection/assets-1.jpg",
+    "bytes": 401792,
+    "width": 1440,
+    "height": 1300,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/assets-2.jpg",
+    "bytes": 411356,
+    "width": 1440,
+    "height": 1300,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/embedded-image1.jpeg",
+    "bytes": 168165,
+    "width": 404,
+    "height": 693,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/video-1.jpg",
+    "bytes": 16318,
+    "width": 640,
+    "height": 267,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/video-2.jpg",
+    "bytes": 24379,
+    "width": 640,
+    "height": 267,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/video-3.jpg",
+    "bytes": 14103,
+    "width": 640,
+    "height": 267,
+    "mode": "RGB"
+  },
+  {
+    "path": "99_Temp/inspection/video-4.jpg",
+    "bytes": 30293,
+    "width": 640,
+    "height": 267,
+    "mode": "RGB"
+  },
+  {
+    "path": "探讨总结.txt",
+    "bytes": 41385,
+    "sha256": "267f65853ba571e353f90e48bcdab89e03bca6d81a41d4e9ba151fda132c8f68"
+  },
+  {
+    "path": "游戏剧本原型/萧山事件.docx",
+    "bytes": 192622,
+    "members": 13
+  },
+  {
+    "path": "游戏图片素材/剪刀.jpg",
+    "bytes": 618736,
+    "width": 2048,
+    "height": 1746,
+    "mode": "RGB"
+  },
+  {
+    "path": "游戏图片素材/行李箱.jpg",
+    "bytes": 57778,
+    "width": 768,
+    "height": 768,
+    "mode": "RGB"
+  },
+  {
+    "path": "游戏机制.docx",
+    "bytes": 22661,
+    "members": 14
+  },
+  {
+    "path": "美术风格参考/2D视觉/2D平面设计-1.webp",
+    "bytes": 543416,
+    "width": 1920,
+    "height": 834,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/2D视觉/2D平面设计-2.png",
+    "bytes": 1551053,
+    "width": 1625,
+    "height": 1080,
+    "mode": "P"
+  },
+  {
+    "path": "美术风格参考/人物/1.jpg",
+    "bytes": 168391,
+    "width": 1920,
+    "height": 461,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/10.jpg",
+    "bytes": 861226,
+    "width": 1920,
+    "height": 3349,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/11.jpg",
+    "bytes": 762180,
+    "width": 1920,
+    "height": 3347,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/2.jpg",
+    "bytes": 251281,
+    "width": 1920,
+    "height": 712,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/3.jpg",
+    "bytes": 330052,
+    "width": 1920,
+    "height": 794,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/4.jpg",
+    "bytes": 330382,
+    "width": 1920,
+    "height": 1078,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/5.jpg",
+    "bytes": 456420,
+    "width": 1920,
+    "height": 1116,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/6.jpg",
+    "bytes": 235182,
+    "width": 1920,
+    "height": 709,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/7.jpg",
+    "bytes": 216451,
+    "width": 1920,
+    "height": 636,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/8.jpg",
+    "bytes": 1499754,
+    "width": 1920,
+    "height": 3028,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/9.jpg",
+    "bytes": 662708,
+    "width": 1920,
+    "height": 1724,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-1.jpg",
+    "bytes": 736657,
+    "width": 1920,
+    "height": 3034,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-2.jpg",
+    "bytes": 635849,
+    "width": 1920,
+    "height": 3034,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-3.jpg",
+    "bytes": 182402,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-4.jpg",
+    "bytes": 154885,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-5.jpg",
+    "bytes": 221390,
+    "width": 1920,
+    "height": 935,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/人物/不空僧-6.jpg",
+    "bytes": 320706,
+    "width": 1920,
+    "height": 935,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/1.jpg",
+    "bytes": 711182,
+    "width": 1920,
+    "height": 1167,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/10.jpg",
+    "bytes": 455436,
+    "width": 1920,
+    "height": 917,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/11.jpg",
+    "bytes": 580464,
+    "width": 1920,
+    "height": 1166,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/12.jpg",
+    "bytes": 788750,
+    "width": 1920,
+    "height": 1067,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/13.jpg",
+    "bytes": 792881,
+    "width": 1920,
+    "height": 1112,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/14.jpg",
+    "bytes": 349242,
+    "width": 1920,
+    "height": 887,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/15.jpg",
+    "bytes": 583900,
+    "width": 1920,
+    "height": 1098,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/16.jpg",
+    "bytes": 347429,
+    "width": 1920,
+    "height": 1022,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/17.jpg",
+    "bytes": 405075,
+    "width": 1920,
+    "height": 779,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/18.jpg",
+    "bytes": 444680,
+    "width": 1920,
+    "height": 935,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/19.jpg",
+    "bytes": 674027,
+    "width": 1920,
+    "height": 944,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/2.jpg",
+    "bytes": 462010,
+    "width": 1920,
+    "height": 833,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/20.jpg",
+    "bytes": 494007,
+    "width": 1920,
+    "height": 818,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/21.jpg",
+    "bytes": 722340,
+    "width": 1920,
+    "height": 855,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/22.jpg",
+    "bytes": 870366,
+    "width": 1920,
+    "height": 897,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/23.jpg",
+    "bytes": 728775,
+    "width": 1920,
+    "height": 842,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/24.jpg",
+    "bytes": 508430,
+    "width": 1920,
+    "height": 1005,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/25.jpg",
+    "bytes": 802091,
+    "width": 1920,
+    "height": 1004,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/26.jpg",
+    "bytes": 616671,
+    "width": 1920,
+    "height": 871,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/27.jpg",
+    "bytes": 500145,
+    "width": 1920,
+    "height": 984,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/28.jpg",
+    "bytes": 607910,
+    "width": 1920,
+    "height": 859,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/29.jpg",
+    "bytes": 372332,
+    "width": 1920,
+    "height": 944,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/3.jpg",
+    "bytes": 476084,
+    "width": 1920,
+    "height": 875,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/30.jpg",
+    "bytes": 455006,
+    "width": 1920,
+    "height": 939,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/31.jpg",
+    "bytes": 322555,
+    "width": 1920,
+    "height": 940,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/32.jpg",
+    "bytes": 589799,
+    "width": 1920,
+    "height": 988,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/33.jpg",
+    "bytes": 386895,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/34.jpg",
+    "bytes": 233494,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/35.jpg",
+    "bytes": 261377,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/36.jpg",
+    "bytes": 288076,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/37.jpg",
+    "bytes": 215911,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/38.jpg",
+    "bytes": 216633,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/39.jpg",
+    "bytes": 265179,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/4.jpg",
+    "bytes": 509563,
+    "width": 1920,
+    "height": 1184,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/40.jpg",
+    "bytes": 223351,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/41.jpg",
+    "bytes": 218316,
+    "width": 1920,
+    "height": 1007,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/42.jpg",
+    "bytes": 782336,
+    "width": 1919,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/43.jpg",
+    "bytes": 273407,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/44.jpg",
+    "bytes": 423712,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/45.jpg",
+    "bytes": 491613,
+    "width": 1916,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/46.jpg",
+    "bytes": 466054,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/47.jpg",
+    "bytes": 659885,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/48.jpg",
+    "bytes": 658663,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/49.jpg",
+    "bytes": 267267,
+    "width": 1920,
+    "height": 983,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/5.jpg",
+    "bytes": 749320,
+    "width": 1920,
+    "height": 1164,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/50.jpg",
+    "bytes": 348125,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/51.jpg",
+    "bytes": 647416,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/52.jpg",
+    "bytes": 529945,
+    "width": 1916,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/53.jpg",
+    "bytes": 587927,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/54.jpg",
+    "bytes": 364147,
+    "width": 1920,
+    "height": 977,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/55.jpg",
+    "bytes": 556913,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/56.jpg",
+    "bytes": 444922,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/57.jpg",
+    "bytes": 559110,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/58.jpg",
+    "bytes": 567639,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/59.jpg",
+    "bytes": 794845,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/6.jpg",
+    "bytes": 593916,
+    "width": 1920,
+    "height": 978,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/60.jpg",
+    "bytes": 457397,
+    "width": 1919,
+    "height": 1065,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/61.jpg",
+    "bytes": 569524,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/62.jpg",
+    "bytes": 486356,
+    "width": 1920,
+    "height": 883,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/63.jpg",
+    "bytes": 546921,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/64.jpg",
+    "bytes": 456832,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/65.jpg",
+    "bytes": 591861,
+    "width": 1920,
+    "height": 913,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/66.jpg",
+    "bytes": 690088,
+    "width": 1920,
+    "height": 1068,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/67.jpg",
+    "bytes": 568146,
+    "width": 1920,
+    "height": 889,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/68.jpg",
+    "bytes": 661126,
+    "width": 1920,
+    "height": 953,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/69.jpg",
+    "bytes": 626887,
+    "width": 1920,
+    "height": 888,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/7.jpg",
+    "bytes": 511382,
+    "width": 1920,
+    "height": 987,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/70.webp",
+    "bytes": 273858,
+    "width": 1920,
+    "height": 1023,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/8.jpg",
+    "bytes": 500347,
+    "width": 1920,
+    "height": 995,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/场景/9.jpg",
+    "bytes": 792113,
+    "width": 1920,
+    "height": 967,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/小西天浮屠界地牢 转经筒-1.jpg",
+    "bytes": 1231248,
+    "width": 1920,
+    "height": 3413,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/小西天浮屠界地牢 转经筒-2.jpg",
+    "bytes": 597966,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/火焰山土地庙-1.jpg",
+    "bytes": 366772,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/火焰山土地庙-2.jpg",
+    "bytes": 421399,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/盘丝岭土地庙-1.jpg",
+    "bytes": 418746,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/盘丝岭土地庙-2.jpg",
+    "bytes": 307276,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/石窟.jpg",
+    "bytes": 277471,
+    "width": 1920,
+    "height": 960,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-1.jpg",
+    "bytes": 493496,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-10.jpg",
+    "bytes": 383698,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-11.jpg",
+    "bytes": 319933,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-12.jpg",
+    "bytes": 420857,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-13.jpg",
+    "bytes": 419695,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-2.jpg",
+    "bytes": 526257,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-3.jpg",
+    "bytes": 407807,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-4.jpg",
+    "bytes": 327258,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-5.jpg",
+    "bytes": 380842,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-6.jpg",
+    "bytes": 388972,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-7.jpg",
+    "bytes": 378843,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-8.jpg",
+    "bytes": 422863,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺侧殿-9.jpg",
+    "bytes": 375586,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺围墙-1.jpg",
+    "bytes": 350115,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺围墙-2.jpg",
+    "bytes": 488062,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺围墙-3.jpg",
+    "bytes": 522957,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺围墙-4.jpg",
+    "bytes": 551869,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺土地庙.jpg",
+    "bytes": 395690,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺大门-1.jpg",
+    "bytes": 516130,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺大门-2.jpg",
+    "bytes": 502313,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺大门-3.jpg",
+    "bytes": 459157,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺山门-1.jpg",
+    "bytes": 441507,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺山门-2.jpg",
+    "bytes": 423797,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺山门-3.jpg",
+    "bytes": 454638,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺山门-4.jpg",
+    "bytes": 380011,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺山门-5.jpg",
+    "bytes": 445198,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖小庙-1.jpg",
+    "bytes": 459795,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖小庙-2.jpg",
+    "bytes": 395530,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖小庙-3.jpg",
+    "bytes": 344166,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖驳门-1.jpg",
+    "bytes": 510443,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖驳门-2.jpg",
+    "bytes": 424787,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/雷音寺镜湖驳门-3.jpg",
+    "bytes": 349434,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/建筑/黑风山土地庙.jpg",
+    "bytes": 503588,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/业火棍.jpg",
+    "bytes": 1264076,
+    "width": 1920,
+    "height": 3152,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/兽棍-貂鼠.jpg",
+    "bytes": 1360123,
+    "width": 1920,
+    "height": 3476,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/大锅.webp",
+    "bytes": 123550,
+    "width": 1920,
+    "height": 924,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/天龙棍.jpg",
+    "bytes": 1354347,
+    "width": 1920,
+    "height": 3152,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/招魂幡-1.jpg",
+    "bytes": 365891,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/招魂幡-2.jpg",
+    "bytes": 397517,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/杂物-1.webp",
+    "bytes": 97934,
+    "width": 1920,
+    "height": 924,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/杂物-2.webp",
+    "bytes": 125350,
+    "width": 1920,
+    "height": 924,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/枪尖.jpg",
+    "bytes": 92678,
+    "width": 1920,
+    "height": 938,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/楮白枪.jpg",
+    "bytes": 2037782,
+    "width": 1920,
+    "height": 4705,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/灶台.webp",
+    "bytes": 203206,
+    "width": 1920,
+    "height": 924,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/盾牌.jpg",
+    "bytes": 238847,
+    "width": 1920,
+    "height": 938,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/禅杖与铜钱.jpg",
+    "bytes": 312097,
+    "width": 1920,
+    "height": 938,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/菜刀.webp",
+    "bytes": 117054,
+    "width": 1920,
+    "height": 924,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-1.jpg",
+    "bytes": 317229,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-10.jpg",
+    "bytes": 265737,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-2.jpg",
+    "bytes": 287793,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-3.jpg",
+    "bytes": 219221,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-4.jpg",
+    "bytes": 246168,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-5.jpg",
+    "bytes": 289347,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-6.jpg",
+    "bytes": 217567,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-7.jpg",
+    "bytes": 222898,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-8.jpg",
+    "bytes": 129500,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/葫芦-9.jpg",
+    "bytes": 362048,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/酒壶.jpg",
+    "bytes": 339972,
+    "width": 1920,
+    "height": 623,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/食材.jpg",
+    "bytes": 208611,
+    "width": 1920,
+    "height": 448,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/黄风庙土地庙-1.jpg",
+    "bytes": 526373,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/物品/黄风庙土地庙-2.jpg",
+    "bytes": 385346,
+    "width": 1920,
+    "height": 1080,
+    "mode": "RGB"
+  },
+  {
+    "path": "美术风格参考/视频风格参考.mp4",
+    "bytes": 3460099328
+  }
+]

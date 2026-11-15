@@ -1,0 +1,483 @@
+{
+  "version": 1,
+  "provenance": "Recovered exact revisedPrompt from completed image generation events; original user prompts may differ.",
+  "generations": [
+    {
+      "generationId": "exec-d92bf848-4ed1-4374-a0bb-d8cd487a93d4",
+      "assetId": "background.exterior",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.exterior for historical investigation AVG 叫魂. exterior of a provincial government yamen courtyard in Hangzhou 1768, wet stone paving, restrained timber gateway, overcast morning, no readable signs. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-d92bf848-4ed1-4374-a0bb-d8cd487a93d4.png",
+      "sha256": "8f9aae33126cbb5c6754b754d7b8061423af3fa9d1ac6ee3dae60906011edb51",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/exterior.png"
+    },
+    {
+      "generationId": "exec-ea26450c-5a13-4fff-b47d-935d4e0b0bc7",
+      "assetId": "background.court",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.court for historical investigation AVG 叫魂. interior Qing provincial judicial hearing hall, raised magistrate desk at rear center, weathered timber columns, side benches, eye level view, empty open foreground for characters, no readable inscriptions. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-ea26450c-5a13-4fff-b47d-935d4e0b0bc7.png",
+      "sha256": "da00f71c37804d5509bc35367aff8a6f056e40ce2c8e29d7a4e0e3dd1057fa72",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/court.png"
+    },
+    {
+      "generationId": "exec-b715bc1a-b5ce-4def-88ab-f2df099d5d00",
+      "assetId": "background.evidence_room",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.evidence_room for historical investigation AVG 叫魂. modest Qing government evidence storage room, old timber table occupying lower middle with EMPTY worn linen surface for game object overlays, wooden shelves and closed cases behind, daylight from left lattice window. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-b715bc1a-b5ce-4def-88ab-f2df099d5d00.png",
+      "sha256": "eca60fa4cff88b1bb1aeecbb6d03811bc7f979932a4eeada38318c54a3ac26e7",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/evidence_room.png"
+    },
+    {
+      "generationId": "exec-6aabac67-5b6f-4b7e-8182-3acae8d2839a",
+      "assetId": "character.shenyan.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.shenyan.neutral (沈砚). Chinese Han man approximately 28, observant composed face, restrained dark blue plain long gown, Qing shaved front scalp and braid behind, no official rank badge or official hat, thoughtful investigator. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-6aabac67-5b6f-4b7e-8182-3acae8d2839a.png",
+      "sha256": "1ee1b543e0d0b74ca3b08a9505e02f8a9471879f2a582538f40ccb83fee3fc41",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-ec86e7af-cbb9-4b99-a41e-21fe28cd201f",
+      "assetId": "background.inspection_table",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.inspection_table for historical investigation AVG 叫魂. close view of EMPTY worn timber inspection table with plain beige linen covering center, Qing lattice window and blurred room beyond, top slightly tilted toward viewer, clean space for evidence overlays. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-ec86e7af-cbb9-4b99-a41e-21fe28cd201f.png",
+      "sha256": "35a2551d3532a0e3456f1ca4f8aa0f99c8b1308c355b3aace26abccc99247c3a",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/inspection_table.png"
+    },
+    {
+      "generationId": "exec-ff333e7d-52eb-4102-a388-a4bc77dc28bc",
+      "assetId": "character.zhengyi.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.zhengyi.neutral (正一). Chinese Buddhist monk age 22, thin youthful face, fully shaved head, worn pale gray brown monk robe, subtle healed bruises and tired eyes, dignified vulnerable demeanor, no gore. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-ff333e7d-52eb-4102-a388-a4bc77dc28bc.png",
+      "sha256": "0aba36487390cba38158ccec056d57260b6f21b0cb67049b7cbf36f86c6d8c2f",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-6a47a0f1-3e1d-4436-bec4-badc9d5eadd3",
+      "assetId": "background.corridor",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.corridor for historical investigation AVG 叫魂. covered timber corridor in a Qing Hangzhou yamen, weathered red brown columns, white plaster walls, stone courtyard beyond, empty foreground for witness character, overcast afternoon. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-6a47a0f1-3e1d-4436-bec4-badc9d5eadd3.png",
+      "sha256": "8defa343df7566da7d71490f555b7536cc6e9d77de8f9a0beac7db901e576e40",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/corridor.png"
+    },
+    {
+      "generationId": "exec-968ddd3e-f561-489e-af2d-6def46453756",
+      "assetId": "background.waiting_room",
+      "prompt": "Create ONE original production game background, landscape 16:9 composition. Asset: background.waiting_room for historical investigation AVG 叫魂. plain Qing government waiting chamber, rough wooden benches along plaster wall, subdued daylight, empty center foreground for injured monk characters, dignified somber atmosphere. Unified art direction: muted antique realistic hand-painted illustration, detailed brushwork, mineral ochre, charcoal, desaturated moss, aged wood, soft natural light, serious human historical drama. No people, no supernatural creatures, no fantasy weapons, no modern objects, no logos or text, no UI or borders. Composition must allow a translucent dialogue box over bottom quarter. Do not make a collage or sheet. Save output as a usable image asset.",
+      "sourceFile": "exec-968ddd3e-f561-489e-af2d-6def46453756.png",
+      "sha256": "b0aa35466f9ffe27e447b4fa0a973cdd005c33a654edb3387a48a68d548cecc7",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/background/waiting_room.png"
+    },
+    {
+      "generationId": "exec-d700ab1a-2cb5-443c-aa83-7bbadf193617",
+      "assetId": "character.cai.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.cai.neutral (蔡瑞). Chinese local yamen runner approximately 38, ordinary weathered face, thin mustache, faded brown gray work jacket and cloth belt, plain soft black cloth cap with narrow fabric bound LOWER EDGE, NO projecting rigid brim, rear edge intact and hidden from front, professionally composed, not an obvious villain. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-d700ab1a-2cb5-443c-aa83-7bbadf193617.png",
+      "sha256": "18f2e6af1e20d5345a302aefee91e0af54a16d591e213832bd1df18ffa55b69c",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-fe687965-7308-42b0-8d08-00d28d5a7cbb",
+      "assetId": "evidence.braids",
+      "prompt": "Create ONE original evidence illustration for historical investigation AVG 叫魂, asset evidence.braids. Exactly TWO short dark brown black braided tufts laid parallel and separate, superficially similar at this distance, no severed scalp or skin, no hat or source materials anywhere. One represents old hair and one fine woven fibers, but the broad image should not make their different material obvious. Isolated centered on genuinely transparent background, no ground plane, no scene. Antique realistic hand-painted illustration with fine brushwork, muted ochre charcoal brown, soft upper-left daylight, sober historical 1768 Hangzhou. Large readable silhouette, generous margin. No text, no annotations, no UI, no collage.",
+      "sourceFile": "exec-fe687965-7308-42b0-8d08-00d28d5a7cbb.png",
+      "sha256": "9c0ae1fa7eda86865cbc85dca9b6c835e289c26d1423e05b83dde2e0e53955c2",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-43d3ad8a-91a9-46a8-8dfa-8e8c0cd7fb53",
+      "assetId": "character.zeng.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.zeng.neutral (曾日理). Chinese provincial judicial magistrate approximately 55, lean dignified face, short graying mustache, restrained period Qing official dark robe and modest official cap, no invented rank text, authoritative but attentive. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-43d3ad8a-91a9-46a8-8dfa-8e8c0cd7fb53.png",
+      "sha256": "9ee9c0d3966353281fb668c5d982e3afe90c71929be8fa3eb708138c23eec95d",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zeng/neutral.png"
+    },
+    {
+      "generationId": "exec-d51ceffd-5222-425b-a5d5-0f1318ffc931",
+      "assetId": "evidence.luggage",
+      "prompt": "Create ONE original evidence illustration for historical investigation AVG 叫魂, asset evidence.luggage. One small eighteenth century Chinese travel chest of aged dark brown wood and worn leather fittings, lid slightly open, broken iron clasp at front. No modern suitcase, no wheels, no contents visible, no label. Isolated centered on genuinely transparent background, no ground plane, no scene. Antique realistic hand-painted illustration with fine brushwork, muted ochre charcoal brown, soft upper-left daylight, sober historical 1768 Hangzhou. Large readable silhouette, generous margin. No text, no annotations, no UI, no collage.",
+      "sourceFile": "exec-d51ceffd-5222-425b-a5d5-0f1318ffc931.png",
+      "sha256": "f66e2a9a7bca00bc75d0b2aac6cc1f226b6378990aca8883f49d52f7f5df792d",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-7d395ece-be68-4af5-a58e-7d2b723049af",
+      "assetId": "character.jucheng.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.jucheng.neutral (巨成). Chinese Buddhist monk age 48, narrow weathered face, shaved head, patch repaired charcoal monk robe, subtle fatigue and injuries, seated or supported posture, dignified. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-7d395ece-be68-4af5-a58e-7d2b723049af.png",
+      "sha256": "57f83fef5ac193994657b8886f24d2071ee107575b7c0b1820de9240c9808452",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/jucheng/neutral.png"
+    },
+    {
+      "generationId": "exec-0315d876-f593-4762-ab63-66dd3c98c1c5",
+      "assetId": "evidence.scissors",
+      "prompt": "Create ONE original evidence illustration for historical investigation AVG 叫魂, asset evidence.scissors. Exactly FOUR separate antique Qing-era hand-forged iron scissors, each visibly countable and not overlapping, three worn leatherworker shears and one subtly different small shear, laid in two rows. No modern plastic handles. Do NOT imply which was planted. Isolated centered on genuinely transparent background, no ground plane, no scene. Antique realistic hand-painted illustration with fine brushwork, muted ochre charcoal brown, soft upper-left daylight, sober historical 1768 Hangzhou. Large readable silhouette, generous margin. No text, no annotations, no UI, no collage.",
+      "sourceFile": "exec-0315d876-f593-4762-ab63-66dd3c98c1c5.png",
+      "sha256": "2c7b00fe808acca65e42b1ca958d8349e6513ad947c8c7312d292cd465326a6c",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-670625ab-be4f-4bb5-af21-eca802263def",
+      "assetId": "character.witness.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.witness.neutral (围观者). Chinese civilian man approximately 40, ordinary square face, shaved front scalp with braid behind, plain tan cotton tunic and dark vest, no weapons or official badge, observant but uncertain. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-670625ab-be4f-4bb5-af21-eca802263def.png",
+      "sha256": "0b7501f5b60071308b3b837041685b926eae82dea8450bc5a811618e84f564ca",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/witness/neutral.png"
+    },
+    {
+      "generationId": "exec-32a955ae-401a-4f4e-9860-0d081a1d4a9e",
+      "assetId": "evidence.hat",
+      "prompt": "Create ONE original evidence illustration for historical investigation AVG 叫魂, asset evidence.hat. One modest old soft black cloth cap belonging to an ordinary Qing yamen runner, dome shaped with a narrow folded fabric-bound LOWER EDGE, absolutely NO projecting rigid brim. Viewed from front three-quarter so back underside is hidden and cap appears intact. No official finial or badge, no conspicuous cut or loose fibers visible. Isolated centered on genuinely transparent background, no ground plane, no scene. Antique realistic hand-painted illustration with fine brushwork, muted ochre charcoal brown, soft upper-left daylight, sober historical 1768 Hangzhou. Large readable silhouette, generous margin. No text, no annotations, no UI, no collage.",
+      "sourceFile": "exec-32a955ae-401a-4f4e-9860-0d081a1d4a9e.png",
+      "sha256": "7fb868d355e28ea517db32b348ceac4ba67b797c16e4cc85c27f19d22e648ec7",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-ab280a01-7792-4e8a-ba07-0b9c84aae81f",
+      "assetId": "character.chaofan.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.chaofan.neutral (超凡). Chinese Buddhist monk age 43, broad face and sturdy build, shaved head, faded earth brown monk robe, alert concerned expression, no fantasy armor. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-ab280a01-7792-4e8a-ba07-0b9c84aae81f.png",
+      "sha256": "767c99f8b5b18261b7e0ba6ea6cdb5c10cd34038ef32a9b29b05351aa9d1bbff",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/chaofan/neutral.png"
+    },
+    {
+      "generationId": "exec-70498f5e-5c98-4988-915d-9a598fd01abe",
+      "assetId": "character.jingxin.neutral",
+      "prompt": "Create ONE original standalone transparent-background character sprite for historical AVG 叫魂, asset character.jingxin.neutral (净心). Chinese Buddhist monk age 62, thin elderly face, shaved head with gray eyebrow and short gray beard, worn desaturated taupe monk robe, frail supported seated posture. Neutral restrained expression. Front three-quarter facing viewer, head to mid-thigh with BOTH hands visible, centered at consistent scale with clear margin around head and hands. Antique realistic hand-painted illustration with fine visible brushwork, muted charcoal/ochre/desaturated moss colors, soft light from upper left; realistic human anatomy, historical human drama 1768 Hangzhou, no fantasy. Entire background genuinely transparent alpha, no cast ground shadow, no frame, no text, no collage, no other people. This is the master identity reference for future expression edits.",
+      "sourceFile": "exec-70498f5e-5c98-4988-915d-9a598fd01abe.png",
+      "sha256": "9c2fedff2eafc72b819abc37d3c0773beda5914379e8e0535ecc2d1c7b325a6a",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/jingxin/neutral.png"
+    },
+    {
+      "generationId": "exec-288b5b9b-0f99-48e7-a562-c5e04d1e58b1",
+      "assetId": "character.shenyan.thinking",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.shenyan.thinking. Change only the expression and small hand/shoulder gesture to: brows lightly knit, thoughtful gaze and one hand lightly to chin. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-288b5b9b-0f99-48e7-a562-c5e04d1e58b1.png",
+      "sha256": "e5397c0765f6e9f09572affe64e0d51e38dd8b48c3bc3e1170eedb63857e97e6",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/shenyan/thinking.png"
+    },
+    {
+      "generationId": "exec-e68ced5b-0211-4cca-8bd8-b801bfc42ca0",
+      "assetId": "character.zeng.listening",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zeng.listening. Change only the expression and small hand/shoulder gesture to: attentive listening, brows slightly raised, mouth closed. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-e68ced5b-0211-4cca-8bd8-b801bfc42ca0.png",
+      "sha256": "d4f6084b7fd00816cfebba601b2b04c9da55a13a8cd214fcfab5b142dec2984d",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zeng/listening.png"
+    },
+    {
+      "generationId": "exec-dd42abeb-8947-4e41-9b24-3a0614b22d00",
+      "assetId": "detail.hat_cut",
+      "prompt": "Create ONE historical AVG evidence inspection closeup, detail.hat_cut. Rotate this SAME soft black cloth cap to show its REAR LOWER EDGE from below at close range. The narrow folded textile binding has a small elongated strip cut out, creating a locally narrower section bounded by two short clean straight scissor cuts, with a few black-brown frayed woven threads at that spot. Keep dome shape, seams, material, aged color and lack of projecting brim consistent. Show enough of cap to locate the underside cut. This is not a big triangular tear or a hole in crown. Antique realistic hand-painted illustration, fine brushwork, muted charcoal ochre, soft upper-left daylight. Place on a plain neutral worn linen examination surface; landscape composition, strong readable details. No people, no arrows, no annotation, no montage, no modern lab tools, no UI.",
+      "sourceFile": "exec-dd42abeb-8947-4e41-9b24-3a0614b22d00.png",
+      "sha256": "12b3f2d7d166715d18633848f0b828fd2e0dc07644d5d949fc1531392846fee3",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/detail/hat_cut.png"
+    },
+    {
+      "generationId": "exec-0829ad9c-b743-4980-b410-00b0d01a8bfc",
+      "assetId": "detail.braid_tail",
+      "prompt": "Create ONE historical AVG evidence inspection closeup, detail.braid_tail. Macro closeup of the loose end of the LOWER braided object in this reference. It is dark brown woven textile thread pretending to be hair, showing a few short transverse weft threads crossing longer strands and a small patch of partly unravelled fine weave at loose tail. Preserve reference colors and braid thickness. Show only the braid tail, no hat, no cap, no material source, no text or conclusion. Antique realistic hand-painted illustration, fine brushwork, muted charcoal ochre, soft upper-left daylight. Place on a plain neutral worn linen examination surface; landscape composition, strong readable details. No people, no arrows, no annotation, no montage, no modern lab tools, no UI.",
+      "sourceFile": "exec-0829ad9c-b743-4980-b410-00b0d01a8bfc.png",
+      "sha256": "e27af9007b0dfef14c8b823db2fa3300673e0ea9735a42394872f4aab1e9d2d6",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/detail/braid_tail.png"
+    },
+    {
+      "generationId": "exec-d86acb34-32e4-4829-8d70-e7ce6346c19b",
+      "assetId": "character.shenyan.resolved",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.shenyan.resolved. Change only the expression and small hand/shoulder gesture to: quiet relieved resolve, relaxed brows, slight restrained smile. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-d86acb34-32e4-4829-8d70-e7ce6346c19b.png",
+      "sha256": "954d864658dbcb94ebe100b8647dffc27df7bd22ac168bbf259b0d4a2372ee29",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/shenyan/resolved.png"
+    },
+    {
+      "generationId": "exec-0eab865e-a4b1-4382-a0e7-5f587ce7702e",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-0eab865e-a4b1-4382-a0e7-5f587ce7702e.png",
+      "sha256": "809f769f99dd818fa643ec2369e9d3879b6c7d80f5a0cc380164bb7f6d57f741",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/shenyan/neutral.png"
+    },
+    {
+      "generationId": "exec-8c02c1cb-2579-4785-afa8-86871cb9c967",
+      "assetId": "detail.lock",
+      "prompt": "Create ONE historical AVG evidence inspection closeup, detail.lock. Macro closeup of the SAME broken iron clasp at front center of this travel chest. Keep same iron plate, jagged break, nail placement, wooden grain and leather straps. A simple object inspection closeup, no extra objects, no readable labels. Antique realistic hand-painted illustration, fine brushwork, muted charcoal ochre, soft upper-left daylight. Place on a plain neutral worn linen examination surface; landscape composition, strong readable details. No people, no arrows, no annotation, no montage, no modern lab tools, no UI.",
+      "sourceFile": "exec-8c02c1cb-2579-4785-afa8-86871cb9c967.png",
+      "sha256": "dcb1e0d072886f69b665599f83738f2b57744327f353ca2d0318a3a14b2c0aaf",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/detail/lock.png"
+    },
+    {
+      "generationId": "exec-000dc10d-2c6f-4969-97f0-9ff68db08d39",
+      "assetId": "character.shenyan.assertive",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.shenyan.assertive. Change only the expression and small hand/shoulder gesture to: firm focused eyes and a restrained open-palm presenting gesture. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-000dc10d-2c6f-4969-97f0-9ff68db08d39.png",
+      "sha256": "fbb2d31dc1429d7aee32cd10a19707d421ab7dedd6d249235bc0c0e0f9045dfa",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/shenyan/assertive.png"
+    },
+    {
+      "generationId": "exec-aedf6e0e-e4b4-486b-81cb-281b7bed6cd8",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-aedf6e0e-e4b4-486b-81cb-281b7bed6cd8.png",
+      "sha256": "aeb886b53bc64b3c6e8eebaa0765b4824b470b3a7fbab550247b23710eb6a7e4",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zhengyi/neutral.png"
+    },
+    {
+      "generationId": "exec-bc6fcbdb-6a53-4b9c-aab1-edeb2fd89eba",
+      "assetId": "character.zeng.verdict",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zeng.verdict. Change only the expression and small hand/shoulder gesture to: calm decisive judgment, one hand gently raised. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-bc6fcbdb-6a53-4b9c-aab1-edeb2fd89eba.png",
+      "sha256": "9ddda62e9058b5f606e67a482a0fe05c946d6d8bdfc1d1a4d01ae93865ac3104",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zeng/verdict.png"
+    },
+    {
+      "generationId": "exec-74d0bfc5-37be-4677-bb30-34e7d4049431",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-74d0bfc5-37be-4677-bb30-34e7d4049431.png",
+      "sha256": "4cfc67f8c930049e7f0a4ee36be777561167653c0dab11701139d01365442b84",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/neutral.png"
+    },
+    {
+      "generationId": "exec-ea202984-1bfa-4fd8-a9b4-feca2442ea6a",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-ea202984-1bfa-4fd8-a9b4-feca2442ea6a.png",
+      "sha256": "dd2954dc4bcd472867001ab164a549a695554383dfa8824808ddd6e3a502ec6f",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/evidence/scissors.png"
+    },
+    {
+      "generationId": "exec-af4a45b5-e637-429a-bfce-3f18d93af8ba",
+      "assetId": "character.zeng.stern",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zeng.stern. Change only the expression and small hand/shoulder gesture to: stern measured disapproval, slightly lowered brows. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-af4a45b5-e637-429a-bfce-3f18d93af8ba.png",
+      "sha256": "5efa1a5a102076d6cf6add9baaa925566b387ecc262722d107f87fbbaace8e12",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zeng/stern.png"
+    },
+    {
+      "generationId": "exec-6d360342-a213-40dc-8a3c-8d80fa29b9f6",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-6d360342-a213-40dc-8a3c-8d80fa29b9f6.png",
+      "sha256": "92001704fe542af56d53a7bb1ebb67237f1ae92917de9f25cd7185dec174166a",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/evidence/hat.png"
+    },
+    {
+      "generationId": "exec-0bbe4029-98bb-46e1-9eba-0290eab8e927",
+      "assetId": "detail.hat_fiber",
+      "prompt": "ONE evidence closeup illustration for historical AVG 叫魂: detail.hat_fiber. Macro zoom into the actual small scissor-cut section at the cap's lower rear edge in the reference. Show black-brown fine warp strands with a few short transverse weft threads and the folded narrow fabric binding on either side. Retain the exact material and cut structure. Do not show a braid, no conclusory visual. Landscape composition on plain worn neutral linen examination surface, antique realistic hand-painted brushwork matching references, soft left daylight, muted ochre and charcoal brown. No text, no people, no UI, no modern lab equipment, no multi-panel layout.",
+      "sourceFile": "exec-0bbe4029-98bb-46e1-9eba-0290eab8e927.png",
+      "sha256": "f9d1158c34f5809e6b09bb2c5db0f3211376122923a6e2cf8b2bebd28a0e4139",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/detail/hat_fiber.png"
+    },
+    {
+      "generationId": "exec-c0c96d11-0de0-467a-aaa8-51fbc5e305f0",
+      "assetId": null,
+      "prompt": "Extract ONLY the exact foreground subject of this image as a clean PNG game cutout. Remove ALL brown smoky glow, gradient background, vignette, halo and cast shadow outside the silhouette, including enclosed gaps. Preserve the exact illustration, identity, pose, objects, colors, materials, composition, scale and framing of the foreground. Foreground should be fully opaque except normal antialiased edges. Outside it must be truly transparent alpha=0, not black, brown, white or checkerboard pixels. Do not redraw or add anything.",
+      "sourceFile": "exec-c0c96d11-0de0-467a-aaa8-51fbc5e305f0.png",
+      "sha256": "2a3a39074ea9726a3062cdb36c7eb2f0a41528fcfb25a98bfd51d46ed377458a",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/evidence/luggage.png"
+    },
+    {
+      "generationId": "exec-655b5f31-df8a-4587-9b3f-023f845c4857",
+      "assetId": "character.cai.defensive",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.defensive. Change only the expression and small hand/shoulder gesture to: guarded defensive reply, a small open-hand denial gesture. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-655b5f31-df8a-4587-9b3f-023f845c4857.png",
+      "sha256": "dfc1e4e8571208d5970461844d41585509aab970cd80338d723a240bcfc50494",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/defensive.png"
+    },
+    {
+      "generationId": "exec-69b09c0b-31e2-4625-b226-29f35b49c59f",
+      "assetId": "detail.comparison",
+      "prompt": "ONE evidence closeup illustration for historical AVG 叫魂: detail.comparison. Create a SINGLE physical tabletop comparison scene. At left place the same soft cap's cut rear lower edge from reference 1; at right place the same woven braid tail from reference 2, side by side with a clear gap, both at comparable physical magnification. Similar black-brown colors, thread thickness and short transverse weft fibers should be readable. Do not join them, no exact jigsaw fit, no arrows, no ticks, no scales, no declarations of unique source. This scene records visual similarities, not forensic certainty. Landscape composition on plain worn neutral linen examination surface, antique realistic hand-painted brushwork matching references, soft left daylight, muted ochre and charcoal brown. No text, no people, no UI, no modern lab equipment, no multi-panel layout.",
+      "sourceFile": "exec-69b09c0b-31e2-4625-b226-29f35b49c59f.png",
+      "sha256": "e5111d26ec05293a7edbf0a689980cd8a601279177381cfd30a0820c3072ccc1",
+      "tool": "built-in image_gen",
+      "selectedPath": null
+    },
+    {
+      "generationId": "exec-af7a251c-17d7-4688-a5e3-7ea3d1a8cb7e",
+      "assetId": "character.cai.irritated",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.irritated. Change only the expression and small hand/shoulder gesture to: irritated tight brows and pressed lips, controlled annoyance. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-af7a251c-17d7-4688-a5e3-7ea3d1a8cb7e.png",
+      "sha256": "f7b109ea8d883d3b5563c86756f38790cd64426d1108608b384c73e6e58fae0a",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/irritated.png"
+    },
+    {
+      "generationId": "exec-1a587be9-a30b-413f-84bc-5726a493b7dd",
+      "assetId": "character.cai.sweating",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.sweating. Change only the expression and small hand/shoulder gesture to: anxious eyes and a few small beads of sweat at temple, defensive mouth. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-1a587be9-a30b-413f-84bc-5726a493b7dd.png",
+      "sha256": "7d1f4102e12acbd48210621284d6d19be5cd1cc0418bc243f6b33cd80f5cca37",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/sweating.png"
+    },
+    {
+      "generationId": "exec-7d46adee-53cf-4425-885a-506fb301aa33",
+      "assetId": "character.cai.alarmed",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.alarmed. Change only the expression and small hand/shoulder gesture to: sudden alarm, widened eyes and parted lips, no caricature. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-7d46adee-53cf-4425-885a-506fb301aa33.png",
+      "sha256": "3683a086c8661eb943e801700ff09f87380a9da7e157f1a14e9089c976991fbd",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/alarmed.png"
+    },
+    {
+      "generationId": "exec-0eebfaa4-3676-4128-8ea1-a39a3c7b3a53",
+      "assetId": "character.cai.confession",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.confession. Change only the expression and small hand/shoulder gesture to: defeated admission, eyes lowered and one hand at chest, restrained shame. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-0eebfaa4-3676-4128-8ea1-a39a3c7b3a53.png",
+      "sha256": "fcc6c8b697a5891f2435f6fd89965d48a1acd65f8d819b7faee5a47634db390e",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/confession.png"
+    },
+    {
+      "generationId": "exec-79821fc3-52de-44c2-a61b-03ff8388497c",
+      "assetId": "character.cai.exhausted",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.cai.exhausted. Change only the expression and small hand/shoulder gesture to: exhausted, shoulders slightly lowered, downcast eyes. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-79821fc3-52de-44c2-a61b-03ff8388497c.png",
+      "sha256": "8d299af4f63c05b9e45bc3303fc4330a565f8213fdf3177ef443dafc1f4461d1",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/cai/exhausted.png"
+    },
+    {
+      "generationId": "exec-d582a57b-a0f2-48ed-999f-08eb9d64a7e1",
+      "assetId": "character.zhengyi.insistent",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zhengyi.insistent. Change only the expression and small hand/shoulder gesture to: insistent truthful testimony, focused eyes, one hand lightly forward. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-d582a57b-a0f2-48ed-999f-08eb9d64a7e1.png",
+      "sha256": "089d37ca7ed3d4255485f4ebfe173707dedc8edbdeef50b536af0d9aed096fa1",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zhengyi/insistent.png"
+    },
+    {
+      "generationId": "exec-67718208-2c6c-448a-afde-d02e300bafcb",
+      "assetId": "character.zhengyi.fearful",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zhengyi.fearful. Change only the expression and small hand/shoulder gesture to: fearful hesitant eyes and tense shoulders, dignified. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-67718208-2c6c-448a-afde-d02e300bafcb.png",
+      "sha256": "07b65d7546faa68cc605323f6b11dd5c8075c959948d6ae463b8e93577ce1aca",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zhengyi/fearful.png"
+    },
+    {
+      "generationId": "exec-a3986ccc-5df9-4c64-98df-f6f2b9804466",
+      "assetId": "character.zhengyi.relieved",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.zhengyi.relieved. Change only the expression and small hand/shoulder gesture to: quiet relief, softened eyes and a very slight smile. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-a3986ccc-5df9-4c64-98df-f6f2b9804466.png",
+      "sha256": "9c7d25c24748b52db46c64246f627d0d7e5a3a32811da1f15745be9d58ef40b4",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/zhengyi/relieved.png"
+    },
+    {
+      "generationId": "exec-3f1a8948-8b2b-46a4-a96f-c6483891844f",
+      "assetId": "character.jucheng.worried",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.jucheng.worried. Change only the expression and small hand/shoulder gesture to: worried anxious brows and tightened mouth. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-3f1a8948-8b2b-46a4-a96f-c6483891844f.png",
+      "sha256": "6a298990da86c03b0df0ebd9d99851540c6e005959a21bbe3247730d706bb446",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/jucheng/worried.png"
+    },
+    {
+      "generationId": "exec-4cc02d60-a619-47ed-85e2-371bdc11dccd",
+      "assetId": "character.chaofan.concerned",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.chaofan.concerned. Change only the expression and small hand/shoulder gesture to: concerned furrowed brow, worried attentive eyes. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-4cc02d60-a619-47ed-85e2-371bdc11dccd.png",
+      "sha256": "d78f1564020667fa082a695e8f259aa70ff52869086d96f2a436782bf7d06b8d",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/chaofan/concerned.png"
+    },
+    {
+      "generationId": "exec-b8031e3e-6b5b-47f1-bb87-fc592498c0b6",
+      "assetId": "character.chaofan.insistent",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.chaofan.insistent. Change only the expression and small hand/shoulder gesture to: firm insistent testimony, a restrained open-hand gesture. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-b8031e3e-6b5b-47f1-bb87-fc592498c0b6.png",
+      "sha256": "88f265a2c86688893f43e6265e87d82070e8eedac57cc9a9f77f3555f9a74c8e",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/chaofan/insistent.png"
+    },
+    {
+      "generationId": "exec-c7dd9af7-8951-4586-9763-97940089c400",
+      "assetId": "character.jingxin.weary",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.jingxin.weary. Change only the expression and small hand/shoulder gesture to: weary lowered eyelids, shoulders slightly sagging, dignified. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-c7dd9af7-8951-4586-9763-97940089c400.png",
+      "sha256": "7bac0d0415fd640dd1fc2446c7d3a724de53ef123db96e51f85d217cc2ca6e5b",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/jingxin/weary.png"
+    },
+    {
+      "generationId": "exec-7c0884e9-2967-4d6e-a3e5-e044c7b17816",
+      "assetId": "character.witness.uncertain",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.witness.uncertain. Change only the expression and small hand/shoulder gesture to: uncertain hesitant expression, slightly raised brows. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-7c0884e9-2967-4d6e-a3e5-e044c7b17816.png",
+      "sha256": "d4ed701bc106dcf3450e64da4f01c433bf2005227f980dfd265f15ea8014c7da",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/witness/uncertain.png"
+    },
+    {
+      "generationId": "exec-02c18df9-a200-4e97-8ab0-9823d181f950",
+      "assetId": "character.jucheng.sad",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.jucheng.sad. Change only the expression and small hand/shoulder gesture to: sad recollection, downcast eyes, no exaggerated crying. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-02c18df9-a200-4e97-8ab0-9823d181f950.png",
+      "sha256": "f5b7e2a69b6afa68b796d7571ff7e755f3bb2849cb8d63ea933b3ccb47ed7d39",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/jucheng/sad.png"
+    },
+    {
+      "generationId": "exec-4dab4827-ad44-4647-9e59-ab25187fcffd",
+      "assetId": "character.witness.recalling",
+      "prompt": "Edit this exact character master into ONE game sprite variant, character.witness.recalling. Change only the expression and small hand/shoulder gesture to: recalling an event, eyes looking slightly aside and brow thoughtful. Preserve the SAME person's facial identity, age, head shape, outfit, fabric wear, accessories, lighting, brushwork, body proportions, canvas framing, position, and apparent scale. Keep head and both hands fully visible. Do not add objects or lettering. Genuine transparent alpha outside the character, including between arms. Remove any brown glow, smoky vignette, black backdrop or halo outside the silhouette; the character itself stays fully opaque. No collage, no duplicate figure, no fantasy elements.",
+      "sourceFile": "exec-4dab4827-ad44-4647-9e59-ab25187fcffd.png",
+      "sha256": "4840edf6ab391a8cf0db563297117d9e6607923a47c37977ff8e384f155b44e3",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/character/witness/recalling.png"
+    },
+    {
+      "assetId": "evidence.braids",
+      "sourceFile": "exec-9ac6f3d9-d65e-4c83-94f7-bf9312e8dc3f.png",
+      "prompt": "Edit this historical AVG evidence image. Keep exactly TWO short separate dark braided tufts in the same positions, sizes and antique hand-painted style. The UPPER tuft must be made of natural old human hair: very fine smooth dark strands, slightly glossy, tapered individual hair ends, absolutely no fuzzy yarn bundles. The LOWER tuft is an imitation braided from dark brown cloth fibers: subtly coarser matte threads, with a few tiny transverse weft threads at its loose tail. At thumbnail size both have similar braided silhouettes; material difference is readable only on inspection. No cap or material source anywhere. No labels, arrows, explanation, scalp, blood or extra object. Preserve genuine transparent background outside both objects.",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/evidence/braids.png",
+      "sha256": "77a209b40dc98e1bbfe66b962b071f30cdfebb8aaf003391ebd293c84dbb2e8b",
+      "generationId": "exec-9ac6f3d9-d65e-4c83-94f7-bf9312e8dc3f"
+    },
+    {
+      "assetId": "detail.comparison",
+      "sourceFile": "exec-78f62303-5e67-4432-8ab0-d88608ced95c.png",
+      "prompt": "Edit this historical AVG comparison illustration to prevent implying physical continuity. Keep the SAME black cloth cap lower-edge cut at LEFT and SAME woven braid tail at RIGHT, same textures and lighting. Separate them by a broad entirely EMPTY clean linen gap taking at least 25 percent of the image width, with absolutely NO thread, strand, yarn, fiber, shadow strand or object bridging that gap. Each sample is complete within its own side and visibly disconnected. Similar colors and weave may be observed, but no fitted edges or matching joins. Maintain a single tabletop scene, antique realistic brushwork, no text, arrows, ticks, scientific conclusions, or modern equipment.",
+      "tool": "built-in image_gen",
+      "selectedPath": "02_Art/generated/detail/comparison.png",
+      "sha256": "3a3b55658bbf266198b11f94c65a6a3fe50ae21487e07ddec56506bdf6ac1bd3",
+      "generationId": "exec-78f62303-5e67-4432-8ab0-d88608ced95c"
+    }
+  ]
+}

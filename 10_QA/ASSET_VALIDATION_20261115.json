@@ -1,0 +1,447 @@
+{
+  "originals": 45,
+  "characterSprites": 30,
+  "uniqueImages": 45,
+  "alphaCheck": "passed",
+  "images": [
+    {
+      "path": "02_Art/generated/background/corridor.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "8defa343df7566da7d71490f555b7536cc6e9d77de8f9a0beac7db901e576e40"
+    },
+    {
+      "path": "02_Art/generated/background/court.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "da00f71c37804d5509bc35367aff8a6f056e40ce2c8e29d7a4e0e3dd1057fa72"
+    },
+    {
+      "path": "02_Art/generated/background/evidence_room.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "eca60fa4cff88b1bb1aeecbb6d03811bc7f979932a4eeada38318c54a3ac26e7"
+    },
+    {
+      "path": "02_Art/generated/background/exterior.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "8f9aae33126cbb5c6754b754d7b8061423af3fa9d1ac6ee3dae60906011edb51"
+    },
+    {
+      "path": "02_Art/generated/background/inspection_table.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "35a2551d3532a0e3456f1ca4f8aa0f99c8b1308c355b3aace26abccc99247c3a"
+    },
+    {
+      "path": "02_Art/generated/background/waiting_room.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "b0aa35466f9ffe27e447b4fa0a973cdd005c33a654edb3387a48a68d548cecc7"
+    },
+    {
+      "path": "02_Art/generated/character/cai/alarmed.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "3683a086c8661eb943e801700ff09f87380a9da7e157f1a14e9089c976991fbd",
+      "transparentFraction": 0.3894
+    },
+    {
+      "path": "02_Art/generated/character/cai/confession.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "fcc6c8b697a5891f2435f6fd89965d48a1acd65f8d819b7faee5a47634db390e",
+      "transparentFraction": 0.4568
+    },
+    {
+      "path": "02_Art/generated/character/cai/defensive.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "dfc1e4e8571208d5970461844d41585509aab970cd80338d723a240bcfc50494",
+      "transparentFraction": 0.4509
+    },
+    {
+      "path": "02_Art/generated/character/cai/exhausted.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "8d299af4f63c05b9e45bc3303fc4330a565f8213fdf3177ef443dafc1f4461d1",
+      "transparentFraction": 0.4221
+    },
+    {
+      "path": "02_Art/generated/character/cai/irritated.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "f7b109ea8d883d3b5563c86756f38790cd64426d1108608b384c73e6e58fae0a",
+      "transparentFraction": 0.4171
+    },
+    {
+      "path": "02_Art/generated/character/cai/neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "4cfc67f8c930049e7f0a4ee36be777561167653c0dab11701139d01365442b84",
+      "transparentFraction": 0.4184
+    },
+    {
+      "path": "02_Art/generated/character/cai/sweating.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "7d1f4102e12acbd48210621284d6d19be5cd1cc0418bc243f6b33cd80f5cca37",
+      "transparentFraction": 0.4064
+    },
+    {
+      "path": "02_Art/generated/character/chaofan/concerned.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "d78f1564020667fa082a695e8f259aa70ff52869086d96f2a436782bf7d06b8d",
+      "transparentFraction": 0.3655
+    },
+    {
+      "path": "02_Art/generated/character/chaofan/insistent.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "88f265a2c86688893f43e6265e87d82070e8eedac57cc9a9f77f3555f9a74c8e",
+      "transparentFraction": 0.3733
+    },
+    {
+      "path": "02_Art/generated/character/chaofan/neutral.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "767c99f8b5b18261b7e0ba6ea6cdb5c10cd34038ef32a9b29b05351aa9d1bbff",
+      "transparentFraction": 0.3795
+    },
+    {
+      "path": "02_Art/generated/character/jingxin/neutral.png",
+      "size": [
+        1176,
+        1337
+      ],
+      "mode": "RGBA",
+      "sha256": "9c2fedff2eafc72b819abc37d3c0773beda5914379e8e0535ecc2d1c7b325a6a",
+      "transparentFraction": 0.4045
+    },
+    {
+      "path": "02_Art/generated/character/jingxin/weary.png",
+      "size": [
+        1176,
+        1337
+      ],
+      "mode": "RGBA",
+      "sha256": "7bac0d0415fd640dd1fc2446c7d3a724de53ef123db96e51f85d217cc2ca6e5b",
+      "transparentFraction": 0.397
+    },
+    {
+      "path": "02_Art/generated/character/jucheng/neutral.png",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "sha256": "57f83fef5ac193994657b8886f24d2071ee107575b7c0b1820de9240c9808452",
+      "transparentFraction": 0.4195
+    },
+    {
+      "path": "02_Art/generated/character/jucheng/sad.png",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "sha256": "f5b7e2a69b6afa68b796d7571ff7e755f3bb2849cb8d63ea933b3ccb47ed7d39",
+      "transparentFraction": 0.4178
+    },
+    {
+      "path": "02_Art/generated/character/jucheng/worried.png",
+      "size": [
+        1199,
+        1312
+      ],
+      "mode": "RGBA",
+      "sha256": "6a298990da86c03b0df0ebd9d99851540c6e005959a21bbe3247730d706bb446",
+      "transparentFraction": 0.3992
+    },
+    {
+      "path": "02_Art/generated/character/shenyan/assertive.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "fbb2d31dc1429d7aee32cd10a19707d421ab7dedd6d249235bc0c0e0f9045dfa",
+      "transparentFraction": 0.4445
+    },
+    {
+      "path": "02_Art/generated/character/shenyan/neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "809f769f99dd818fa643ec2369e9d3879b6c7d80f5a0cc380164bb7f6d57f741",
+      "transparentFraction": 0.4384
+    },
+    {
+      "path": "02_Art/generated/character/shenyan/resolved.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "954d864658dbcb94ebe100b8647dffc27df7bd22ac168bbf259b0d4a2372ee29",
+      "transparentFraction": 0.4379
+    },
+    {
+      "path": "02_Art/generated/character/shenyan/thinking.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "e5397c0765f6e9f09572affe64e0d51e38dd8b48c3bc3e1170eedb63857e97e6",
+      "transparentFraction": 0.4814
+    },
+    {
+      "path": "02_Art/generated/character/witness/neutral.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "sha256": "0b7501f5b60071308b3b837041685b926eae82dea8450bc5a811618e84f564ca",
+      "transparentFraction": 0.4363
+    },
+    {
+      "path": "02_Art/generated/character/witness/recalling.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "sha256": "4840edf6ab391a8cf0db563297117d9e6607923a47c37977ff8e384f155b44e3",
+      "transparentFraction": 0.4527
+    },
+    {
+      "path": "02_Art/generated/character/witness/uncertain.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "sha256": "d4ed701bc106dcf3450e64da4f01c433bf2005227f980dfd265f15ea8014c7da",
+      "transparentFraction": 0.4294
+    },
+    {
+      "path": "02_Art/generated/character/zeng/listening.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "d4f6084b7fd00816cfebba601b2b04c9da55a13a8cd214fcfab5b142dec2984d",
+      "transparentFraction": 0.4397
+    },
+    {
+      "path": "02_Art/generated/character/zeng/neutral.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "9ee9c0d3966353281fb668c5d982e3afe90c71929be8fa3eb708138c23eec95d",
+      "transparentFraction": 0.446
+    },
+    {
+      "path": "02_Art/generated/character/zeng/stern.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "5efa1a5a102076d6cf6add9baaa925566b387ecc262722d107f87fbbaace8e12",
+      "transparentFraction": 0.4401
+    },
+    {
+      "path": "02_Art/generated/character/zeng/verdict.png",
+      "size": [
+        1103,
+        1426
+      ],
+      "mode": "RGBA",
+      "sha256": "9ddda62e9058b5f606e67a482a0fe05c946d6d8bdfc1d1a4d01ae93865ac3104",
+      "transparentFraction": 0.4436
+    },
+    {
+      "path": "02_Art/generated/character/zhengyi/fearful.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "07b65d7546faa68cc605323f6b11dd5c8075c959948d6ae463b8e93577ce1aca",
+      "transparentFraction": 0.368
+    },
+    {
+      "path": "02_Art/generated/character/zhengyi/insistent.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "089d37ca7ed3d4255485f4ebfe173707dedc8edbdeef50b536af0d9aed096fa1",
+      "transparentFraction": 0.3803
+    },
+    {
+      "path": "02_Art/generated/character/zhengyi/neutral.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "aeb886b53bc64b3c6e8eebaa0765b4824b470b3a7fbab550247b23710eb6a7e4",
+      "transparentFraction": 0.3817
+    },
+    {
+      "path": "02_Art/generated/character/zhengyi/relieved.png",
+      "size": [
+        1024,
+        1536
+      ],
+      "mode": "RGBA",
+      "sha256": "9c7d25c24748b52db46c64246f627d0d7e5a3a32811da1f15745be9d58ef40b4",
+      "transparentFraction": 0.3823
+    },
+    {
+      "path": "02_Art/generated/detail/braid_tail.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "e27af9007b0dfef14c8b823db2fa3300673e0ea9735a42394872f4aab1e9d2d6"
+    },
+    {
+      "path": "02_Art/generated/detail/comparison.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGB",
+      "sha256": "3a3b55658bbf266198b11f94c65a6a3fe50ae21487e07ddec56506bdf6ac1bd3"
+    },
+    {
+      "path": "02_Art/generated/detail/hat_cut.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "12b3f2d7d166715d18633848f0b828fd2e0dc07644d5d949fc1531392846fee3"
+    },
+    {
+      "path": "02_Art/generated/detail/hat_fiber.png",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "sha256": "f9d1158c34f5809e6b09bb2c5db0f3211376122923a6e2cf8b2bebd28a0e4139"
+    },
+    {
+      "path": "02_Art/generated/detail/lock.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "dcb1e0d072886f69b665599f83738f2b57744327f353ca2d0318a3a14b2c0aaf"
+    },
+    {
+      "path": "02_Art/generated/evidence/braids.png",
+      "size": [
+        1774,
+        887
+      ],
+      "mode": "RGBA",
+      "sha256": "77a209b40dc98e1bbfe66b962b071f30cdfebb8aaf003391ebd293c84dbb2e8b",
+      "transparentFraction": 0.7176
+    },
+    {
+      "path": "02_Art/generated/evidence/hat.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "92001704fe542af56d53a7bb1ebb67237f1ae92917de9f25cd7185dec174166a",
+      "transparentFraction": 0.6014
+    },
+    {
+      "path": "02_Art/generated/evidence/luggage.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "2a3a39074ea9726a3062cdb36c7eb2f0a41528fcfb25a98bfd51d46ed377458a",
+      "transparentFraction": 0.4274
+    },
+    {
+      "path": "02_Art/generated/evidence/scissors.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "dd2954dc4bcd472867001ab164a549a695554383dfa8824808ddd6e3a502ec6f",
+      "transparentFraction": 0.7019
+    }
+  ]
+}
