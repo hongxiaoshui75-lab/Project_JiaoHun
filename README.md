@@ -59,3 +59,5 @@ node 04_Code/tools/build.mjs
 # NAS 网络存档版与投稿
 
 入口构建在 `09_Builds/JiaoHun_Demo/site/`，关卡源在 `levels/`，投稿规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。线上 v2 使用独立的 `network-server.mjs`、SQLite 和游戏专用账号；玩家以用户名和暗号登录，注册时一次性展示恢复码，进度自动保存到 NAS。主持端与检修端使用另建的专用角色账号，不复用玩家暗号或 NAS 系统账号。最新部署与运维说明见 [网络存档记录](00_Docs/NETWORK_SAVE_20261115.md) 和 [v2 交接单](04_Code/deploy/AUTH_V2_HANDOFF.md)。旧版离线 Demo.html 和本机 server.mjs 仍保持离线行为。
+
+协作者账号与最小权限 Git 工作流见 [NAS 协作者说明](00_Docs/COLLABORATOR_NAS_ACCESS.md)。
