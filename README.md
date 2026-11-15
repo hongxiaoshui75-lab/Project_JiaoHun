@@ -63,3 +63,5 @@ node 04_Code/tools/build.mjs
 项目共享账号、Git 工作流与受控服务重启见 [NAS 项目维护说明](00_Docs/COLLABORATOR_NAS_ACCESS.md)。
 
 当前账号、home 空间与权限快照见 [NAS 账号清单](00_Docs/NAS_ACCOUNT_INVENTORY_20261115.md)。
+
+协作者 AI agent 的接入提示词见 [叫魂 Agent 提示词](00_Docs/JIAOHUN_DEV_AGENT_PROMPT.md)，NAS 开机项和空壳项目见 [启动项快照](00_Docs/NAS_STARTUP_AND_EMPTY_PROJECTS_20261115.md)。
