@@ -9,13 +9,14 @@ function environment(api,initial={}){
  const action=(text,click)=>({...node('button',text),click});
  const localStorage={getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)};
  const create=compileFunction(source+'\nreturn connectProgress;',['api','node','action','localStorage','window','document','setTimeout','clearTimeout']);
- const connect=create(api,node,action,localStorage,{addEventListener(){}},{addEventListener(){},body:{append(){}}},fn=>{const id=++timerId;timers.set(id,fn);return id;},id=>timers.delete(id));
+ const connect=create(api,node,action,localStorage,{addEventListener(){},removeEventListener(){}},{addEventListener(){},removeEventListener(){},body:{append(){}}},(fn,delay)=>{const id=++timerId;timers.set(id,{fn,delay});return id;},id=>timers.delete(id));
  const restored=[],status={textContent:''};
- return {storage,dialogs,restored,status,connect:()=>connect({slug:'case',identity:{name:'玩家',token:'opaque'},onRestore:save=>restored.push(save),status})};
+ return {storage,dialogs,restored,status,timers,connect:(mode='player')=>connect({slug:'case',identity:{id:3,name:'玩家'},mode,onRestore:save=>restored.push(save),status})};
 }
 test('连续动作在请求未结束时不丢失末次进度，并沿用服务器修订号',async()=>{
  let resolveFirst;const writes=[];
- const e=environment(async(path,options)=>{
+ const e=environment(async(path,options={})=>{
+  assert.equal(options.token,undefined,'Cookie版不附带旧Bearer凭据');
   if(options.method!=='PUT')return {revision:1,save:'old'};
   writes.push(options.body);
   if(writes.length===1)return new Promise(resolve=>{resolveFirst=resolve;});
@@ -27,13 +28,21 @@ test('连续动作在请求未结束时不丢失末次进度，并沿用服务�
  assert.deepEqual(writes.map(w=>[w.revision,w.save]),[[1,'first'],[2,'latest']]);assert.equal(e.storage.size,0);
 });
 test('意外退出前未同步的本机进度，重进时先恢复并补传',async()=>{
- const key='jiaohun.pending.%E7%8E%A9%E5%AE%B6.case',writes=[];
- const e=environment(async(path,options)=>{if(options.method!=='PUT')return {revision:4,save:'server'};writes.push(options.body);return {revision:5,updatedAt:new Date().toISOString()};},{[key]:JSON.stringify({revision:4,save:'pending-after-exit'})});
+ const key='jiaohun.pending.v2.3.player.case',writes=[];
+ const e=environment(async(path,options={})=>{if(options.method!=='PUT')return {revision:4,save:'server'};writes.push(options.body);return {revision:5,updatedAt:new Date().toISOString()};},{[key]:JSON.stringify({revision:4,save:'pending-after-exit'})});
  await e.connect();assert.deepEqual(e.restored,['pending-after-exit']);assert.equal(writes[0].save,'pending-after-exit');assert.equal(e.storage.size,0);
 });
 test('其他设备已有新存档时，不自动覆盖，确认后继续服务器进度',async()=>{
- const key='jiaohun.pending.%E7%8E%A9%E5%AE%B6.case';let writes=0;
- const e=environment(async(path,options)=>{if(options.method==='PUT')writes++;return {revision:9,save:'other-device'};},{[key]:JSON.stringify({revision:8,save:'local'})});
+ const key='jiaohun.pending.v2.3.player.case';let writes=0;
+ const e=environment(async(path,options={})=>{if(options.method==='PUT')writes++;return {revision:9,save:'other-device'};},{[key]:JSON.stringify({revision:8,save:'local'})});
  await e.connect();assert.equal(writes,0);assert.equal(e.dialogs.length,1);assert.equal(e.restored.length,0);
  const buttons=e.dialogs[0].children[2].children;buttons[0].click();assert.deepEqual(e.restored,['other-device']);assert.equal(e.storage.size,0);
+});
+
+test('独立演示只使用demo接口，后续普通队列节流至每秒一次',async()=>{
+ const paths=[];const e=environment(async(path,options={})=>{paths.push(path);return options.method==='PUT'?{revision:1,updatedAt:new Date().toISOString()}:{revision:0,save:null};});
+ const cloud=await e.connect('demo');cloud.queue('demo-first');await cloud.flush();cloud.queue('demo-latest');
+ assert.ok(paths.every(path=>path==='demo/case'));
+ assert.ok([...e.timers.values()].some(timer=>timer.delay>800),'刚保存后排队的普通动作至少等待约1秒');
+ cloud.dispose();assert.equal(e.timers.size,0);
 });

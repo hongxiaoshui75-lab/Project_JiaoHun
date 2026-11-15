@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,readFile,writeFile,rm,cp} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {validateLevel,safeAssetPath,buildLevels,MAX_ASSET_BYTES,hash} from '../tools/levels.mjs';
 import {renderLevels} from '../web/level-list.mjs';
@@ -21,7 +20,8 @@ test('列表把投稿标题作者作为文字渲染，不执行标记',()=>{
 });
 test('真实关卡契约和 manifest 哈希一致，篡改后构建不收录',async()=>{
  const good=await validateLevel(project,'xiaoshan-demo');assert.ok(good.total<=MAX_ASSET_BYTES);assert.equal(good.contentSha256.length,64);
- const temp=await mkdtemp(resolve(tmpdir(),'jiaohun-levels-'));
+ await mkdir(resolve(project,'99_Temp'),{recursive:true});
+ const temp=await mkdtemp(resolve(project,'99_Temp','jiaohun-levels-'));
  try{
   await mkdir(resolve(temp,'levels'));await cp(resolve(project,'levels/xiaoshan-demo'),resolve(temp,'levels/xiaoshan-demo'),{recursive:true});
   const path=resolve(temp,'levels/xiaoshan-demo/manifest.json'),m=JSON.parse(await readFile(path,'utf8'));
@@ -40,5 +40,6 @@ test('真实关卡契约和 manifest 哈希一致，篡改后构建不收录',as
 });
 test('纯静态运行器无动态投稿脚本和 HTML 注入',async()=>{
  for(const name of ['app.mjs','level-loader.mjs','level-list.mjs'])assert.doesNotMatch(await readFile(resolve(project,'04_Code/web',name),'utf8'),/innerHTML|eval\(|new Function/);
- const source=await readFile(resolve(project,'04_Code/tools/static-site.mjs'),'utf8');assert.match(source,/jiaohun-level/);
+ const source=await readFile(resolve(project,'04_Code/tools/static-site.mjs'),'utf8');
+ assert.match(source,/network-lobby\.mjs/);assert.match(source,/operator\.html/);assert.match(source,/screen\.html/);
 });

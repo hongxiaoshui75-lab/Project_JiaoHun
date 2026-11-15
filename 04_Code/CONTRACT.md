@@ -102,7 +102,7 @@ hint 仅调查阶段提供。hearing 不暴露规则、答案、哪些句被追�
 
 ## 运行和交付
 
-零 npm 依赖，Node 22+ 本地 HTTP 静态服务器仅监听 127.0.0.1，默认 4173，serve web/ + core/ + /content/demo-content.mjs；不对外发布。前端浏览器作为试玩客户端；build 生成独立目录及 zip 到 09_Builds。不要把 3.4GB 参考视频或参考画作混进试玩包。游戏实际进程保存在浏览器，JSON 导入导出作备份，无账号和远程数据库。
+零 npm 依赖，Node 22+ 本地 HTTP 静态服务器仅监听 127.0.0.1，默认 4173，serve web/ + core/ + /content/demo-content.mjs；不对外发布。前端浏览器可作为离线和在线试玩客户端；build 生成独立目录及 zip 到 09_Builds。不要把 3.4GB 参考视频或参考画作混进试玩包。离线模式把进程保存在浏览器；NAS v2 通过独立 network-server.mjs、游戏专用账号、Cookie 会话和 SQLite 提供跨设备存档，主持端/检修端不复用玩家凭据。
 
 
 ## AVG 表现接口（兼容 v1 存档）

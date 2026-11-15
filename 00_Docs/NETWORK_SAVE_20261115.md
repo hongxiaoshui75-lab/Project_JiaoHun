@@ -1,36 +1,55 @@
-# 网络存档与旧入口停用（2026-11-15）
+# NAS 网络存档 v2（2026-11-15）
 
-维护者明确要求取消游戏的纯静态限制，采用扫码打开、用户名查重、新建/找回前确认、NAS 自动保存。此要求取代 NAS_DEPLOY_PLAN_20261115.md 的无写接口/纯静态存档部分；关卡仍为 JSON、8MiB 配图、白名单与哈希校验，投稿仍走 PR + 人工审阅，核心 engine.mjs/save.mjs 不变。旧部署文档是当时状态，不代表当前服务。
+维护者取消了游戏的纯静态限制，并要求账号、跨设备自动存档、展示场次和大屏观察。当前候选为游戏专用认证 v2；关卡仍是经过哈希和白名单校验的 JSON 资源包，核心 `engine.mjs` / `save.mjs` 不变。旧的无密码 v1 仅保留历史数据归档，不再接受请求。
 
 ## 玩家流程
 
-入口 `/game/` 显示“找回已有进度 / 新建进度”，默认填入本机记住的昵称。新建检查唯一性（NFKC、首尾空格及大小写归一）；找回先展示关卡阶段与保存时间，由玩家确认“是我的进度，继续”。确认后显示关卡列表。二维码在本地使用固定版本 qrcode-generator 1.4.4（MIT）生成，不将地址发给第三方。
+- `/game/` 提供登录存档与创建账号。用户名按 NFKC、首尾空格和大小写归一后查重。
+- 玩家暗号以 scrypt 加盐摘要保存；浏览器只持有 Secure、HttpOnly、SameSite Cookie。
+- 注册和修改暗号时一次性显示恢复码。服务器只保存其 SHA-256；恢复后旧码立即失效，并撤销该玩家的其他会话。
+- 玩家保存先写本机 pending，再异步提交 NAS。断网、切后台或临时退出时保留本机副本，重新进入后补传。
+- 多设备修订号冲突返回 409，页面要求玩家明确选择服务器或本机版本，不自动覆盖。
+- JSON 导入导出仍保留为备用；载入前继续执行格式、剧情版本、状态和大小校验。
 
-该模式按用户要求无密码，确认不等于身份验证；知道用户名的人也可以找回或覆盖该名进度，因此页面明确说明，并建议独特昵称。浏览器保存随机凭据，服务器只保存其 SHA-256；另一设备通过用户名确认找回会轮换凭据，旧设备需重新找回。没有公开玩家列表、真实姓名/联系方式、评论、关卡上传或多人房间。
+## 展示与权限
 
-每个动作先写本机 pending，再异步同步服务器；退出/切后台尝试 keepalive，同步失败保留本机数据并重试。重新进入会补传未同步数据。多设备修订号不一致时返回 409，必须选择服务器或本机版本，不自动覆盖。备用 JSON 导入仍走原存档校验，导入后自动同步。剧情版本不匹配会拒绝，不静默迁移。
+- 主持端和检修端使用维护者在 NAS 上单独创建的 `presenter` / `inspector` 角色账号，不与玩家暗号或 NAS 系统账号共用。
+- 每场展示生成独立二维码。玩家登录后必须勾选同意并主动加入，普通登录不会自动广播。
+- 大屏只显示玩家选择的头像、昵称、关卡阶段与在线状态；主持人只能读取 `getView` 表现投影，不能替玩家操作。
+- 玩家退出展示后只保留退出时摘要，不再随私下进度更新；关闭场次后成员和事件清空，个人存档仍可继续。
+- 私有存档、加入/退出/心跳、演示存档和角色操作都校验当前页面身份，防止同浏览器切换账号后旧标签写入新 Cookie 的账号。
 
 ## 服务与数据
 
-- 入口：`https://sociology.lumi-ember.top/game/`，8443 入口仍可用；game 子域重定向到同一入口。
-- Caddy 静态页面 + `/game/api/*` → `127.0.0.1:4186`；独立 game-save.service 以 agent 运行。
+- 入口：`https://sociology.lumi-ember.top/game/`；NAS 8443 入口保留。
+- Caddy 静态页 + `/game/api/*` → `127.0.0.1:4186`；`game-save.service` 以 `agent` 运行并自动重启。
 - 程序：`/vol2/1000/Dockers/projects/Project_JiaoHun/runtime/network-server.mjs`。
-- SQLite：`/home/agent/jiaohun-game-data/progress.sqlite`，父目录 0700，服务 UMask=0077，不在网站目录。
-- 静态文件发布仍为 `/vol2/1000/Dockers/projects/Project_JiaoHun/site/`，旧版备份 `site.before-network-20261115161038`。
-- 自动启动、故障重启；SQLite WAL + FULL synchronous。做运行中备份应使用 SQLite backup API，或停服务后一起保留数据库/WAL；不能只随意复制活动数据库文件。此轮未设置定时异地备份。
-- API：POST join/lookup/resume，GET profile、GET/PUT saves/<slug>，GET health；JSON 限流、请求大小限制、来源校验、预编译 SQL、修订号 CAS，以及原 core/save 解码校验。不提供写任意目录或执行内容包代码的接口。
-- 最多 2000 个用户名；查找/加入限制为每来源每小时 300 次，普通 API 每分钟 2400 次。当前反代连接共享来源限额，适合低流量试用，扩大使用前需调整受信代理地址处理和配额。
+- 新数据库：`/home/agent/jiaohun-game-data/progress-v2.sqlite`，服务使用 WAL + FULL synchronous，目录与数据库均为私有权限。
+- 旧 `progress.sqlite` 在停服务后使用 SQLite backup API 归档为 `legacy-progress-archive.sqlite`；不会自动认领到新账号，也不会在后续准备步骤中覆盖已有归档。
+- CSP 允许同源脚本、样式和连接，并允许 `data:` 头像与二维码；不加载第三方脚本、字体、图片或分析服务。
+- 活跃 SQLite 不能只复制主文件。运行中备份须使用 SQLite backup API，或停服务后同时处理数据库与 WAL。
 
-## 验证与审计
+## 发布与回滚
 
-最终完整自动测试 66 项全部通过（约 9.64 秒）。网络存档测试覆盖用户名重名、跨玩家隔离、跨来源拒绝、无凭据拒绝、非法存档、版本冲突、确认恢复及服务重启后恢复；另有客户端连续动作保存、意外退出 pending 补传和其他设备更新冲突测试。公网 IPv6 API 自检已验证新建201、重名409、摘要预览、确认恢复200、保存200和完整状态一致。浏览器控制通道超时，尚未把新版全流程和二维码真机扫码列为视觉验收通过。
+1. 在 `04_Code` 运行全量测试和 `node tools/build.mjs`。
+2. 构建 `site/` 与最小 `runtime/`，复制到 NAS 项目目录下的独立 staging 子目录。
+3. 在 staging 中用临时数据目录演练数据库准备，不接触生产 `progress.sqlite`。
+4. 维护者通过已授权 `ask-root` 运行 `runtime` 外的 `upgrade-auth-v2.py --stage=<staging>`。脚本只停 `game-save`，备份配置/数据库，保留旧 `site`、`runtime` 后切换。
+5. 健康检查失败时恢复旧站点/运行时代码并重启原服务；新/旧数据库均保留供检查。
+6. 角色账号只通过 NAS 本机隐藏输入 CLI 初始化，不设置默认密码，不接受命令行或环境变量密码。
 
-用户截图 502 对应 15:57 Caddy 重启时到 frp 的短暂 TLS 握手中断；之后 ECS nginx 本机、隧道和 NAS 路由均恢复200。动态服务部署后公网 IPv6 health 正常。IPv4 直达 ECS 在本机 curl 仍被重置，尚不能宣称所有 IPv4 网络可用。网站 HTML 能读取不等于完整游戏体验已验收。
+详细交接：[AUTH_V2_HANDOFF.md](../04_Code/deploy/AUTH_V2_HANDOFF.md)。
 
-部署审计：`/home/agent/jiaohun-audit/network-game-20261115161038/receipt.json`，配置备份在同目录。NAS 原管理 ZeroTier 地址部署时超时，改用同一 NAS 已配置的 lumi-agent/Tailscale 通道，不更改 VPN 或飞牛组件。
+## 验证状态
 
-## 四个旧入口
+- 本地 79 项自动测试全部通过。
+- 真实浏览器通过：注册、一次性恢复码确认、关卡选择、游戏首段、NAS 保存状态、桌面与竖屏布局、主持账号登录、场次创建、二维码渲染、玩家同意加入、SSE 成员更新与只读观察。
+- 浏览器只报告了预期的未登录 401 和缺少 favicon 的 403，没有模块、资源或 CSP 执行错误。
+- 2026-11-15 19:37（北京时间）已在 NAS 完成 `active-v2` 切换。切换回执位于 `/home/agent/jiaohun-audit/auth-v2-cutover-20261115193757/receipt.json`；旧站点和运行时分别保留为 `site.before-auth-v2-20261115193757`、`runtime.before-auth-v2-20261115193757`。
+- 生产 `progress-v2.sqlite` 初始为 0 玩家；已通过隐藏输入 CLI 建立 `presenter` 和 `inspector` 两个专用角色账号，密码不写入仓库。角色登录、退出和检修台 5 项健康检查已在线上浏览器通过。
+- NAS 8443 与标准 443 直连均返回 v2 health；标准 443 经本机代理时出现一次 TLS 握手失败，直连 IPv6 正常，未据此宣称所有代理环境均可用。
+- 自动测试和页面渲染不等于用户对剧情或美术的最终认可。
 
-按用户要求，opencode/docker/comfyui/mcsm 的 `.top` 与 `.xyz` 自建路由改为 410，无后端代理；ECS 的旧 opencode.conf/docker.conf 已移出启用目录，另有停用响应配置。NAS 的 OpenCode 服务与健康拉起定时器 stop + disable。安装与数据原目录保留，未删除任何后端程序/会话。
+## 旧入口
 
-NAS 备份 `/home/agent/jiaohun-audit/retire-entries-20261115155614/opencode-data-backup.tar.gz`（10,671,046 字节），包含 svc-ai 的 `.local/share/opencode`、`.config/opencode`、`.local/state/opencode`。同目录有原 Caddy 和 unit 配置及 receipt.json。ECS 配置备份 `/root/lumi-retired-entries-20261115155704/`。只清理入口和停用 OpenCode，飞牛官方 lumi-nas.fnos.net 及远程套件未动。
+opencode/docker/comfyui/mcsm 的 `.top` / `.xyz` 自建入口已按维护者要求改为 410，原后端目录未删除；ECS 旧代理配置已移出启用目录。此状态不由 v2 部署脚本修改。

@@ -24,6 +24,7 @@
 .agents/
 node_modules/
 .cache/
+.playwright-cli/
 .DS_Store
 Thumbs.db
 *.log

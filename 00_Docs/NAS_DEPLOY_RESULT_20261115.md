@@ -1,4 +1,6 @@
-# 静态关卡部署结果
+# 静态关卡部署结果（历史）
+
+> 本文记录 2026-11-15 下午的静态版部署，不代表当前在线形态。维护者随后要求增加账号与自动存档，当前实现与运维边界以 [NETWORK_SAVE_20261115.md](NETWORK_SAVE_20261115.md) 和 [AUTH_V2_HANDOFF.md](../04_Code/deploy/AUTH_V2_HANDOFF.md) 为准。
 
 静态产物：`09_Builds/JiaoHun_Demo/site/`，已上传 `/vol2/1000/Dockers/projects/Project_JiaoHun/site/`。只部署该目录，不运行 server.mjs。线上与本地 JSON 内容包一致；45 张原图的网页 WebP 副本共 2,645,278 字节，原图保留。
 

@@ -1,9 +1,13 @@
 # Insert inside the existing sociology.lumi-ember.top site block, before catch-all routes.
 redir /game /game/ 308
+route /game/api/* {
+    uri strip_prefix /game
+    reverse_proxy 127.0.0.1:4186
+}
 route /game/* {
     uri strip_prefix /game
     root * /vol2/1000/Dockers/projects/Project_JiaoHun/site
     header X-Content-Type-Options nosniff
-    header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
+    header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; frame-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'"
     file_server
 }
