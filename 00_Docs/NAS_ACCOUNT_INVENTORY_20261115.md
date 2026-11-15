@@ -27,7 +27,7 @@
 |---|---|---|
 | `svc-ai` | `/home/svc-ai`，1.1 GB，0700 | Caddy 服务账号；`ai-ops` 与项目只读组 |
 | `comfyui-op` | `/home/comfyui-op`，20 KB，0755 | 已清理为 `nologin`、密码锁定、无 Docker 组；无服务/进程使用 |
-| `maa-fnos` | Home 缺失，nologin | `docker` 组 |
+| `maa-fnos` | Home 缺失，nologin | `docker` 组；当前无进程、systemd、包记录或 MAA 容器，疑似已卸载套件残留 |
 | `trim-media`、`trim.photos`、`trim.security`、`trim.docs`、`trim.text-editor`、`trim.seek`、`trim.openclaw`、`trim.vm`、`trim.music`、`trim.preview` | 无独立 home | NAS 官方套件账号，`OfficialAppUsers`；无 sudo |
 | `frpc`、`tailscale`、`zerotier` | 无独立 home | 网络套件账号，`AppUsers`；无 sudo |
 | `nodejs_v22`、`nodejs_v24`、`bunjs`、`dpanel`、`mcsmanager`、`qBittorrent`、`navidrome`、`ts2`、`fygo-browser`、`trim.hermes`、`lumina-control`、`fn-qemu-ga` | 无独立 home | 各自套件组，nologin，无 sudo |
@@ -43,3 +43,5 @@
 ```
 
 注意：`sudoer` 和 `lumi` 是完整管理员边界；`maa-fnos` 虽无 sudo，但 Docker 组成员应视作高权限。`jiaohun-dev` 不在这些高权限边界内。
+
+Docker socket 为 `root:docker`、权限 `0660`。`lumi` 和 `sudoer` 不在 `docker` 组，不能用普通用户身份直接运行 Docker；但两者都有 `(ALL:ALL) ALL` sudo，输入密码后可通过 `sudo docker` 控制 Docker。`agent`、`jiaohun-dev` 和 `svc-ai` 均无该能力。
