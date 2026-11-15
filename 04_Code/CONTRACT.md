@@ -1,5 +1,7 @@
 # Demo 模块接口 v1
 
+静态投稿入口：`levels/<slug>/content.json` 是纯 JSON 数据，结构沿用下述对象；manifest 与资源限制见根目录 CONTRIBUTING.md。core/engine.mjs 和 core/save.mjs 冻结，投稿不包含代码。05_Content/demo-content.mjs 保留为旧离线 Demo 的创作源；线上构建从 levels/ 读取，不导入投稿脚本。
+
 本文件是本轮实现接口。原始文档保持不动。运行时不使用生成式对话、网络服务或第三方依赖。
 
 ## 内容导出

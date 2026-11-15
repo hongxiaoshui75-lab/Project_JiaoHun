@@ -1,0 +1,340 @@
+{
+  "slug": "xiaoshan-demo",
+  "title": "萧山剪辫案",
+  "author": "Project JiaoHun 制作组",
+  "version": 1,
+  "license": "CC-BY-NC-4.0",
+  "assets": [
+    {
+      "id": "background.corridor",
+      "file": "levels/xiaoshan-demo/assets/background_corridor.webp",
+      "bytes": 51918,
+      "sha256": "5c7e33c3cb7c28eae4a928ac20f49c6641287c69bf73fbc8395c5bf16c314a6b"
+    },
+    {
+      "id": "background.court",
+      "file": "levels/xiaoshan-demo/assets/background_court.webp",
+      "bytes": 49598,
+      "sha256": "f5237e506d7ff588c4ae3e31158c671bf8365466cd020fdbaa74da16dfc97bd4"
+    },
+    {
+      "id": "background.evidence_room",
+      "file": "levels/xiaoshan-demo/assets/background_evidence_room.webp",
+      "bytes": 41146,
+      "sha256": "70525bf5fc4a4b9dfdcd248d99fa45dd437e65e3dd31ed06b3fb7d3ab37c11ee"
+    },
+    {
+      "id": "background.exterior",
+      "file": "levels/xiaoshan-demo/assets/background_exterior.webp",
+      "bytes": 65910,
+      "sha256": "0182cfa58d56b182d1e9d2424089aa46a70de64a794d0e0e65ca84de83ac80ac"
+    },
+    {
+      "id": "background.inspection_table",
+      "file": "levels/xiaoshan-demo/assets/background_inspection_table.webp",
+      "bytes": 33346,
+      "sha256": "f92f1e606e8668ee552e5dafa91fd0bff0f726257622c6c9a69dd52c0dae625f"
+    },
+    {
+      "id": "background.waiting_room",
+      "file": "levels/xiaoshan-demo/assets/background_waiting_room.webp",
+      "bytes": 31504,
+      "sha256": "b04c92271073d9aead20da88dded8214a630765a3be3a2373a626bdb76deb7cc"
+    },
+    {
+      "id": "character.cai.alarmed",
+      "file": "levels/xiaoshan-demo/assets/character_cai_alarmed.webp",
+      "bytes": 67042,
+      "sha256": "c873dad147deab43ee8bdf476de30a067529caec01135e7cb355a60f3d29734b"
+    },
+    {
+      "id": "character.cai.confession",
+      "file": "levels/xiaoshan-demo/assets/character_cai_confession.webp",
+      "bytes": 56260,
+      "sha256": "44d7ec64fd7aee3b2eb4a75461c0b797ddbcdd0681c8071cbd484486b46d128d"
+    },
+    {
+      "id": "character.cai.defensive",
+      "file": "levels/xiaoshan-demo/assets/character_cai_defensive.webp",
+      "bytes": 55002,
+      "sha256": "5ba4e4961aae509a52cfe6c4ebcfa995903dd2ff9d14cf1f187bf7bc2cdbfa36"
+    },
+    {
+      "id": "character.cai.exhausted",
+      "file": "levels/xiaoshan-demo/assets/character_cai_exhausted.webp",
+      "bytes": 57494,
+      "sha256": "1127efb62cfe82209c0254d1c40cf504ab65f30564ef79d360f20a97160001b5"
+    },
+    {
+      "id": "character.cai.irritated",
+      "file": "levels/xiaoshan-demo/assets/character_cai_irritated.webp",
+      "bytes": 53584,
+      "sha256": "b7c91fa657b82012797cd9c43ea3748ab7c1220eb424ea046f32b2fdd3eb065e"
+    },
+    {
+      "id": "character.cai.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_cai_neutral.webp",
+      "bytes": 58008,
+      "sha256": "c0c7b13be9434ad2d1a87207c86b615ebe8aa07c45cedd14413a2ac4b5ae395c"
+    },
+    {
+      "id": "character.cai.sweating",
+      "file": "levels/xiaoshan-demo/assets/character_cai_sweating.webp",
+      "bytes": 56318,
+      "sha256": "63b0108eeb10d60b0f1d8cceb02175bdad04e34e5f1069b59869f4c874d6e112"
+    },
+    {
+      "id": "character.chaofan.concerned",
+      "file": "levels/xiaoshan-demo/assets/character_chaofan_concerned.webp",
+      "bytes": 63914,
+      "sha256": "ce4c2828c71d0b9d452f7acaf44b915a4a253a983158f0ebbfb7b65c448a44ec"
+    },
+    {
+      "id": "character.chaofan.insistent",
+      "file": "levels/xiaoshan-demo/assets/character_chaofan_insistent.webp",
+      "bytes": 60886,
+      "sha256": "637204b2760acd0dcd4443f3a0ca10436495c34a200cb15d853e5a817ffc2e77"
+    },
+    {
+      "id": "character.chaofan.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_chaofan_neutral.webp",
+      "bytes": 86482,
+      "sha256": "4d08509cc70afcd442432e7b788c0de3094e185a822656f5fe9dbfa7cd5039e6"
+    },
+    {
+      "id": "character.jingxin.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_jingxin_neutral.webp",
+      "bytes": 88154,
+      "sha256": "90c41f9ca9036afd647a335aa8261022c63d8a99b2a23a66648bcc2aae26f9a3"
+    },
+    {
+      "id": "character.jingxin.weary",
+      "file": "levels/xiaoshan-demo/assets/character_jingxin_weary.webp",
+      "bytes": 60010,
+      "sha256": "45fa6a8b3ea1bdd53a4b24f9f174b8a178023d9439b107abb4b6f86b3b466530"
+    },
+    {
+      "id": "character.jucheng.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_jucheng_neutral.webp",
+      "bytes": 96440,
+      "sha256": "3a81626fdd1a0bee154fd637985f08693832fa8944494957bdafde65a517b9ef"
+    },
+    {
+      "id": "character.jucheng.sad",
+      "file": "levels/xiaoshan-demo/assets/character_jucheng_sad.webp",
+      "bytes": 71578,
+      "sha256": "173b4ad828490e500372e423e982f06ec5041aa28819e5976b113fc27769bf55"
+    },
+    {
+      "id": "character.jucheng.worried",
+      "file": "levels/xiaoshan-demo/assets/character_jucheng_worried.webp",
+      "bytes": 73210,
+      "sha256": "e12cd0436d2fe1fdf105364eb75cf226b716a4c60dd7e8278cad1fb9b9310c52"
+    },
+    {
+      "id": "character.shenyan.assertive",
+      "file": "levels/xiaoshan-demo/assets/character_shenyan_assertive.webp",
+      "bytes": 38588,
+      "sha256": "e80240a936a8cd913fadf92f7c719608f54af13bf1012763b38e1175b374606e"
+    },
+    {
+      "id": "character.shenyan.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_shenyan_neutral.webp",
+      "bytes": 37928,
+      "sha256": "17c99215d9e5e855e0dbf1bca4324d1e83953848701bd7e6f14a780cfd54d130"
+    },
+    {
+      "id": "character.shenyan.resolved",
+      "file": "levels/xiaoshan-demo/assets/character_shenyan_resolved.webp",
+      "bytes": 36470,
+      "sha256": "be3839bc02a79f06b816685588ad32e0a9c18b7c4ab5955db1bd96927b96ee2f"
+    },
+    {
+      "id": "character.shenyan.thinking",
+      "file": "levels/xiaoshan-demo/assets/character_shenyan_thinking.webp",
+      "bytes": 33306,
+      "sha256": "3b9e46e75f2205a41c5844f08a6a4f5c048bab54328f6eefada11fbe524e0cf9"
+    },
+    {
+      "id": "character.witness.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_witness_neutral.webp",
+      "bytes": 59558,
+      "sha256": "6f26b28ca82b9aab43827a09541f245a8afa34aa81ac59bb03c8188de2a6de56"
+    },
+    {
+      "id": "character.witness.recalling",
+      "file": "levels/xiaoshan-demo/assets/character_witness_recalling.webp",
+      "bytes": 50854,
+      "sha256": "e36c39b3380dc340bfbf0088b7c3445dde3d4166562841e9737659edee2a138b"
+    },
+    {
+      "id": "character.witness.uncertain",
+      "file": "levels/xiaoshan-demo/assets/character_witness_uncertain.webp",
+      "bytes": 51678,
+      "sha256": "5d63e55bab94d4600ce53bf28834f77285c4a6a1c978447be574d2dbf4b67ace"
+    },
+    {
+      "id": "character.zeng.listening",
+      "file": "levels/xiaoshan-demo/assets/character_zeng_listening.webp",
+      "bytes": 43140,
+      "sha256": "f3d1c98e2a07cd83e7c6d272ec0a4a6331f9d4311afd91157f85dbb9b994d883"
+    },
+    {
+      "id": "character.zeng.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_zeng_neutral.webp",
+      "bytes": 59002,
+      "sha256": "3ecafe5f4de5f1f015d88813d6b424d02abe3eed6bfe95077099977860233b49"
+    },
+    {
+      "id": "character.zeng.stern",
+      "file": "levels/xiaoshan-demo/assets/character_zeng_stern.webp",
+      "bytes": 44992,
+      "sha256": "fded71859f02e0119914f6a04d090b376d4a9098cdfccfd3d33301010def2672"
+    },
+    {
+      "id": "character.zeng.verdict",
+      "file": "levels/xiaoshan-demo/assets/character_zeng_verdict.webp",
+      "bytes": 49824,
+      "sha256": "f99428e444398f5de072703c58e69c5af51dc8237ec81ba81875a47030fcfc29"
+    },
+    {
+      "id": "character.zhengyi.fearful",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_fearful.webp",
+      "bytes": 58086,
+      "sha256": "e2f2ba9fa1a04020ee9b640549fb2ecd3825d1649580478786e47418d1c18e62"
+    },
+    {
+      "id": "character.zhengyi.insistent",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_insistent.webp",
+      "bytes": 59710,
+      "sha256": "f121e35be48c2ee1b57f802a3e97fd690e1314651588be6a5d5ca4b5b549cca7"
+    },
+    {
+      "id": "character.zhengyi.neutral",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_neutral.webp",
+      "bytes": 58128,
+      "sha256": "583a26b678630b1c0b5165c2ba1141181d582be6bd4ebab5ccf47b6fc522ee2e"
+    },
+    {
+      "id": "character.zhengyi.relieved",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_relieved.webp",
+      "bytes": 52246,
+      "sha256": "878ff559ffbaaa36f03b8b308a1790c453e165047adbd77b27bb9e6a420cdc20"
+    },
+    {
+      "id": "detail.braid_tail",
+      "file": "levels/xiaoshan-demo/assets/detail_braid_tail.webp",
+      "bytes": 69380,
+      "sha256": "33950c821514da8e30ec7e0f0e36205d55bf73a1aa5b9781f18326042305b7d2"
+    },
+    {
+      "id": "detail.comparison",
+      "file": "levels/xiaoshan-demo/assets/detail_comparison.webp",
+      "bytes": 57250,
+      "sha256": "001d5f631618030d87abc8d46c40ba6eb81be73f399e8ab5eeec895d1ef143f1"
+    },
+    {
+      "id": "detail.hat_cut",
+      "file": "levels/xiaoshan-demo/assets/detail_hat_cut.webp",
+      "bytes": 74324,
+      "sha256": "c77e537ebdd3bafba4f1bdf19e969ccdfdf8d0925a04fc5298360c22838afb0b"
+    },
+    {
+      "id": "detail.hat_fiber",
+      "file": "levels/xiaoshan-demo/assets/detail_hat_fiber.webp",
+      "bytes": 96082,
+      "sha256": "df6a4bdb41aea8b67c70807e3f7cd24a99046c94774aebf0de3380072ce845a1"
+    },
+    {
+      "id": "detail.lock",
+      "file": "levels/xiaoshan-demo/assets/detail_lock.webp",
+      "bytes": 87462,
+      "sha256": "0d3c9bf5f45d481f0de6613cded8695393951e48fa4da9bc1f7b57511d6d32dc"
+    },
+    {
+      "id": "evidence.braids",
+      "file": "levels/xiaoshan-demo/assets/evidence_braids.webp",
+      "bytes": 58886,
+      "sha256": "67b15c7064138851729f02434d66e000f83787ee106ec52f142ae764df4f242f"
+    },
+    {
+      "id": "evidence.hat",
+      "file": "levels/xiaoshan-demo/assets/evidence_hat.webp",
+      "bytes": 37786,
+      "sha256": "21407c886950de5884c26a79ac7219c071a234828db3538da737aa587b52f8da"
+    },
+    {
+      "id": "evidence.luggage",
+      "file": "levels/xiaoshan-demo/assets/evidence_luggage.webp",
+      "bytes": 68196,
+      "sha256": "896bcf8f0720b0a2417c673790f2042059d0eaa98b29e52bce19ae9bb8203fb0"
+    },
+    {
+      "id": "evidence.scissors",
+      "file": "levels/xiaoshan-demo/assets/evidence_scissors.webp",
+      "bytes": 84598,
+      "sha256": "172674863c843aea7d0d2998246fbae1405c91944177140760cc291da45c5438"
+    },
+    {
+      "id": "evidence.testimony_witness",
+      "file": "levels/xiaoshan-demo/assets/character_witness_neutral.webp",
+      "bytes": 59558,
+      "sha256": "6f26b28ca82b9aab43827a09541f245a8afa34aa81ac59bb03c8188de2a6de56"
+    },
+    {
+      "id": "evidence.testimony_jucheng",
+      "file": "levels/xiaoshan-demo/assets/character_jucheng_neutral.webp",
+      "bytes": 96440,
+      "sha256": "3a81626fdd1a0bee154fd637985f08693832fa8944494957bdafde65a517b9ef"
+    },
+    {
+      "id": "evidence.testimony_zhengyi",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_neutral.webp",
+      "bytes": 58128,
+      "sha256": "583a26b678630b1c0b5165c2ba1141181d582be6bd4ebab5ccf47b6fc522ee2e"
+    },
+    {
+      "id": "evidence.testimony_chaofan",
+      "file": "levels/xiaoshan-demo/assets/character_chaofan_neutral.webp",
+      "bytes": 86482,
+      "sha256": "4d08509cc70afcd442432e7b788c0de3094e185a822656f5fe9dbfa7cd5039e6"
+    },
+    {
+      "id": "evidence.testimony_home",
+      "file": "levels/xiaoshan-demo/assets/character_zhengyi_neutral.webp",
+      "bytes": 58128,
+      "sha256": "583a26b678630b1c0b5165c2ba1141181d582be6bd4ebab5ccf47b6fc522ee2e"
+    },
+    {
+      "id": "evidence.testimony_luggage",
+      "file": "levels/xiaoshan-demo/assets/character_chaofan_neutral.webp",
+      "bytes": 86482,
+      "sha256": "4d08509cc70afcd442432e7b788c0de3094e185a822656f5fe9dbfa7cd5039e6"
+    },
+    {
+      "id": "evidence.inquiry_record",
+      "file": "levels/xiaoshan-demo/assets/background_court.webp",
+      "bytes": 49598,
+      "sha256": "f5237e506d7ff588c4ae3e31158c671bf8365466cd020fdbaa74da16dfc97bd4"
+    },
+    {
+      "id": "evidence.fiber_report",
+      "file": "levels/xiaoshan-demo/assets/detail_comparison.webp",
+      "bytes": 57250,
+      "sha256": "001d5f631618030d87abc8d46c40ba6eb81be73f399e8ab5eeec895d1ef143f1"
+    },
+    {
+      "id": "evidence.hat_fiber",
+      "file": "levels/xiaoshan-demo/assets/detail_hat_fiber.webp",
+      "bytes": 96082,
+      "sha256": "df6a4bdb41aea8b67c70807e3f7cd24a99046c94774aebf0de3380072ce845a1"
+    },
+    {
+      "id": "detail.hat_front",
+      "file": "levels/xiaoshan-demo/assets/evidence_hat.webp",
+      "bytes": 37786,
+      "sha256": "21407c886950de5884c26a79ac7219c071a234828db3538da737aa587b52f8da"
+    }
+  ],
+  "notes": "改编与 AI 生成配图工作稿；帽形与现场纤维比对为游戏设计。许可覆盖本关原创改编和有权许可部分，不涵盖原著或第三方资料，不对 AI 图像可版权性作保证。"
+}

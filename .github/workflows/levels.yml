@@ -1,0 +1,25 @@
+name: Validate game and content packs
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node 04_Code/tools/prepare-art.mjs
+      - run: node --test 04_Code/tests/*.test.mjs
+      - name: Reject invalid submitted packs
+        run: |
+          node --input-type=module <<'JS'
+          import {readFile} from 'node:fs/promises';
+          const report=JSON.parse(await readFile('09_Builds/levels-validation.json','utf8'));
+          if(report.rejected.length){console.error(report.rejected);process.exit(1);}
+          JS
+      # Passing automation does not replace the maintainer's historical/content review.

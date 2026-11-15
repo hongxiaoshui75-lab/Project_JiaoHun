@@ -48,3 +48,6 @@ node 04_Code/tools/build.mjs
 图像和对白均为可校订工作稿，不代表用户已认可的最终美术。帽子形制和现场纤维比对属于游戏新增设计；材料相似不作为唯一来源鉴定。沈砚的具体官职未定。本次不含配音和视频。
 
 此仓库尚未授予开源许可。
+# NAS 静态版与投稿
+
+静态入口构建在 `09_Builds/JiaoHun_Demo/site/`，关卡源在 `levels/`，投稿规则见 [CONTRIBUTING.md](CONTRIBUTING.md)，部署状态与限制见 [部署结果](00_Docs/NAS_DEPLOY_RESULT_20261115.md)。线上不运行 Node 服务，存档仍在浏览器本地。
