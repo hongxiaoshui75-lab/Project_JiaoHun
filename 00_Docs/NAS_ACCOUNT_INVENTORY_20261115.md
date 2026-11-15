@@ -14,10 +14,10 @@
 
 | 账号 | UID | Home 与占用 | 登录 Shell | 组与权限 |
 |---|---:|---|---|---|
-| `lumi` | 1000 | `/home/lumi`，2.7 GB，0755 | `/bin/bash` | `Users`、`Administrators`、`work`、`jiaohun-maintainers`；sudo 为 `(ALL:ALL) ALL` |
-| `agent` | 1001 | `/home/agent`，1.9 GB，0750 | `/bin/bash` | `Users`、`ai-ops`、`work`、`jiaohun-*`；仅免密启停 `strata-webui.service` |
+| `lumi` | 1000 | `/home/lumi`，2.7 GB，0755 | `/bin/bash` | `Users`、`Administrators`、`work`、`jiaohun-editors`；sudo 为 `(ALL:ALL) ALL` |
+| `agent` | 1001 | `/home/agent`，1.9 GB，0750 | `/bin/bash` | `Users`、`ai-ops`、`work`、项目服务组；仅免密启停 `strata-webui.service` |
 | `sudoer` | 1005 | Home 缺失 | `/bin/bash` | `Users`、`Administrators`、`work`；临时完整 sudo 账号 |
-| `jiaohun-dev` | 2000 | `/home/jiaohun-dev`，895 MB，0700 | `/bin/bash` | `jiaohun-dev/maintainers/site/runtime`；仅免密运行固定 `jiaohun-service` |
+| `jiaohun-dev` | 2000 | `/home/jiaohun-dev`，895 MB，0700 | `/bin/bash` | `jiaohun-dev/editors/site/runtime`；整项目读写，仅免密运行固定 `jiaohun-service` |
 | `ldpdwqgy` | 1003 | Home 缺失 | `nologin` | `Users` |
 | `zxm` | 1004 | Home 缺失 | `nologin` | `Users` |
 

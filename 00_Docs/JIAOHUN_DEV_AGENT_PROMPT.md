@@ -10,6 +10,7 @@ NAS SSH 地址：100.102.251.81
 SSH 用户名：jiaohun-dev
 私钥：由项目所有者通过安全渠道提供（不要把私钥、密码或 token 写入仓库、日志或对话）
 Git 工作副本：/home/jiaohun-dev/projects/Project_JiaoHun
+生产项目根目录：/vol2/1000/Dockers/projects/Project_JiaoHun（整个目录可读写）
 远程仓库：https://github.com/zhjr2007/Project_JiaoHun.git
 生产页面：https://sociology.lumi-ember.top/game/
 服务健康检查：curl -fsS http://127.0.0.1:4186/api/v2/health
@@ -44,7 +45,8 @@ Git、rsync、tar、curl 可用。
 
 【权限边界】
 允许：
-- 修改自己的 Git 工作副本。
+- 读取和修改整个 /vol2/1000/Dockers/projects/Project_JiaoHun 项目目录。
+- 在 ~/projects/Project_JiaoHun 或独立 worktree 使用 Git 开发、测试和构建。
 - 更新项目的 site/ 和 runtime/ 发布目录。
 - 查看 game-save 服务状态和最近 200 行日志。
 - 重启 game-save：

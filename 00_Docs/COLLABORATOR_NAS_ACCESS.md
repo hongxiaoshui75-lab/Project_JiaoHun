@@ -4,6 +4,8 @@
 
 `jiaohun-dev` 是 `Project_JiaoHun`（叫魂 / 萧山剪辫案）的共享开发与维护账号。项目所有者、协作同学和自动化 agent 都使用这个 NAS 账号，但每人/每个 agent 应保留独立的 Git 分支或 worktree。
 
+该账号对整个项目目录 `/vol2/1000/Dockers/projects/Project_JiaoHun` 有读写权限，包括源码、`.git`、`site` 和 `runtime`。仍建议在 `~/projects/Project_JiaoHun` 或独立 worktree 做日常开发，生产目录只在明确发布时更新。
+
 用途记录同时在 NAS：
 
 ```text
@@ -12,6 +14,7 @@
 
 ## 允许的操作
 
+- 读写 `/vol2/1000/Dockers/projects/Project_JiaoHun` 整棵项目树。
 - 在 `/home/jiaohun-dev/projects/Project_JiaoHun` 使用 Git 开发、测试和构建。
 - 更新项目发布目录：
 

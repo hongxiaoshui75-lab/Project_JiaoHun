@@ -4,6 +4,17 @@
 /04_Code/web/assets.mjs
 /02_Art/review/ASSET_CATALOG.html
 
+# NAS production checkout overlays
+/site/
+/runtime/
+/site.before-*/
+/runtime.before-*/
+/auth-v2-stage-*/
+/deploy-network-*/
+/homepage-integration/
+/Caddy.game.snippet
+/install-caddy-game.py
+
 # Local inspection files, transcripts and third-party references
 /99_Temp/
 /进度.txt
