@@ -12,3 +12,4 @@
  .dialogue-panel{min-height:148px;padding:12px 20px;margin-top:12px}.dialogue-heading{margin-bottom:4px}#line{font-size:20px;min-height:60px;line-height:1.7}.actions{margin-top:8px}.actions button{min-height:38px}
  .case-panel{margin-top:8px}.notice{margin:4px 0;min-height:18px;font-size:12px}footer{padding:4px 24px 8px}
 }
+#player-entry{padding:24px;border:1px solid var(--line);border-radius:12px;margin:20px 0}#player-entry form{display:flex;align-items:end;flex-wrap:wrap;gap:12px;margin:20px 0}#player-entry label{display:flex;flex-direction:column;gap:8px}#player-entry input{font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);max-width:100%}#share-game{margin-top:32px}#share-game img{display:block;image-rendering:pixelated;max-width:100%;background:white}#share-game a{display:block;overflow-wrap:anywhere}#cloud-status{max-width:1180px;margin:12px auto;padding:0 24px}

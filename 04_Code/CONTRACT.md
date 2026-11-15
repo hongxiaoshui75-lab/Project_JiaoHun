@@ -96,6 +96,8 @@ hint 仅调查阶段提供。hearing 不暴露规则、答案、哪些句被追�
 
 ## 存档模块
 
+2026-11-15 网络存档扩展：冻结的引擎与 save.mjs 不变；线上另用 network-server.mjs 将通过 decodeSave() 校验的 JSON 持久写入私有 SQLite。接口、用户名确认恢复与修订冲突见 ../00_Docs/NETWORK_SAVE_20261115.md。下述本机静态 server.mjs 说明仅适用于旧离线分发。
+
 `core/save.mjs`: `encodeSave(content,state)` 返回 JSON 字符串，`decodeSave(content,text)` 返回校验通过 state，失败抛出面向用户中文错误。信封 `{format:'jiaohun-save',version:1,contentId,contentVersion,savedAt,state}`。拒绝损坏、版本错误、未知 ID、数值越界和异常结构；载入不得执行代码。不使用 Node 专属依赖，以便浏览器共用。
 
 ## 运行和交付

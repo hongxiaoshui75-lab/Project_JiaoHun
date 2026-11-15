@@ -22,7 +22,7 @@ card='''
       <h2 id="case-title">萧山剪辫案</h2>
       <p>剪刀与发辫，如何成为罪证？走进一桩疑案，勘查物件、听取陈述，在追问与举证中辨明风闻与事实。</p>
       <a class="case-link" href="/game/">打开案件卷宗 <span aria-hidden="true">→</span></a>
-      <p class="case-note">基于《叫魂》相关记载的改编工作稿 · 进度保存在当前浏览器</p>
+      <p class="case-note">基于《叫魂》相关记载的改编工作稿 · 用户名找回进度，自动保存到 NAS</p>
     </div>
     <img class="case-image" src="/game/levels/xiaoshan-demo/assets/background_court.webp" alt="萧山剪辫案的古旧风格衙门正堂场景" width="960" height="540" decoding="async">
   </section>

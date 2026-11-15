@@ -1,6 +1,6 @@
 # 投稿与协作
 
-本站是个人项目展示，只提供静态阅读和游玩。投稿通过本仓库 Pull Request；没有站内上传、评论、注册或账号接口。私有仓库需先取得协作者访问权限。
+本站是个人项目展示，投稿通过本仓库 Pull Request，没有站内投稿上传或评论。维护者于 2026-11-15 明确将游戏从纯静态改为动态网络存档：用户名用于定位游戏进度，新建时查重，找回前确认进度摘要。没有密码与真实身份认证；知道用户名的人也能找回，玩家应使用独特昵称。私有仓库需先取得协作者访问权限。
 
 每关提交 `levels/<slug>/content.json`、`manifest.json`、`assets/`。slug 只用小写英文字母、数字和单个连接号。内容遵循 [CONTRACT.md](04_Code/CONTRACT.md)，以现有关卡为格式示例。修改已发布内容时递增 content.version 与 manifest.version；存档不跨剧情版本自动迁移。投稿不能修改冻结的 `04_Code/core/engine.mjs`、`save.mjs`，不能带脚本或 HTML。
 
@@ -12,4 +12,4 @@ manifest 必填 slug、title、author、整数 version、license、assets；titl
 
 验证：`node 04_Code/tools/prepare-art.mjs`，然后 `node --test 04_Code/tests/*.test.mjs`，最后 `node 04_Code/tools/build.mjs`。构建只发布验证成功的关卡；失败详情见 `09_Builds/levels-validation.json`，不要忽略失败继续合并。
 
-线上只发布 `09_Builds/JiaoHun_Demo/site/`；不运行 server.mjs。存档在浏览器本地，跨设备请导出 JSON 后在另一设备导入。纯静态站无法消耗一次性邀请码或向服务器槽位写入存档；预分配槽位仅为未来经另行确认的离线/人工转移方案，不提供身份识别、密码或站内写接口。
+线上页面发布 `09_Builds/JiaoHun_Demo/site/`，另运行仅监听 NAS 本机的 `network-server.mjs`，由 Caddy 转发 `/game/api/*`。数据库位于网站目录之外，部署内容时不得覆盖它。浏览器先暂存每次操作，再自动同步 NAS；跨设备可用用户名预览与确认找回，JSON 导入导出为备用。同一用户名在另一设备找回后，旧凭据失效；保存版本冲突须由玩家选择。服务接口不接受关卡上传，也不允许贡献者修改核心引擎。详见 `00_Docs/NETWORK_SAVE_20261115.md`。

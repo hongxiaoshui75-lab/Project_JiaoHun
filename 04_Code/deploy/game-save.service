@@ -1,0 +1,21 @@
+[Unit]
+Description=JiaoHun durable game progress API
+After=network.target
+
+[Service]
+Type=simple
+User=agent
+Group=Users
+UMask=0077
+Environment=PORT=4186
+Environment=GAME_ORIGINS=https://sociology.lumi-ember.top,https://sociology.lumi-ember.xyz,https://sociology.lumi-ember.top:8443,https://sociology.lumi-ember.xyz:8443,https://game.lumi-ember.top,https://game.lumi-ember.xyz,https://game.lumi-ember.top:8443,https://game.lumi-ember.xyz:8443
+ExecStart=/opt/node/bin/node /vol2/1000/Dockers/projects/Project_JiaoHun/runtime/network-server.mjs --site=/vol2/1000/Dockers/projects/Project_JiaoHun/site --data=/home/agent/jiaohun-game-data
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/home/agent/jiaohun-game-data
+
+[Install]
+WantedBy=multi-user.target

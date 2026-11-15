@@ -31,3 +31,6 @@ Thumbs.db
 
 # Player saves belong outside the source tree
 jiaohun-save-*.json
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

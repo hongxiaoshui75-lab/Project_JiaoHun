@@ -48,6 +48,6 @@ node 04_Code/tools/build.mjs
 图像和对白均为可校订工作稿，不代表用户已认可的最终美术。帽子形制和现场纤维比对属于游戏新增设计；材料相似不作为唯一来源鉴定。沈砚的具体官职未定。本次不含配音和视频。
 
 此仓库尚未授予开源许可。
-# NAS 静态版与投稿
+# NAS 网络存档版与投稿
 
-静态入口构建在 `09_Builds/JiaoHun_Demo/site/`，关卡源在 `levels/`，投稿规则见 [CONTRIBUTING.md](CONTRIBUTING.md)，部署状态与限制见 [部署结果](00_Docs/NAS_DEPLOY_RESULT_20261115.md)。线上不运行 Node 服务，存档仍在浏览器本地。
+入口构建在 `09_Builds/JiaoHun_Demo/site/`，关卡源在 `levels/`，投稿规则见 [CONTRIBUTING.md](CONTRIBUTING.md)。线上使用独立的 `network-server.mjs` 保存 API 和 SQLite；新建用户名后自动保存，找回时确认关卡与保存时间，本机保留断网备份，JSON 导入导出为备用。最新部署说明见 [网络存档记录](00_Docs/NETWORK_SAVE_20261115.md)。旧版离线 Demo.html 和本机 server.mjs 仍保持离线行为。
