@@ -1,9 +1,9 @@
 import {api,node,action} from './player.mjs';
-export async function connectProgress({slug,identity,onRestore,status,mode='player'}){
- const key=`jiaohun.pending.v2.${identity.id??encodeURIComponent(identity.name)}.${mode}.${slug}`;
+export async function connectProgress({slug,identity,onRestore,status,mode='player',contentVersion,onBlocked=()=>{}}){
+ const key=`jiaohun.pending.v2.${identity.id??encodeURIComponent(identity.name)}.${mode}.${slug}${contentVersion===undefined?'':'.v'+contentVersion}`;
  const endpoint=(mode==='demo'?'demo/':'saves/')+slug;
  const identityHeaders=mode==='demo'?{'X-Operator-Name':encodeURIComponent(identity.name)}:{'X-Player-Id':String(identity.id)};
- let revision=0,pending=null,busy=false,conflict=null,timer,lastWrite=0,disposed=false;
+ let revision=0,pending=null,busy=false,conflict=null,timer,lastWrite=0,disposed=false,blocked=false;
  try{pending=JSON.parse(localStorage.getItem(key)||'null');}catch{}
  const persistPending=()=>{if(pending)localStorage.setItem(key,JSON.stringify(pending));else localStorage.removeItem(key);};
  const line=text=>{status.textContent=text;};
@@ -14,22 +14,23 @@ export async function connectProgress({slug,identity,onRestore,status,mode='play
   buttons.append(action('继续服务器进度',()=>done(false)),action('保留本机进度并覆盖',()=>done(true)));dialog.append(heading,copy,buttons);dialog.addEventListener('cancel',event=>event.preventDefault());(document.getElementById?.('game')||document.body).append(dialog);dialog.showModal();
  }
  async function flush(keepalive=false){
-  if(disposed||busy||!pending||conflict)return;busy=true;const outgoing=pending;let failed=false;
+  if(disposed||blocked||busy||!pending||conflict)return;busy=true;const outgoing=pending;let failed=false;
   try{
    lastWrite=Date.now();const result=await api(endpoint,{method:'PUT',body:{revision:outgoing.revision,save:outgoing.save},keepalive,headers:identityHeaders});
    revision=result.revision;
    if(pending===outgoing)pending=null;else if(pending)pending.revision=revision;
    persistPending();line(`已保存到 NAS · ${new Date(result.updatedAt).toLocaleTimeString('zh-CN')}`);
-  }catch(error){failed=true;if(error.status===409)await resolveConflict(error.result);else if(error.status===401)line('登录已失效，请先导出本机进度，再回到入口登录。');else line('网络暂不可用，进度已留在本机，恢复连接后重试。');}
-  finally{busy=false;if(pending&&!conflict&&!disposed){clearTimeout(timer);timer=setTimeout(()=>flush(),failed?10000:Math.max(0,1000-(Date.now()-lastWrite)));}}
+  }catch(error){failed=true;if(error.status===428){blocked=true;line('旧版进度需要确认迁移；当前本机进度已保留，请返回入口。');onBlocked(error);}else if(error.status===409)await resolveConflict(error.result);else if(error.status===401)line('登录已失效，请先导出本机进度，再回到入口登录。');else line('网络暂不可用，进度已留在本机，恢复连接后重试。');}
+  finally{busy=false;if(pending&&!blocked&&!conflict&&!disposed){clearTimeout(timer);timer=setTimeout(()=>flush(),failed?10000:Math.max(0,1000-(Date.now()-lastWrite)));}}
  }
  try{
-  const remote=await api(endpoint,{headers:identityHeaders});revision=remote.revision;
+   const remote=await api(endpoint,{headers:identityHeaders});revision=remote.revision;
+   if(remote.migrationRequired||(remote.save&&contentVersion!==undefined&&remote.version!==undefined&&remote.version!==contentVersion)){const error=Error('旧版进度需先返回入口，查看并同意迁移后再继续。');error.code='MIGRATION_REQUIRED';throw error;}
   if(pending){if(pending.revision!==revision)await resolveConflict(remote);else{onRestore(pending.save);await flush();}}
   else if(remote.save){onRestore(remote.save);line('已恢复 NAS 上的游戏进度。');}
   else line(mode==='demo'?'独立演示存档已准备，不影响真实玩家。':'新进度将在游玩时自动保存到 NAS。');
- }catch(error){line('暂时无法读取 NAS 存档，保留本机进度；可稍后重试或导出备份。');}
+ }catch(error){if(error.code==='MIGRATION_REQUIRED'||error.status===428){line(error.message);throw error;}line('暂时无法读取 NAS 存档，保留本机进度；可稍后重试或导出备份。');}
  const online=()=>flush(),visibility=()=>{if(document.visibilityState==='hidden')flush(true);};
  window.addEventListener('online',online);document.addEventListener('visibilitychange',visibility);
- return {queue(save){if(conflict||disposed)return;pending={save,revision};persistPending();line('正在保存到 NAS……');clearTimeout(timer);timer=setTimeout(()=>flush(),Math.max(150,1000-(Date.now()-lastWrite)));},flush,dispose(){disposed=true;clearTimeout(timer);window.removeEventListener('online',online);document.removeEventListener('visibilitychange',visibility);}};
+ return {queue(save){if(conflict||disposed||blocked)return;pending={save,revision};persistPending();line('正在保存到 NAS……');clearTimeout(timer);timer=setTimeout(()=>flush(),Math.max(150,1000-(Date.now()-lastWrite)));},flush,dispose(){disposed=true;clearTimeout(timer);window.removeEventListener('online',online);document.removeEventListener('visibilitychange',visibility);}};
 }

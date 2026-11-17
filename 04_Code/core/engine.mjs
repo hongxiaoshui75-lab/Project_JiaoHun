@@ -230,11 +230,15 @@ export function validateContent(content) {
           const rpath = `${path}.rules[${index}]`;
           if (!object(rule)) return;
           if (!Array.isArray(stage.statements) || !stage.statements.some(statement => statement?.id === rule.statementId)) fail(`${rpath} 引用了不存在的证词。`);
-          if (!lookup(content.evidence, rule.evidenceId)) fail(`${rpath} 引用了不存在的证物。`);
+          if (rule.evidenceIds !== undefined) {
+            stringArray(rule.evidenceIds, `${rpath}.evidenceIds`, { optional: false, refs: content.evidence });
+            if (!Array.isArray(rule.evidenceIds) || rule.evidenceIds.length !== 2 || rule.evidenceId !== undefined) fail(`${rpath} 双证物规则必须恰好两件，且不能同时设置 evidenceId。`);
+          } else if (!lookup(content.evidence, rule.evidenceId)) fail(`${rpath} 引用了不存在的证物。`);
+          if (rule.onceFlag !== undefined && (!nonempty(rule.onceFlag) || !rule.flags?.includes(rule.onceFlag))) fail(`${rpath}.onceFlag 必须由本规则授予。`);
           condition(rule.requires, `${rpath}.requires`);
           reward(rule, rpath);
           lines(rule.lines, `${rpath}.lines`);
-          stageRef(rule.next, `${rpath}.next`, true);
+          stageRef(rule.next, `${rpath}.next`, !stage.next);
         });
       }
     }
@@ -302,7 +306,7 @@ export function validateState(content, state) {
       const max = stage.kind === 'hearing' ? stage.statements.length - 1 : 0;
       if (!Number.isInteger(value.statementIndex) || value.statementIndex < 0 || value.statementIndex > max) errors.push(`${path} 证词下标越界。`);
       if (value.pendingStage !== null) {
-        const targets = new Set(stage.kind === 'dialogue' ? [stage.next] : stage.kind === 'hearing' ? [...stage.rules.map(rule => rule.next), stage.failure] : []);
+        const targets = new Set(stage.kind === 'dialogue' ? [stage.next] : stage.kind === 'hearing' ? [...stage.rules.map(rule => rule.next), stage.next, stage.failure] : []);
         if (!targets.has(value.pendingStage)) errors.push(`${path} 的待跳转阶段不符合当前剧情。`);
         if (!Array.isArray(value.dialogue) || !value.dialogue.length) errors.push(`${path} 待跳转阶段缺少待播放对白。`);
       }
@@ -411,6 +415,11 @@ export function dispatch(content, state, action) {
           const target = next.pendingStage;
           next.pendingStage = null;
           enterStage(content, next, target, events);
+        } else if (!next.dialogue.length && stage.kind === 'hearing') {
+          const current = stage.statements[next.statementIndex];
+          const solved = stage.rules.some(rule => rule.statementId === current.id && rule.onceFlag && next.flags.includes(rule.onceFlag));
+          const remaining = stage.rules.find(rule => rule.onceFlag && !next.flags.includes(rule.onceFlag) && satisfied(next, rule.requires));
+          if (solved && remaining) next.statementIndex = stage.statements.findIndex(item => item.id === remaining.statementId);
         }
         break;
       }
@@ -469,8 +478,11 @@ export function dispatch(content, state, action) {
       }
       case 'PRESENT': {
         requireAction(stage.kind === 'hearing' || stage.kind === 'investigation', '当前不能出示证物。');
-        requireAction(next.evidence.includes(action.evidenceId), '尚未获得这项证物。');
+        const presented = action.evidenceIds === undefined ? [action.evidenceId] : action.evidenceIds;
+        requireAction(Array.isArray(presented) && presented.length >= 1 && presented.length <= 2 && new Set(presented).size === presented.length && presented.every(id => typeof id === 'string' && next.evidence.includes(id)) && !(action.evidenceIds !== undefined && action.evidenceId !== undefined), '请选择已取得的一项或两项不同证物。');
         if (stage.kind === 'investigation') {
+          requireAction(presented.length === 1, '调查时请单独向人物出示证物。');
+          action = { ...action, evidenceId: presented[0] };
           const location = stage.locations.find(item => item.id === next.locationId);
           const availableActors = (location.interactions ?? []).filter(item => satisfied(next, item.requires)).map(item => item.actor).filter(Boolean);
           if (action.actor !== undefined) requireAction(typeof action.actor === 'string' && availableActors.includes(action.actor), '这位人物当前不在场，无法向其出示。');
@@ -485,15 +497,17 @@ export function dispatch(content, state, action) {
           break;
         }
         const statement = stage.statements[next.statementIndex];
-        const rule = stage.rules.find(item => item.statementId === statement.id && item.evidenceId === action.evidenceId && satisfied(next, item.requires));
+        const rule = stage.rules.find(item => { const expected = item.evidenceIds ?? [item.evidenceId]; return item.statementId === statement.id && expected.length === presented.length && expected.every(id => presented.includes(id)) && satisfied(next, item.requires); });
+        requireAction(!rule?.onceFlag || !next.flags.includes(rule.onceFlag), '这处疑点已经举证，请继续核查其他证词。');
         if (rule) {
           grant(next, rule, events);
-          queue(next, rule.lines, rule.next);
+          const target = rule.next ?? (stage.next && satisfied(next, stage.requires) ? stage.next : null);
+          queue(next, rule.lines, target);
           // Empty feedback is supported without leaving a dead pending transition.
-          if (!next.dialogue.length) enterStage(content, next, rule.next, events);
-          events.push({ type: 'presentation_correct', evidenceId: action.evidenceId, statementId: statement.id });
+          if (!next.dialogue.length && target) enterStage(content, next, target, events);
+          events.push({ type: 'presentation_correct', evidenceId: presented[0], evidenceIds: presented, statementId: statement.id });
         } else {
-          const item = resolveEvidence(content, next, action.evidenceId);
+          const item = { name: presented.map(id => resolveEvidence(content, next, id).name).join('、') };
           queue(next, [
             { speaker: '蔡瑞', text: `这份「${item.name}」，并不能证明小人方才这句话有何不实。` },
             { speaker: '曾日理', text: '沈砚，物件虽与案件有关，仍须说明它如何驳倒眼前这句证词。' },
@@ -504,7 +518,7 @@ export function dispatch(content, state, action) {
           const field = stage.pool === 'ordinary' ? 'ordinaryWill' : 'finalWill';
           next[field] -= 1;
           if (next[field] === 0) next.pendingStage = stage.failure;
-          events.push({ type: 'presentation_wrong', evidenceId: action.evidenceId, statementId: statement.id });
+          events.push({ type: 'presentation_wrong', evidenceId: presented[0], evidenceIds: presented, statementId: statement.id });
           events.push({ type: 'will_changed', pool: stage.pool, value: next[field] });
         }
         break;
@@ -568,6 +582,12 @@ export function getView(content, state) {
     })),
     statements, statement: statements[state.statementIndex] ?? null,
     statementIndex: state.statementIndex, statementCount: statements.length,
+    hearingProgress: stage.kind === 'hearing' ? {
+      total: stage.rules.filter(rule => rule.onceFlag).length,
+      completed: stage.rules.filter(rule => rule.onceFlag && state.flags.includes(rule.onceFlag)).length,
+      currentSolved: stage.rules.some(rule => rule.statementId === statements[state.statementIndex]?.id && rule.onceFlag && state.flags.includes(rule.onceFlag)),
+      nextStatementId: stage.rules.find(rule => rule.onceFlag && !state.flags.includes(rule.onceFlag) && satisfied(state, rule.requires))?.statementId ?? null,
+    } : null,
     evidence: state.evidence.map(evidenceId => resolveEvidence(content, state, evidenceId)),
     profiles: (content.profiles ?? []).filter(profile => satisfied(state, profile.requires)).map(({ id, name, description, assetId }) => ({ id, name, description, ...(assetId ? { assetId } : {}) })),
     will: stage.pool === 'ordinary' ? state.ordinaryWill : stage.pool === 'final' ? state.finalWill : null,

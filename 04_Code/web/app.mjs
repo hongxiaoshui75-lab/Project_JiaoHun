@@ -6,6 +6,7 @@ import { assetCatalog } from '/assets.mjs';
 const platform=typeof gamePlatform==='undefined'?{}:gamePlatform;
 const $=id=>document.getElementById(id),storageKey=platform.storageKey||'jiaohun-demo.autosave.v1',settingsKey='jiaohun-demo.reading.v1';
 let state,view,notice='',autosavePaused=false,presentMode=false,tab='evidence',selected=null,selectedActor=null,currentLocation=null;
+let combinationMode=false,combination=[];
 let lineText='',typing=false,typingToken=0,lineIdentity='',feedbackToken=0;
 const defaultBindings={advance:'Space',previous:'ArrowLeft',next:'ArrowRight',press:'KeyQ',present:'KeyE',records:'KeyR',auto:'KeyA',hide:'KeyH',log:'KeyL',fullscreen:'KeyF'};
 const preferenceDefaults={speed:32,fontSize:'medium',opacity:65,autoDelay:2000,fastSpeed:4,reduceMotion:Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches),bindings:defaultBindings};
@@ -40,19 +41,25 @@ function showLine(text,identity){
   window.requestAnimationFrame(frame);
 }
 function advanceDialogue(){if(uiHidden){setHidden(false);return;}stopPlayback();if(typing){completeLine();return;}if(view.dialogue)act({type:'NEXT_DIALOGUE'});}
-function openRecords(mode=false){stopPlayback();$('game-menu').close();$('investigation').close();presentMode=mode;tab='evidence';selected=null;renderRecords();records.showModal();}
-function renderRecords(){
+function openRecords(mode=false){stopPlayback();$('game-menu').close();$('investigation').close();presentMode=mode;tab='evidence';selected=null;combinationMode=false;combination=[];renderRecords();showGameDialog(records);}
+function renderRecords(scrollPosition=0){
+  records.dataset.present=String(presentMode);records.dataset.combination=String(combinationMode);
   $('records-title').textContent=presentMode?'选择要出示的凭据':'证佐凭据';for(const node of document.querySelectorAll('[data-tab]'))node.classList.toggle('active',node.dataset.tab===tab);
   const body=$('record-content');body.replaceChildren();$('record-actions').replaceChildren();
   if(tab==='hint'){body.append(el('p',view.hint||'会审中可自由查看证词、追问与凭据，查办提示不会指出哪一句应当举证。','no-records'));return;}
   const items=tab==='evidence'?view.evidence:view.profiles;if(!items.length){body.append(el('p','尚无已取得的资料。','no-records'));return;}
   const grid=el('div',undefined,'record-grid');
-  for(const item of items){const card=button('',()=>{selected=item.id;renderRecords();});card.className='record-card'+(selected===item.id?' selected':'');card.setAttribute('aria-pressed',String(selected===item.id));card.setAttribute('aria-label',`${item.kind||'人物档案'}：${item.name}`);card.append(artwork(item.assetId,'','record-art'),el('small',item.kind||'人物档案'),el('strong',item.name),el('p',item.description));grid.append(card);}body.append(grid);
-  const picked=items.find(item=>item.id===selected);
-  if(picked){const detail=el('section',undefined,'record-detail');detail.setAttribute('aria-label',`${picked.name}详细资料`);const copy=el('div');copy.append(el('h3',picked.name),el('p',picked.description));detail.append(artwork(picked.assetId,picked.name,'record-large'),copy);body.append(detail);}
+  for(const item of items){let down=null;const card=button('',()=>{if(down?.moved)return;const scroll=grid.scrollLeft;selected=item.id;if(combinationMode&&tab==='evidence'){if(combination.includes(item.id))combination=combination.filter(id=>id!==item.id);else if(combination.length<2)combination.push(item.id);else{tell('已选两件，请先取消其中一件。');return;}}renderRecords(scroll);});card.addEventListener('pointerdown',event=>{down={x:event.clientX,y:event.clientY,moved:false};});card.addEventListener('pointermove',event=>{if(down&&(Math.abs(event.clientX-down.x)>9||Math.abs(event.clientY-down.y)>9))down.moved=true;});card.className='record-card'+((combinationMode?combination.includes(item.id):selected===item.id)?' selected':'');card.setAttribute('aria-pressed',String(combinationMode?combination.includes(item.id):selected===item.id));card.setAttribute('aria-label',`${item.kind||'人物档案'}：${item.name}`);card.append(artwork(item.assetId,'','record-art'),el('small',item.kind||'人物档案'),el('strong',item.name));grid.append(card);}body.append(grid);grid.scrollLeft=scrollPosition;
+  const picked=items.find(item=>item.id===selected),previewed=picked||items[0];
+  if(previewed){const detail=el('section',undefined,'record-detail');detail.setAttribute('aria-label',`${previewed.name}详细资料`);const copy=el('div');copy.append(el('h3',previewed.name),el('p',previewed.description));detail.append(artwork(previewed.assetId,previewed.name,'record-large'),copy);body.append(detail);}
   if(presentMode&&tab==='evidence'){
-    const target=view.kind==='investigation'&&selectedActor?`向${selectedActor}出示`:'出示';body.append(el('p',picked?`准备${target}：${picked.name}。确认后才会进行举证判定。`:'请选择一项凭据，再确认出示。','evidence-confirm'));
-    $('record-actions').append(button('取消',()=>records.close()),button('确认出示',()=>{const evidenceId=selected,actor=view.kind==='investigation'?selectedActor:null;records.close();act({type:'PRESENT',evidenceId,...(actor?{actor}:{})});},{primary:true,disabled:!picked||Boolean(view.dialogue)}));
+    if(view.kind==='hearing'){
+      const toggle=button(combinationMode?'改为单件出示':'两件组合比对',()=>{combinationMode=!combinationMode;combination=[];renderRecords();});toggle.setAttribute('aria-pressed',String(combinationMode));body.append(toggle);
+      if(combinationMode){const slots=el('div',undefined,'combination-slots');for(let index=0;index<2;index++){const item=items.find(i=>i.id===combination[index]);slots.append(button(item?`${index+1} · ${item.name} ×`:`${index+1} · 请选择证物`,()=>{if(item){combination.splice(index,1);renderRecords();}},{disabled:!item}));}slots.setAttribute('aria-label','双证物比对槽位');body.append(slots);}
+    }
+    const target=view.kind==='investigation'&&selectedActor?`向${selectedActor}出示`:'出示';const confirmation=el('p',picked?`准备${target}：${picked.name}。确认后才会进行举证判定。`:'请选择一项凭据，再确认出示。','evidence-confirm');body.append(confirmation);
+    if(combinationMode)confirmation.textContent='选择两件证物后确认比对；选择和取消不会扣除威信。';
+    $('record-actions').append(button('取消',()=>records.close()),button(combinationMode?'确认组合举证':'确认出示',()=>{const actor=view.kind==='investigation'?selectedActor:null;records.close();act({type:'PRESENT',...(combinationMode?{evidenceIds:[...combination]}:{evidenceId:selected}),...(actor?{actor}:{})});},{primary:true,disabled:(combinationMode?combination.length!==2:!picked)||Boolean(view.dialogue)}));
   }else if(presentMode)body.append(el('p','人物档案供查阅；本 Demo 使用证物、证言和调查记录举证。','no-records'));
 }
 function renderStage(){
@@ -101,7 +108,12 @@ function render(externalView){
   const actions=$('actions');actions.replaceChildren();
   if(platform.readOnly)actions.append(el('span','只读观察 · 操作由玩家完成','small-help'));
   else if(view.dialogue)actions.append(button('继续',advanceDialogue,{primary:true}));
-  else if(view.kind==='hearing')actions.append(button('← 上一句',()=>act({type:'PREV_STATEMENT'})),button('追问',()=>act({type:'PRESS'})),button('出示',()=>openRecords(true),{primary:true}),button('下一句 →',()=>act({type:'NEXT_STATEMENT'})));
+  else if(view.kind==='hearing'){
+    const progress=view.hearingProgress;
+    if(progress?.total)actions.append(el('span',`本轮疑点 ${progress.completed} / ${progress.total}${progress.currentSolved?' · 此句已驳倒':''}`,'small-help'));
+    actions.append(button('← 上一句',()=>act({type:'PREV_STATEMENT'})),button('追问',()=>act({type:'PRESS'})),button('出示',()=>openRecords(true),{primary:true}),button('下一句 →',()=>act({type:'NEXT_STATEMENT'})));
+    if(progress?.currentSolved&&progress.nextStatementId)actions.append(button('继续核查下一处',()=>act({type:'SELECT_STATEMENT',statementId:progress.nextStatementId}),{primary:true}));
+  }
   else if(view.kind==='investigation'){if(selectedActor)actions.append(button('向在场人物出示',()=>openRecords(true)));actions.append(button('证佐凭据',()=>openRecords()),button('继续查办',()=>act({type:'ADVANCE_STAGE'}),{primary:true,disabled:!view.canAdvance}));}
   else if(view.kind==='ending'){if(view.canRetry)actions.append(button('从本阶段重试',()=>act({type:'RETRY'}),{primary:true}));actions.append(button('重新开始',restart,{primary:!view.canRetry}));}
   $('notice').textContent=notice;
@@ -117,10 +129,34 @@ function schedulePlayback(){
 }
 function togglePlayback(mode){if(platform.readOnly||!view?.dialogue){tell('当前需要手动调查、选择或举证。');return;}if(playback===mode){stopPlayback();return;}playback=mode;$('auto-play').textContent=mode==='auto'?'自动 ON':'自动 OFF';$('fast-forward').textContent=mode==='fast'?`快进 ${preferences.fastSpeed}× ▪`:'跳过 ▸';$('auto-play').setAttribute('aria-pressed',String(mode==='auto'));$('fast-forward').setAttribute('aria-pressed',String(mode==='fast'));schedulePlayback();}
 function setHidden(value){stopPlayback();uiHidden=value;$('game').classList.toggle('ui-hidden',value);$('restore-ui').hidden=!value;}
-function openPanel(id){stopPlayback();for(const other of ['records','settings','game-menu','story-log','investigation'])if(other!==id)$(other).close();if(!$(id).open)$(id).showModal();}
+function showGameDialog(dialog){
+  dialog.showModal();
+}
+function openPanel(id){stopPlayback();for(const other of ['records','settings','game-menu','story-log','investigation'])if(other!==id)$(other).close();if(!$(id).open)showGameDialog($(id));}
 function openInvestigation(kind){if(view.kind!=='investigation'||view.dialogue||platform.readOnly)return;investigationTab=kind;$('investigation-title').textContent=kind;render();openPanel('investigation');}
 function openLog(){completeLine();const body=$('log-content');body.replaceChildren();for(const entry of logEntries){const row=el('div',undefined,'log-row');row.append(el('strong',entry.speaker),el('span',entry.text));body.append(row);}if(!logEntries.length)body.append(el('p','尚无已播放对白。'));openPanel('story-log');body.scrollTop=body.scrollHeight;}
-async function toggleFullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else if($('game').requestFullscreen)await $('game').requestFullscreen();else tell('当前浏览器不支持系统全屏，已使用铺满窗口布局。');}catch{tell('浏览器未允许全屏，当前游戏仍保持铺满窗口。');}}
+let landscapeFullscreen=false;
+function updateFullscreenLayout(){
+  const portrait=landscapeFullscreen&&window.innerHeight>window.innerWidth;
+  document.body.classList.toggle('fullscreen-landscape',portrait);
+  document.body.style.setProperty?.('--landscape-width',`${window.innerHeight}px`);
+  document.body.style.setProperty?.('--landscape-height',`${window.innerWidth}px`);
+  $('fullscreen').setAttribute('aria-pressed',String(landscapeFullscreen||Boolean(document.fullscreenElement)));
+}
+async function toggleFullscreen(){
+  if(landscapeFullscreen||document.fullscreenElement){landscapeFullscreen=false;try{window.screen?.orientation?.unlock?.();if(document.fullscreenElement)await document.exitFullscreen();}catch{}updateFullscreenLayout();return;}
+  landscapeFullscreen=true;updateFullscreenLayout();
+  try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else tell('已进入横屏布局；此浏览器不支持隐藏系统栏。');}catch{tell('已进入横屏布局；浏览器未允许隐藏系统栏。');}
+  try{await window.screen?.orientation?.lock?.('landscape');}catch{}
+  updateFullscreenLayout();
+}
+window.addEventListener?.('resize',updateFullscreenLayout);
+let hadNativeFullscreen=false;
+document.addEventListener('fullscreenchange',()=>{
+  if(document.fullscreenElement)hadNativeFullscreen=true;
+  else if(hadNativeFullscreen){hadNativeFullscreen=false;landscapeFullscreen=false;try{window.screen?.orientation?.unlock?.();}catch{}}
+  updateFullscreenLayout();
+});
 function renderBindings(){const box=$('keybindings');box.replaceChildren();const labels={advance:'推进对白',previous:'上一句',next:'下一句',press:'追问',present:'出示',records:'档案',auto:'自动',hide:'隐藏UI',log:'LOG',fullscreen:'全屏'};for(const [name,label] of Object.entries(labels)){const key=preferences.bindings[name];box.append(button(`${label} · ${bindingTarget===name?'按下新键':key.replace('Key','').replace('Digit','')}`,()=>{bindingTarget=name;$('key-message').textContent='按一个字母、数字、方向键、空格或 Enter；Esc 取消。';renderBindings();}));}}
 function handleBinding(event){if(!bindingTarget)return false;event.preventDefault();const code=event.code||(event.key===' '?'Space':event.key?.length===1?'Key'+event.key.toUpperCase():event.key);if(code==='Escape'){bindingTarget=null;renderBindings();return true;}if(event.ctrlKey||event.metaKey||event.altKey||event.shiftKey||! /^(Key[A-Z]|Digit[0-9]|ArrowLeft|ArrowRight|ArrowUp|ArrowDown|Space|Enter)$/.test(code)){ $('key-message').textContent='此按键由浏览器保留，或不支持作为单键快捷键。';return true;}if(Object.entries(preferences.bindings).some(([name,key])=>name!==bindingTarget&&key===code)){$('key-message').textContent='这个按键已被使用，请选择其他按键。';return true;}preferences.bindings[bindingTarget]=code;bindingTarget=null;$('key-message').textContent='键位已保存。';savePreferences();return true;}
 function restart(){if(platform.readOnly)return;if(!window.confirm(platform.restartMessage||'重新开始会替换当前浏览器的自动存档。需要保留进度时，请先导出存档。'))return;stopPlayback();$('game-menu').close();state=createGame(demoContent);autosavePaused=false;notice='已重新开始。';persist();render();}
@@ -134,7 +170,7 @@ $('investigate-open').addEventListener('click',()=>openInvestigation('调查'));
 $('investigation-advance').addEventListener('click',()=>{if(view.kind==='investigation'&&!view.dialogue&&view.canAdvance)act({type:'ADVANCE_STAGE'});});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')stopPlayback();});document.addEventListener('fullscreenchange',()=>{if(!platform.stopped)$('fullscreen').setAttribute('aria-pressed',String(Boolean(document.fullscreenElement)));});window.addEventListener?.('orientationchange',stopPlayback);
 $('save').addEventListener('click',()=>{try{const blob=new Blob([encodeSave(demoContent,state)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),link=el('a');link.href=url;link.download=`jiaohun-save-${new Date().toISOString().replaceAll(':','-')}.json`;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);tell('已导出当前进度。');}catch(error){tell(error.message);}});
-$('load').addEventListener('click',()=>{$('load-file').value='';$('load-file').click();});$('load-file').addEventListener('change',async event=>{const file=event.target.files?.[0];if(!file)return;try{if(file.size>2*1024*1024)throw new Error('存档文件过大，请选择本 Demo 导出的 JSON 文件。');const restored=decodeSave(demoContent,await file.text());state=restored;autosavePaused=false;if(records.open)records.close();notice='存档已恢复。';persist();render();}catch(error){tell(`未载入存档，当前进度已保留：${error.message}`);}});
+$('load').addEventListener('click',()=>{$('load-file').value='';$('load-file').click();});$('load-file').addEventListener('change',async event=>{const file=event.target.files?.[0];if(!file)return;try{if(file.size>2*1024*1024)throw new Error('存档文件过大，请选择本 Demo 导出的 JSON 文件。');const original=await file.text();const imported=platform.importSave?await platform.importSave(original):original;if(imported===null)return;const restored=decodeSave(demoContent,imported);state=restored;autosavePaused=false;if(records.open)records.close();notice='存档已恢复。';persist();render();}catch(error){tell(`未载入存档，当前进度已保留：${error.message}`);}});
 document.addEventListener('keydown',event=>{
   if(platform.stopped)return;
   if(event.isComposing)return;if(handleBinding(event))return;

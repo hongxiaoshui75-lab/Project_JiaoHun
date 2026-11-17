@@ -42,7 +42,7 @@ export async function buildLevels(root,out){
    const target=resolve(out,'levels',ent.name);await mkdir(target,{recursive:true});
    for(const name of ['content.json','manifest.json'])await copyFile(resolve(root,'levels',ent.name,name),resolve(target,name));
    for(const file of new Set(m.assets.map(a=>a.file))){await mkdir(dirname(resolve(out,file)),{recursive:true});await copyFile(resolve(root,file),resolve(out,file));}
-   levels.push({slug:m.slug,title:m.title,author:m.author,version:m.version,license:m.license,bytes:result.total,status:'valid',contentSha256:result.contentSha256,manifestSha256:result.manifestSha256});
+   levels.push({slug:m.slug,title:m.title,author:m.author,version:m.version,license:m.license,bytes:result.total,status:'valid',...(m.archived===true?{archived:true}:{}),contentSha256:result.contentSha256,manifestSha256:result.manifestSha256});
   }catch(error){rejected.push({slug:ent.name,error:error.message});}
  }
  levels.sort((a,b)=>a.slug.localeCompare(b.slug));

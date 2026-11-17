@@ -2,7 +2,7 @@
   "slug": "xiaoshan-demo",
   "title": "萧山剪辫案",
   "author": "Project JiaoHun 制作组",
-  "version": 1,
+  "version": 2,
   "license": "CC-BY-NC-4.0",
   "assets": [
     {
@@ -334,7 +334,44 @@
       "file": "levels/xiaoshan-demo/assets/evidence_hat.webp",
       "bytes": 37786,
       "sha256": "21407c886950de5884c26a79ac7219c071a234828db3538da737aa587b52f8da"
+    },
+    {
+      "id": "evidence.ev_03",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_03.png",
+      "bytes": 27548,
+      "sha256": "de3782c794e39b9296ec8d62efb68ea1692878e537870f6ea3e613fa5d4c1f7f"
+    },
+    {
+      "id": "evidence.ev_04",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_04.png",
+      "bytes": 21284,
+      "sha256": "8ddb3423389a41dc458421eaf77ebfb6384f1406177073d900feefd2a7435e79"
+    },
+    {
+      "id": "evidence.ev_05",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_05.png",
+      "bytes": 26641,
+      "sha256": "18b171369746b131841a7a6cb28665eeceb901fb160c14f2a817da138afcc0b8"
+    },
+    {
+      "id": "evidence.ev_06",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_06.png",
+      "bytes": 57801,
+      "sha256": "731b997ee807f9ea3c03e1e554bf986f43b7821d831e9d182da655a61dfc1e4b"
+    },
+    {
+      "id": "evidence.ev_07",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_07.png",
+      "bytes": 29156,
+      "sha256": "d9500f27d0c9a2be15cd9a4680a314be4c725bddcda90e8e6cc3368c65ba34c9"
+    },
+    {
+      "id": "evidence.ev_08",
+      "file": "levels/xiaoshan-demo/assets/evidence_ev_08.png",
+      "bytes": 30678,
+      "sha256": "870bc279304079bfda499d17aa596ba2892e0d902f7ce81a3e6e8fa1d87e2f3a"
     }
   ],
-  "notes": "改编与 AI 生成配图工作稿；帽形与现场纤维比对为游戏设计。许可覆盖本关原创改编和有权许可部分，不涵盖原著或第三方资料，不对 AI 图像可版权性作保证。"
+  "notes": "改编与 AI 生成配图工作稿；帽形与现场纤维比对为游戏设计。许可覆盖本关原创改编和有权许可部分，不涵盖原著或第三方资料，不对 AI 图像可版权性作保证。",
+  "archived": false
 }

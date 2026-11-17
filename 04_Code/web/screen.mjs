@@ -50,7 +50,7 @@ $('close-room').addEventListener('click',async()=>{if(!confirm('结束本次展�
 $('screen-logout').addEventListener('click',async()=>{await hostApi('operator/logout',{method:'POST',body:{role:'presenter'}});location.href='./operator.html?role=presenter';});
 try{
  await requireHost();if(!/^[A-Za-z0-9_-]{4,100}$/.test(id))throw Error('请从展示入口选择有效场次。');
- const response=await fetch('./levels/index.json',{cache:'no-cache'});if(!response.ok)throw Error('关卡列表暂时无法读取。');levels=(await response.json()).levels;
+ const response=await fetch('./levels/index.json',{cache:'no-cache'});if(!response.ok)throw Error('关卡列表暂时无法读取。');levels=(await response.json()).levels.filter(level=>!level.archived);
  const join=new URL('./',location.href);join.searchParams.set('room',id);const qr=qrcode(0,'M');qr.addData(join.href);qr.make();const image=node('img');image.src=qr.createDataURL(4,8);image.alt='加入本次展示的二维码';image.width=180;image.height=180;$('room-qr').append(image);$('join-url').href=join.href;$('join-url').textContent=join.href;
  await refresh();await renderMode();source=new EventSource(new URL(`./api/v2/rooms/${encodeURIComponent(id)}/events`,location.href),{withCredentials:true});
  const update=event=>{try{const payload=JSON.parse(event.data);if(payload.room)applySnapshot(payload);else refresh();$('screen-network').textContent='实时连接';}catch{refresh();}};

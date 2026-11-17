@@ -125,7 +125,7 @@ function documentStub() {
   return doc;
 }
 
-function boot(storage = new Map(), { catalog, frames } = {}) {
+function boot(storage = new Map(), { catalog, frames, content = demoContent } = {}) {
   const document = documentStub();
   const blobs = new Map();
   let blobSerial = 0;
@@ -148,7 +148,7 @@ function boot(storage = new Map(), { catalog, frames } = {}) {
     },
     setTimeout: (callback) => { timers.push(callback); return timers.length; },
     assetCatalog: catalog ?? new Proxy({}, { get: (_, id) => ({ src: `/assets/${String(id)}.png`, alt: String(id) }) }),
-    demoContent, createGame, dispatch, getView, encodeSave, decodeSave
+    demoContent:content, createGame, dispatch, getView, encodeSave, decodeSave
   };
   // compileFunction uses the host realm: injected real engine functions and
   // object-literal actions have the same prototypes, just as browser modules do.
@@ -157,12 +157,21 @@ function boot(storage = new Map(), { catalog, frames } = {}) {
   });
   const inspect = run(...Object.values(environment));
   return {
-    document, storage, blobs, timers,
+    document, storage, blobs, timers, window:environment.window,
     node: (id) => document.getElementById(id),
     state: () => structuredClone(inspect().state),
     view: () => structuredClone(inspect().view)
   };
 }
+
+test('手机竖屏全屏在锁定不受支持时旋转布局，退出还原，横屏不旋转',async()=>{
+ const app=boot();app.window.innerWidth=390;app.window.innerHeight=844;
+ await app.node('fullscreen').click();assert.match(app.document.body.className,/fullscreen-landscape/);
+ await app.node('fullscreen').click();assert.doesNotMatch(app.document.body.className,/fullscreen-landscape/);
+ app.window.innerWidth=844;app.window.innerHeight=390;
+ await app.node('fullscreen').click();assert.doesNotMatch(app.document.body.className,/fullscreen-landscape/);
+ assert.equal(app.node('fullscreen').attributes['aria-pressed'],'true');
+});
 
 function descendants(node) {
   return node.children.flatMap((child) => [child, ...descendants(child)]);
@@ -269,6 +278,20 @@ test('可通过界面完成初次查办并进入普通会审', async () => {
   assert.equal(app.view().statement.id, 'scissors_2');
   await click(app, 'actions', '← 上一句');
   assert.equal(app.view().statement.id, 'scissors_1');
+});
+
+test('组合比对必须选满两槽并单独确认，取消和浏览不提交', async () => {
+ const content=structuredClone(demoContent);content.startStage='hearing_scissors';content.initialEvidence=['scissors','braids'];
+ const rule=content.stages.hearing_scissors.rules[0];delete rule.evidenceId;rule.evidenceIds=['scissors','braids'];rule.requires=[];
+ const app=boot(new Map(),{content});await continueDialogue(app);await click(app,'actions','下一句 →');
+ await click(app,'actions','出示');await click(app,'record-content','两件组合比对');
+ assert.equal(findButton(app,'record-actions','确认组合举证').disabled,true);
+ const before=app.state();await click(app,'record-content',/^物证四把剪刀/);assert.deepEqual(app.state(),before);
+ assert.equal(findButton(app,'record-actions','确认组合举证').disabled,true);
+ await click(app,'record-content',/^物证两段辫子状物/);assert.equal(findButton(app,'record-actions','确认组合举证').disabled,false);
+ await click(app,'record-actions','取消');assert.deepEqual(app.state(),before);
+ await click(app,'actions','出示');await click(app,'record-content','两件组合比对');await click(app,'record-content',/^物证四把剪刀/);await click(app,'record-content',/^物证两段辫子状物/);await click(app,'record-actions','确认组合举证');
+ assert.equal(app.state().ordinaryWill,5);assert.ok(app.state().flags.includes('scissors_contradiction'));assert.equal(app.state().pendingStage,'hearing_braid');
 });
 
 test('选择证物不立即判定，确认出示才扣一点且返回原句', async () => {

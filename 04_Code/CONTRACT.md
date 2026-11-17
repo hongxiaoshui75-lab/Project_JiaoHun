@@ -1,4 +1,16 @@
-# Demo 模块接口 v1
+# Demo 模块接口 v1（兼容扩展 2026-11-16）
+
+本次由维护者按《剧情.md》升级默认内容至 version 2，授权对引擎做下列兼容扩展；投稿仍只能提交 JSON，不得随投稿修改引擎。存档信封和 state.schemaVersion 仍为 1，旧内容和旧存档按旧内容包校验。版本迁移必须先预览、取得玩家明确同意，禁止直接用新内容解码旧存档或静默覆盖。
+
+## 完整会审扩展
+
+- `PRESENT` 保留 `evidenceId`，可改用 `evidenceIds: [id1, id2]` 提交两件不同且已获得的证物。两字段不可同时传；调查仍只允许单件，会审组合忽略顺序但必须集合完全相等。
+- hearing rule 的 `evidenceId` 可替换为恰好两项的 `evidenceIds`；二者互斥。可设置 `onceFlag`，必须包含在本规则授予的 `flags` 内，已经完成则拒绝重复判定且不扣威信。
+- 多举证点会审设置 stage 的 `requires` 和 `next`，各 rule 可省略 `next`。每次正确举证授予 flags；只有 stage.requires 全满足才将 stage.next 排入 pendingStage，并须播放完本次反驳才能进入下一轮。未满足时保持当前会审和证词。
+- 组合无效、未知或重复 ID 属非法操作，不扣分；合法已取得证物组合不匹配当前证词或调查前置条件，才按一次错误举证扣一点。对白播放中拒绝重复提交。
+- 新版为四轮普通会审（共用五点威信）和一轮最终会审（独立五点）。最终同轮两处举证，第二处须同时出示 EV_08 与 EV_10，且先完成帽檐纤维调查与比对。人物和证物说明只通过公开视图呈现已发现的信息。
+
+以下为旧版离线内容的接口与流程记录；与上述扩展冲突时以上述为准。
 
 静态投稿入口：`levels/<slug>/content.json` 是纯 JSON 数据，结构沿用下述对象；manifest 与资源限制见根目录 CONTRIBUTING.md。core/engine.mjs 和 core/save.mjs 冻结，投稿不包含代码。05_Content/demo-content.mjs 保留为旧离线 Demo 的创作源；线上构建从 levels/ 读取，不导入投稿脚本。
 

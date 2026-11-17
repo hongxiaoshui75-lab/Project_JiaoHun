@@ -7,3 +7,7 @@
 button{min-width:44px}
 @media(max-width:480px){.avatar-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .check-row{min-height:44px;align-items:center}
+@media(max-width:780px){.entry-shell{gap:12px;padding-top:4px}.entry-intro h1{font-size:28px;margin:4px 0}.entry-intro .eyebrow{margin:0}.entry-card{padding:18px}.entry-tabs{margin-bottom:14px}.form-field{margin:10px 0}.form-actions{margin-top:14px}.entry-header{padding-top:10px;padding-bottom:8px}}
+.form-field input{font-size:16px}.migration-card{border:2px solid var(--gold);border-radius:12px;background:#f6ecd1;padding:16px;margin:12px 0}.migration-card h3{margin:0 0 8px}.migration-card p{font-size:13px;margin:6px 0}.migration-card .form-actions{margin-top:12px}.account-search{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.account-search input{font:inherit;min-height:44px;flex:1;min-width:140px;padding:8px 12px;border:1px solid var(--line);border-radius:8px}.account-row{border-bottom:1px solid var(--line);padding:12px 0}.account-row summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.account-row p{font-size:13px;margin:6px 0}.pagination{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.account-row summary{gap:10px}.account-row summary img{border-radius:10px;flex-shrink:0}
+@media(max-width:520px){.migration-card .form-actions{display:grid;grid-template-columns:1fr}.migration-card .form-actions button{width:100%;min-height:48px}.check-row{min-height:44px}}

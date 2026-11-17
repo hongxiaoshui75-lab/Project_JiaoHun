@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,mkdir,writeFile,readFile,rm,stat} from 'node:fs/promises';
+import {mkdtemp,mkdir,writeFile,readFile,rm,stat,copyFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {DatabaseSync} from 'node:sqlite';
@@ -8,7 +8,13 @@ import {createSaveService} from '../network-server.mjs';
 import {demoContent} from '../../05_Content/demo-content.mjs';
 import {createGame,dispatch} from '../core/engine.mjs';
 import {encodeSave,decodeSave} from '../core/save.mjs';
+import {createHash} from 'node:crypto';
+import {previewMigration} from '../core/migrate.mjs';
 const secret='测试暗号123456',password='管理验证123456';
+test('升级备份损坏时停止打开，不覆盖原数据库或损坏备份',async()=>{
+ const {openStore}=await import('../network/store.mjs'),data=await mkdtemp(resolve(tmpdir(),'jiaohun-backup-guard-'));
+ try{const db=openStore(data);db.close();const path=resolve(data,'progress-v2.sqlite'),before=await readFile(path),backup=resolve(data,'pre-content-v2-backup.sqlite');for(const broken of ['isolated corrupt backup','']){await writeFile(backup,broken);assert.throws(()=>openStore(data));assert.deepEqual(await readFile(path),before);assert.equal(await readFile(backup,'utf8'),broken);}}finally{await rm(data,{recursive:true,force:true});}
+});
 async function fixture({legacy=false,secureCookies=false}={}){
  const root=await mkdtemp(resolve(tmpdir(),'jiaohun-auth-v2-')),site=resolve(root,'site'),data=resolve(root,'private');
  await mkdir(resolve(site,'levels/xiaoshan-demo'),{recursive:true});await mkdir(data);
@@ -118,5 +124,34 @@ test('跨标签账号切换：旧页面不能读取或覆盖新Cookie账号的�
   assert.equal((await f.request('demo/xiaoshan-demo',{cookie:hostB.cookie,headers:staleHost})).status,401);
   assert.equal((await f.request('demo/xiaoshan-demo',{method:'PUT',cookie:hostB.cookie,headers:staleHost,body:{revision:1,save:aSave}})).status,401);
   assert.equal((await f.request('demo/xiaoshan-demo',{cookie:hostB.cookie})).data.save,bSave);
+ }finally{await f.close();}
+});
+test('迁移必须明确同意、绑定账号与修订，归档失败回滚、重复幂等，备份可恢复',async()=>{
+ const f=await fixture();try{
+  const a=await f.register('迁移甲'),b=await f.register('迁移乙'),oldContent=structuredClone(demoContent),newContent=structuredClone(demoContent);newContent.version=oldContent.version+1;
+  const original=encodeSave(oldContent,createGame(oldContent));
+  for(const player of [a,b])assert.equal((await f.request('saves/xiaoshan-demo',{method:'PUT',cookie:player.cookie,body:{revision:0,save:original}})).status,200);
+  await mkdir(resolve(f.site,'levels/xiaoshan-legacy'));await writeFile(resolve(f.site,'levels/xiaoshan-legacy/content.json'),JSON.stringify(oldContent));await writeFile(resolve(f.site,'levels/xiaoshan-demo/content.json'),JSON.stringify(newContent));await f.restart();
+  const backup=resolve(f.data,'pre-content-v2-backup.sqlite'),restore=resolve(f.data,'isolated-restore.sqlite');await copyFile(backup,restore);
+  const digest=bytes=>createHash('sha256').update(bytes).digest('hex');assert.equal(digest(await readFile(backup)),digest(await readFile(restore)));
+  const restored=new DatabaseSync(restore,{readOnly:true});assert.equal(restored.prepare('SELECT save FROM saves WHERE player=?').get(a.data.player.id).save,original);restored.close();
+  const get=await f.request('saves/xiaoshan-demo',{cookie:a.cookie});assert.equal(get.data.migrationRequired,true);assert.equal((await f.request('saves/xiaoshan-demo',{method:'PUT',cookie:a.cookie,body:{revision:1,save:encodeSave(newContent,createGame(newContent))}})).status,428);
+  let preview=(await f.request('migrations/xiaoshan-demo/preview',{cookie:a.cookie})).data;assert.equal(preview.targetStage,'investigation');assert.equal(preview.convertedSave,undefined);
+  const body={revision:preview.revision,previewId:preview.previewId,consent:true};
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:a.cookie,body:{...body,consent:false}})).status,409);
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:b.cookie,body})).status,409);
+  assert.equal(f.app.db.prepare('SELECT save FROM saves WHERE player=?').get(a.data.player.id).save,original);
+  f.app.db.prepare('UPDATE saves SET revision=2 WHERE player=?').run(a.data.player.id);
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:a.cookie,body})).status,409);
+  preview=(await f.request('migrations/xiaoshan-demo/preview',{cookie:a.cookie})).data;const confirmed={revision:preview.revision,previewId:preview.previewId,consent:true};
+  f.app.db.exec("CREATE TRIGGER fail_archive BEFORE INSERT ON save_archives BEGIN SELECT RAISE(ABORT,'isolated test'); END");
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:a.cookie,body:confirmed})).status,500);assert.equal(f.app.db.prepare('SELECT save FROM saves WHERE player=?').get(a.data.player.id).save,original);assert.equal(f.app.db.prepare('SELECT count(*) AS n FROM save_archives').get().n,0);f.app.db.exec('DROP TRIGGER fail_archive');
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:a.cookie,body:confirmed})).status,200);
+  const row=f.app.db.prepare('SELECT * FROM saves WHERE player=?').get(a.data.player.id),state=decodeSave(newContent,row.save);assert.equal(state.stageId,'investigation');assert.deepEqual(state.completedInteractions,[]);assert.deepEqual(state.pressed,[]);
+  assert.equal(f.app.db.prepare('SELECT save FROM save_archives WHERE player=?').get(a.data.player.id).save,original);
+  assert.equal((await f.request('migrations/xiaoshan-demo/commit',{method:'POST',cookie:a.cookie,body:confirmed})).data.alreadyMigrated,true);assert.equal(f.app.db.prepare('SELECT count(*) AS n FROM save_archives').get().n,1);
+  const inspector=await f.operator('inspector','迁移检修');assert.equal((await f.request('diagnostics/players',{cookie:a.cookie})).status,401);const list=await f.request('diagnostics/players?q=迁移&page=1&pageSize=1',{cookie:inspector.cookie});assert.equal(list.data.total,2);assert.equal(list.data.players.length,1);assert.ok(list.data.players[0].progress[0].version);assert.doesNotMatch(JSON.stringify(list.data),/secret_hash|recovery_hash|token_hash|sessionHash|"save":/);
+  const second=await f.request('diagnostics/players?q=迁移&page=2&pageSize=1',{cookie:inspector.cookie});assert.notEqual(second.data.players[0].id,list.data.players[0].id);
+  const lateOld=structuredClone(oldContent);lateOld.startStage='ending_success';const late=previewMigration(lateOld,newContent,encodeSave(lateOld,createGame(lateOld)));assert.equal(late.targetStage,'investigation');assert.deepEqual(decodeSave(newContent,late.convertedSave).pressed,[]);
  }finally{await f.close();}
 });

@@ -23,12 +23,16 @@ export function openStore(data){
  if(existsSync(legacy)&&!existsSync(archive)){
   const source=new DatabaseSync(legacy,{readOnly:true});try{source.prepare('VACUUM INTO ?').run(archive);}finally{source.close();}chmodSync(archive,0o600);
  }
- const path=resolve(data,'progress-v2.sqlite'),db=new DatabaseSync(path);chmodSync(path,0o600);
+ const path=resolve(data,'progress-v2.sqlite'),upgradeBackup=resolve(data,'pre-content-v2-backup.sqlite');
+ if(existsSync(path)&&!existsSync(upgradeBackup)){const original=new DatabaseSync(path,{readOnly:true});try{original.prepare('VACUUM INTO ?').run(upgradeBackup);}finally{original.close();}chmodSync(upgradeBackup,0o600);}
+ if(existsSync(upgradeBackup)){const check=new DatabaseSync(upgradeBackup,{readOnly:true});try{if(check.prepare('PRAGMA quick_check').get().quick_check!=='ok'||check.prepare("SELECT count(*) AS n FROM sqlite_master WHERE type='table' AND name IN ('players','saves','sessions')").get().n!==3)throw Error('升级前备份校验失败，停止启动并保留原数据库');}finally{check.close();}}
+ const db=new DatabaseSync(path);chmodSync(path,0o600);
  db.exec(`PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL; PRAGMA foreign_keys=ON;
  CREATE TABLE IF NOT EXISTS players(id INTEGER PRIMARY KEY,name TEXT NOT NULL,normalized TEXT NOT NULL UNIQUE,avatar_id TEXT NOT NULL,secret_hash TEXT NOT NULL,recovery_hash TEXT NOT NULL,created_at TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS operators(id INTEGER PRIMARY KEY,name TEXT NOT NULL,normalized TEXT NOT NULL,role TEXT NOT NULL CHECK(role IN ('presenter','inspector')),secret_hash TEXT NOT NULL,UNIQUE(normalized,role));
  CREATE TABLE IF NOT EXISTS sessions(token_hash TEXT PRIMARY KEY,role TEXT NOT NULL,subject_id INTEGER NOT NULL,expires_at INTEGER NOT NULL);
  CREATE TABLE IF NOT EXISTS saves(player INTEGER NOT NULL REFERENCES players(id),slug TEXT NOT NULL,version INTEGER NOT NULL,revision INTEGER NOT NULL,save TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(player,slug));
+ CREATE TABLE IF NOT EXISTS save_archives(player INTEGER NOT NULL,slug TEXT NOT NULL,version INTEGER NOT NULL,revision INTEGER NOT NULL,save TEXT NOT NULL,archived_at TEXT NOT NULL,PRIMARY KEY(player,slug,version,revision));
  CREATE TABLE IF NOT EXISTS demos(operator INTEGER NOT NULL REFERENCES operators(id),slug TEXT NOT NULL,version INTEGER NOT NULL,revision INTEGER NOT NULL,save TEXT NOT NULL,updated_at TEXT NOT NULL,PRIMARY KEY(operator,slug));
  CREATE TABLE IF NOT EXISTS rooms(id TEXT PRIMARY KEY,title TEXT NOT NULL,owner INTEGER NOT NULL REFERENCES operators(id),closed INTEGER NOT NULL DEFAULT 0,created_at TEXT NOT NULL);
  CREATE TABLE IF NOT EXISTS memberships(room TEXT NOT NULL REFERENCES rooms(id),player INTEGER NOT NULL REFERENCES players(id),joined_at TEXT NOT NULL,last_seen INTEGER NOT NULL,active INTEGER NOT NULL DEFAULT 1,slug TEXT,last_snapshot TEXT,PRIMARY KEY(room,player));

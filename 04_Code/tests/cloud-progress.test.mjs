@@ -11,7 +11,7 @@ function environment(api,initial={}){
  const create=compileFunction(source+'\nreturn connectProgress;',['api','node','action','localStorage','window','document','setTimeout','clearTimeout']);
  const connect=create(api,node,action,localStorage,{addEventListener(){},removeEventListener(){}},{addEventListener(){},removeEventListener(){},body:{append(){}}},(fn,delay)=>{const id=++timerId;timers.set(id,{fn,delay});return id;},id=>timers.delete(id));
  const restored=[],status={textContent:''};
- return {storage,dialogs,restored,status,timers,connect:(mode='player')=>connect({slug:'case',identity:{id:3,name:'玩家'},mode,onRestore:save=>restored.push(save),status})};
+ return {storage,dialogs,restored,status,timers,connect:(mode='player',contentVersion)=>connect({slug:'case',identity:{id:3,name:'玩家'},contentVersion,mode,onRestore:save=>restored.push(save),status})};
 }
 test('连续动作在请求未结束时不丢失末次进度，并沿用服务器修订号',async()=>{
  let resolveFirst;const writes=[];
@@ -45,4 +45,12 @@ test('独立演示只使用demo接口，后续普通队列节流至每秒一次'
  assert.ok(paths.every(path=>path==='demo/case'));
  assert.ok([...e.timers.values()].some(timer=>timer.delay>800),'刚保存后排队的普通动作至少等待约1秒');
  cloud.dispose();assert.equal(e.timers.size,0);
+});
+
+test('新版队列不读取或覆盖旧版断网待传档；需迁移时不允许继续写入',async()=>{
+ const legacyKey='jiaohun.pending.v2.3.player.case',legacy=JSON.stringify({save:'legacy',revision:1});let writes=0;
+ const e=environment(async(path,options={})=>{if(options.method==='PUT')writes++;return {save:'new',revision:2};},{[legacyKey]:legacy});
+ const cloud=await e.connect('player',2);assert.deepEqual(e.restored,['new']);cloud.queue('latest');await cloud.flush();assert.equal(e.storage.get(legacyKey),legacy);assert.equal(writes,1);
+ const blocked=environment(async()=>({save:'legacy',revision:1,migrationRequired:true}));await assert.rejects(blocked.connect('player',2),{code:'MIGRATION_REQUIRED'});assert.equal(blocked.restored.length,0);
+ cloud.dispose();
 });
