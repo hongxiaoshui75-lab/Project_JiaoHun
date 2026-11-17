@@ -4,6 +4,7 @@ import {readFileSync,existsSync,statSync} from 'node:fs';
 import {resolve,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {decodeSave,encodeSave} from './core/save.mjs';
+import {previewMigration} from './core/migrate.mjs';
 import {getView,createGame,dispatch,validateContent} from './core/engine.mjs';
 import {openStore,normalize,validName,validSecret,validAvatar,sha,hashSecret,checkSecret,recoveryCode,createOperator} from './network/store.mjs';
 export {createOperator} from './network/store.mjs';
@@ -41,9 +42,9 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
  function clearSession(req,res,role){const person=auth(req,role,true);db.prepare('DELETE FROM sessions WHERE token_hash=?').run(person.sessionHash);for(const client of subscribers)if(client.sessionHash===person.sessionHash){client.res.end();subscribers.delete(client);}res.setHeader('Set-Cookie',`${cookieName(role)}=; Path=/game/; HttpOnly; ${secureCookies?'Secure; ':''}SameSite=${role==='player'?'Lax':'Strict'}; Max-Age=0`);}
  const playerInfo=p=>({id:p.id,name:p.name,avatarId:p.avatar_id});
  const progress=player=>{
-  const rows=db.prepare('SELECT slug,revision,updated_at FROM saves WHERE player=? ORDER BY slug').all(player),signature=JSON.stringify(rows),cached=progressCache.get(player);
+  const rows=db.prepare('SELECT slug,version,revision,updated_at FROM saves WHERE player=? ORDER BY slug').all(player),signature=JSON.stringify(rows),cached=progressCache.get(player);
   if(cached?.signature===signature)return cached.value.map(item=>({...item}));
-  const value=rows.map(row=>{let stageTitle='旧版本进度',kind='unknown';try{const saved=db.prepare('SELECT save FROM saves WHERE player=? AND slug=?').get(player,row.slug),view=getView(contents.get(row.slug),decodeSave(contents.get(row.slug),saved.save));stageTitle=view.stageTitle;kind=view.kind;}catch{}return {slug:row.slug,revision:row.revision,stageTitle,kind,updatedAt:row.updated_at};});
+  const value=rows.map(row=>{let stageTitle='旧版本进度',kind='unknown';try{const saved=db.prepare('SELECT save FROM saves WHERE player=? AND slug=?').get(player,row.slug),active=contents.get(row.slug),matched=active?.version===row.version?active:[...contents.values()].find(c=>c.id===active?.id&&c.version===row.version),view=getView(matched,decodeSave(matched,saved.save));stageTitle=view.stageTitle;kind=view.kind;}catch{}return {slug:row.slug,title:contents.get(row.slug)?.title||row.slug,contentVersion:row.version,version:row.version,migrationRequired:row.version!==contents.get(row.slug)?.version,revision:row.revision,stageTitle,kind,updatedAt:row.updated_at};});
   progressCache.set(player,{signature,value});return value.map(item=>({...item}));
  };
  function getRoom(id){const row=db.prepare('SELECT * FROM rooms WHERE id=?').get(id);if(!row)fail(404,'没有找到本次展示');return row;}
@@ -72,7 +73,7 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
   const parts=[];let size=0;for await(const chunk of req){size+=chunk.length;if(size>2300000)fail(413,'请求内容过大');parts.push(chunk);}
   try{const value=JSON.parse(Buffer.concat(parts).toString('utf8'));if(!value||typeof value!=='object'||Array.isArray(value))throw Error();return value;}catch{fail(400,'JSON 格式无效');}
  }
- function saveFor(subject,slug,demo=false){return db.prepare(`SELECT revision,save,updated_at FROM ${demo?'demos':'saves'} WHERE ${demo?'operator':'player'}=? AND slug=?`).get(subject,slug);}
+ function saveFor(subject,slug,demo=false){return db.prepare(`SELECT version,revision,save,updated_at FROM ${demo?'demos':'saves'} WHERE ${demo?'operator':'player'}=? AND slug=?`).get(subject,slug);}
  function diagnosticChecks(){
   const checks=[{name:'认证数据结构与隔离角色',ok:['players','operators','sessions','rooms'].every(table=>Boolean(db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=?").get(table)))},{name:'持久数据库一致性',ok:db.prepare('PRAGMA quick_check').get().quick_check==='ok'}];
   for(const [slug,content] of contents){
@@ -89,7 +90,7 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
   const send=(status,value)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'});res.end(JSON.stringify(value));};
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname;
-   if(['/api/v1/health','/api/v2/health'].includes(path)&&req.method==='GET')return send(200,{ok:true});
+   if(['/api/v1/health','/api/v2/health'].includes(path)&&req.method==='GET')return send(200,{ok:true,release:'content-v2',contentVersion:contents.get('xiaoshan-demo')?.version??null,upgradeBackupReady:existsSync(resolve(data,'pre-content-v2-backup.sqlite'))});
    if(path.startsWith('/api/v1/'))return send(410,{error:'旧的无暗号入口已停用，请刷新后创建或登录账号'});
    if(!path.startsWith('/api/v2/'))return send(404,{error:'没有这个接口'});
    if(req.headers.origin&&!allowedOrigins.includes(req.headers.origin))fail(403,'来源不允许');if(req.headers['sec-fetch-site']==='cross-site')fail(403,'请从游戏页面操作');
@@ -123,7 +124,7 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
    const saveMatch=path.match(/^\/api\/v2\/(saves|demo)\/([a-z0-9-]+)$/);
    if(saveMatch){
     const demo=saveMatch[1]==='demo',slug=saveMatch[2],subject=auth(req,demo?'presenter':'player',true);if(!contents.has(slug))fail(404,'没有这个关卡');const current=saveFor(subject.id,slug,demo);
-    if(req.method==='GET')return send(200,current?{revision:current.revision,save:current.save,updatedAt:current.updated_at}:{revision:0,save:null});if(req.method!=='PUT')fail(405,'不支持这项操作');if(!Number.isSafeInteger(body.revision)||body.revision<0||typeof body.save!=='string')fail(400,'存档请求无效');
+    if(req.method==='GET')return send(200,current?{version:current.version,migrationRequired:current.version!==contents.get(slug).version,revision:current.revision,save:current.save,updatedAt:current.updated_at}:{revision:0,save:null});if(req.method!=='PUT')fail(405,'不支持这项操作');if(current&&current.version!==contents.get(slug).version)return send(428,{error:'旧版本进度必须先预览并明确同意迁移，不能直接覆盖',migrationRequired:true,version:current.version});if(!Number.isSafeInteger(body.revision)||body.revision<0||typeof body.save!=='string')fail(400,'存档请求无效');
     if(body.revision!==(current?.revision??0))return send(409,{error:'另一设备已有新进度，请选择要保留哪一份',revision:current?.revision??0,save:current?.save??null});const content=contents.get(slug);try{decodeSave(content,body.save);}catch{fail(400,'存档未通过格式、剧情版本或状态校验');}
     const revision=body.revision+1,now=nowISO(),table=demo?'demos':'saves',owner=demo?'operator':'player';db.prepare(`INSERT INTO ${table}(${owner},slug,version,revision,save,updated_at) VALUES(?,?,?,?,?,?) ON CONFLICT(${owner},slug) DO UPDATE SET version=excluded.version,revision=excluded.revision,save=excluded.save,updated_at=excluded.updated_at`).run(subject.id,slug,content.version,revision,body.save,now);if(!demo)playerChanged(subject.id);return send(200,{revision,updatedAt:now});
    }
@@ -145,14 +146,37 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
     if(action==='close'&&req.method==='POST'){db.prepare('UPDATE rooms SET closed=1 WHERE id=?').run(id);emitRoom(id);return send(200,{room:roomInfo(getRoom(id))});}
     if(action==='observe'&&req.method==='GET'){
      if(room.closed)fail(410,'本次展示已结束');if(!playerId)fail(404,'请指定本场玩家');const member=db.prepare('SELECT * FROM memberships WHERE room=? AND player=? AND active=1').get(id,Number(playerId));if(!member)fail(404,'该玩家未加入本次展示');const items=progress(Number(playerId)),selected=member.slug&&items.find(p=>p.slug===member.slug)||items.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt))[0];
-     if(!selected)return send(200,{view:null,slug:null,revision:0});const stored=saveFor(Number(playerId),selected.slug),view=getView(contents.get(selected.slug),decodeSave(contents.get(selected.slug),stored.save));return send(200,{view,slug:selected.slug,revision:stored.revision});
+     if(!selected)return send(200,{view:null,slug:null,revision:0});if(selected.migrationRequired)return send(200,{view:null,slug:selected.slug,revision:selected.revision,migrationRequired:true});const stored=saveFor(Number(playerId),selected.slug),view=getView(contents.get(selected.slug),decodeSave(contents.get(selected.slug),stored.save));return send(200,{view,slug:selected.slug,revision:stored.revision});
     }
     if(action==='events'&&req.method==='GET'){
      if(room.closed)fail(410,'本次展示已结束');if(subscribers.size>=100)fail(503,'展示连接已满');const person=auth(req,'presenter'),value=snapshot(id),text=JSON.stringify(value);res.writeHead(200,{'Content-Type':'text/event-stream','Cache-Control':'no-store','Connection':'keep-alive','X-Accel-Buffering':'no'});res.write(`event: snapshot\ndata: ${text}\n\n`);const client={room:id,res,last:text,sessionHash:person.sessionHash,expiresAt:person.expiresAt};subscribers.add(client);req.on('close',()=>subscribers.delete(client));return;
     }
     fail(405,'不支持这项操作');
    }
-   if(path==='/api/v2/diagnostics/health'&&req.method==='GET'){auth(req,'inspector');return send(200,{ok:true,version:'network-v2',database:'ready',levels:catalog.length,checks:diagnosticChecks()});}
+   const migration=path.match(/^\/api\/v2\/migrations\/([a-z0-9-]+)\/(preview|commit)$/);
+   if(migration){
+    const player=auth(req,'player',true),slug=migration[1],current=saveFor(player.id,slug),newContent=contents.get(slug);
+    if(!current||!newContent)fail(404,'没有可迁移进度');
+    if(current.version===newContent.version)return send(200,{alreadyMigrated:true,revision:current.revision});
+    const oldContent=JSON.parse(readFileSync(resolve(site,'levels/xiaoshan-legacy/content.json'),'utf8'));
+    const preview=previewMigration(oldContent,newContent,current.save),previewId=sha(player.id+':'+slug+':'+current.revision+':'+current.save);
+    if(migration[2]==='preview'&&req.method==='GET'){const {convertedSave,...summary}=preview;return send(200,{...summary,sourceStageTitle:oldContent.stages[preview.oldStage]?.title,targetStageTitle:newContent.stages[preview.targetStage]?.title,revision:current.revision,previewId});}
+    if(migration[2]!=='commit'||req.method!=='POST')fail(405,'不支持此操作');
+    if(body.consent!==true||body.revision!==current.revision||body.previewId!==previewId)fail(409,'请重新预览并明确确认迁移');
+    db.exec('BEGIN IMMEDIATE');try{
+     const fresh=saveFor(player.id,slug);if(fresh.revision!==current.revision||fresh.save!==current.save)fail(409,'进度已改变，请重新预览');
+     const archived=db.prepare('SELECT save FROM save_archives WHERE player=? AND slug=? AND version=? AND revision=?').get(player.id,slug,current.version,current.revision);if(archived&&archived.save!==current.save)fail(409,'已有归档与当前原件不一致，停止迁移并保留两者');
+     db.prepare('INSERT OR IGNORE INTO save_archives(player,slug,version,revision,save,archived_at) VALUES(?,?,?,?,?,?)').run(player.id,slug,current.version,current.revision,current.save,nowISO());
+     db.prepare('UPDATE saves SET version=?,revision=?,save=?,updated_at=? WHERE player=? AND slug=? AND revision=?').run(newContent.version,current.revision+1,preview.convertedSave,nowISO(),player.id,slug,current.revision);db.exec('COMMIT');
+    }catch(error){db.exec('ROLLBACK');throw error;}
+    playerChanged(player.id);return send(200,{revision:current.revision+1,migrated:true});
+   }
+   if(path==='/api/v2/diagnostics/players'&&req.method==='GET'){
+    auth(req,'inspector',true);const positive=(name,fallback,max)=>{const n=Number(url.searchParams.get(name));return Number.isSafeInteger(n)&&n>0?Math.min(n,max):fallback;},page=positive('page',1,2000),pageSize=positive('pageSize',20,50),q=(url.searchParams.get('q')||'').slice(0,100);
+    const rows=db.prepare('SELECT id,name,avatar_id,created_at FROM players WHERE name LIKE ? ORDER BY id LIMIT ? OFFSET ?').all('%'+q+'%',pageSize,(page-1)*pageSize);
+    return send(200,{page,pageSize,total:db.prepare('SELECT count(*) AS n FROM players WHERE name LIKE ?').get('%'+q+'%').n,players:rows.map(p=>({id:p.id,name:p.name,avatarId:p.avatar_id,createdAt:p.created_at,progress:progress(p.id)}))});
+   }
+   if(path==='/api/v2/diagnostics/health'&&req.method==='GET'){auth(req,'inspector');return send(200,{ok:true,version:'network-v2',database:'ready',upgradeBackupReady:existsSync(resolve(data,'pre-content-v2-backup.sqlite')),upgradeBackupAt:existsSync(resolve(data,'pre-content-v2-backup.sqlite'))?statSync(resolve(data,'pre-content-v2-backup.sqlite')).mtime.toISOString():null,levels:catalog.length,checks:diagnosticChecks()});}
    if(path==='/api/v2/diagnostics/run'&&req.method==='POST'){
     const op=auth(req,'inspector',true);if(!rate('diagnostics:'+op.id,5))fail(429,'检修任务过于频繁');const checks=diagnosticChecks(),id=randomBytes(16).toString('hex'),result={id,status:checks.every(c=>c.ok)?'passed':'failed',checks,isolated:true,createdAt:nowISO()};db.prepare('INSERT INTO diagnostic_runs VALUES(?,?,?,?)').run(id,op.id,JSON.stringify(result),nowISO());db.prepare('DELETE FROM diagnostic_runs WHERE owner=? AND id NOT IN (SELECT id FROM diagnostic_runs WHERE owner=? ORDER BY created_at DESC LIMIT 20)').run(op.id,op.id);return send(200,result);
    }

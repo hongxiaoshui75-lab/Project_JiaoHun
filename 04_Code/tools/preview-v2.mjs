@@ -5,10 +5,31 @@ import {mkdtempSync,readFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {resolve,join,extname,sep} from 'node:path';
 import {createSaveService} from '../network-server.mjs';
+import {hashSecretSync} from '../network/store.mjs';
+import {createGame,dispatch,getView} from '../core/engine.mjs';
+import {encodeSave} from '../core/save.mjs';
 const site=resolve(import.meta.dirname,'../../09_Builds/JiaoHun_Demo/site'),data=mkdtempSync(join(tmpdir(),'jiaohun-browser-qa-'));
 const port=Number(process.env.JIAOHUN_PREVIEW_PORT||4188),origin=`http://127.0.0.1:${port}`;
 const api=createSaveService({site,data,allowedOrigins:[origin],secureCookies:false});
 for(const role of ['presenter','inspector'])api.createOperator({role,name:'qa-'+role,password:'LocalPreview123!'});
+// Explicit synthetic fixtures in this disposable local-only database. Never
+// import this preview tool into the production runtime or deployment bundle.
+if(process.env.JIAOHUN_PREVIEW_SEED==='1'){
+ const content=JSON.parse(readFileSync(resolve(site,'levels/xiaoshan-demo/content.json'),'utf8'));
+ const old=JSON.parse(readFileSync(resolve(site,'levels/xiaoshan-legacy/content.json'),'utf8'));
+ function atFinal(){let state=createGame(content);const visited=new Set();for(let count=0;count<5000;count++){
+  const view=getView(content,state),stage=content.stages[state.stageId];if(state.stageId==='final_cut'&&!view.dialogue)return state;let action;
+  if(view.dialogue)action={type:'NEXT_DIALOGUE'};
+  else if(view.kind==='investigation'){const item=view.interactions.find(item=>!item.completed);if(item)action={type:'INTERACT',interactionId:item.id};else if(view.canAdvance)action={type:'ADVANCE_STAGE'};else{visited.add(state.stageId+':'+state.locationId);const location=view.locations.find(loc=>!visited.has(state.stageId+':'+loc.id));if(!location)throw Error('QA fixture investigation blocked');action={type:'MOVE',locationId:location.id};}}
+  else if(view.kind==='hearing'){const rule=stage.rules.find(rule=>rule.statementId===view.statement.id&&(!rule.onceFlag||!state.flags.includes(rule.onceFlag))&&(rule.requires||[]).every(flag=>state.flags.includes(flag)));action=rule?{type:'PRESENT',...(rule.evidenceIds?{evidenceIds:rule.evidenceIds}:{evidenceId:rule.evidenceId})}:{type:'NEXT_STATEMENT'};}
+  else throw Error('QA fixture ended early');const result=dispatch(content,state,action);if(!result.ok)throw Error(result.error);state=result.state;
+ }throw Error('QA fixture exceeded guard');}
+ for(const [index,name] of ['剧情控件验收','旧版迁移验收','初次调查验收'].entries()){
+  const now=new Date().toISOString(),id=Number(api.db.prepare('INSERT INTO players(name,normalized,avatar_id,secret_hash,recovery_hash,created_at) VALUES(?,?,?,?,?,?)').run(name,name,'avatar-0'+(index+1),hashSecretSync('LocalPreview123!'),'0'.repeat(64),now).lastInsertRowid);
+  const chosen=index===1?old:content,state=index===0?atFinal():createGame(chosen);
+  api.db.prepare('INSERT INTO saves(player,slug,version,revision,save,updated_at) VALUES(?,?,?,?,?,?)').run(id,'xiaoshan-demo',chosen.version,1,encodeSave(chosen,state),now);
+ }
+}
 const types={'.html':'text/html; charset=utf-8','.mjs':'text/javascript; charset=utf-8','.js':'text/javascript; charset=utf-8','.json':'application/json; charset=utf-8','.css':'text/css; charset=utf-8','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.jpg':'image/jpeg'};
 const server=http.createServer((req,res)=>{
  let url;try{url=new URL(req.url,origin);}catch{res.writeHead(400).end();return;}
