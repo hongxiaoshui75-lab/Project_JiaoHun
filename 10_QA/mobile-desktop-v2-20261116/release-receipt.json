@@ -1,0 +1,31 @@
+{
+  "release": "NAS_Content_v2_20261116_r3",
+  "zipBytes": 5635355,
+  "zipSha256": "4a8b873350c27ed44a26c5e345f303a277ac332de25c901125d0dd4254bcda72",
+  "verifiedPayloadFiles": 134,
+  "tests": {
+    "passed": 91,
+    "failed": 0
+  },
+  "nasDeploymentExecuted": true,
+  "sudoerUsed": false,
+  "fixtureCredentialsIncluded": false,
+  "pendingAcceptance": [
+    "real-phone-QR-keyboard-touch",
+    "normal-desktop-fullscreen",
+    "Aliyun-filing-status-before-IPv4-retest"
+  ],
+  "deployedAt": "2026-11-16T02:13:02+08:00",
+  "backupConfirmed": true,
+  "backupDirectory": "/vol2/1000/Dockers/projects/Project_JiaoHun/release-backups/20261116-021301",
+  "verifiedEndpoint": "https://sociology.lumi-ember.top/game/",
+  "standard443Status": "IPv6 direct healthy; local proxy can fail; IPv4 ECS returns Aliyun Non-compliance ICP Filing",
+  "nasIsolatedTests": {
+    "passed": 15,
+    "failed": 0
+  },
+  "nasSourceFilesSynchronized": 109,
+  "audit": "/home/jiaohun-dev/jiaohun-audit/content-v2-20261116.txt",
+  "githubPushPerformed": false,
+  "verifiedProtocol": "IPv6 direct with certificate validation"
+}

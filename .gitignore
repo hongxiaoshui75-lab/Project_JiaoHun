@@ -46,3 +46,6 @@ jiaohun-save-*.json
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+
+/release-stage-*/
+/release-backups/
