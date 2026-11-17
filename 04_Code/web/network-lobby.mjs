@@ -67,13 +67,21 @@ async function showLevels(result){
  try{
   const response=await fetch('./levels/index.json',{cache:'no-cache'});if(!response.ok)throw Error('关卡列表暂时无法读取。');const catalog=await response.json();
   for(const [index,level] of catalog.levels.entries()){
-   if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(level.slug))continue;
+   if(level.archived||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(level.slug))continue;
    const entry=node('article',undefined,'level-card');entry.style.animationDelay=`${Math.min(index*40,200)}ms`;const saved=result.progress?.find(p=>p.slug===level.slug);entry.append(node('h3',level.title),node('p',saved?`${saved.stageTitle} · ${new Date(saved.updatedAt).toLocaleString('zh-CN')}`:'尚未开始 · 一份新的卷宗'));
-   const play=node('a',saved?'继续游戏 →':'开始查案 →','play-link');play.href='./play.html?level='+encodeURIComponent(level.slug)+'&player='+encodeURIComponent(result.player.id);entry.append(play);levels.append(entry);
+   if(saved?.migrationRequired){entry.append(node('p','这份旧进度需要先确认迁移。原服务器存档与本机旧备份都会保留。'));const preview=action('查看迁移说明',()=>showMigration(level,saved,entry));preview.className='primary';entry.append(preview);}else{const play=node('a',saved?'继续游戏 →':'开始查案 →','play-link');play.href='./play.html?level='+encodeURIComponent(level.slug)+'&player='+encodeURIComponent(result.player.id);entry.append(play);}levels.append(entry);
   }
   if(!levels.children.length)levels.append(node('p','暂无通过校验的卷宗。'));
  }catch(error){status.textContent=error.message;}
  const actions=node('div',undefined,'form-actions');actions.append(action('切换账号',logout),action('修改暗号',showChangeSecret));card.append(actions);
+}
+async function showMigration(level,saved,entry){
+ const box=node('section',undefined,'migration-card');entry.replaceChildren(node('h3',level.title),box);box.append(node('p','正在核对旧进度……'));
+ try{const preview=await api(`migrations/${encodeURIComponent(level.slug)}/preview`,{headers:playerHeaders()});box.replaceChildren(node('h3','确认迁移旧卷宗'),node('p',`原进度：${preview.sourceStageTitle||preview.from?.stageTitle||saved.stageTitle||'旧版本卷宗'} · 版本 ${preview.fromVersion||preview.sourceVersion||saved.contentVersion||1}`),node('p',`迁移后：${preview.targetStageTitle||preview.to?.stageTitle||'继续相应阶段'} · 版本 ${preview.toVersion||preview.targetVersion||level.version}`),node('p','旧服务器存档会归档保留。本机旧存档与未同步备份不会自动覆盖新版本，也不会被删除。'));
+  if(preview.summary)box.append(node('p',preview.summary));
+  for(const note of preview.notes||preview.warnings||[])box.append(node('p',String(note)));
+  const consent=node('label',undefined,'check-row'),check=node('input');check.type='checkbox';consent.append(check,node('span','我已阅读迁移说明，同意迁移这份进度'));const status=node('p','','status'),confirm=action('确认迁移并保留旧档',async()=>{confirm.disabled=true;try{await api(`migrations/${encodeURIComponent(level.slug)}/commit`,{method:'POST',body:{consent:true,revision:preview.revision??saved.revision,previewId:preview.previewId},headers:playerHeaders()});await loadProfile();}catch(error){status.textContent=error.message;confirm.disabled=!check.checked;}});confirm.disabled=true;check.addEventListener('change',()=>confirm.disabled=!check.checked);const buttons=node('div',undefined,'form-actions');buttons.append(confirm,action('暂不迁移',()=>{box.replaceChildren(node('p','原存档已保留，尚未迁移。你可以稍后重新查看说明。'),action('重新查看迁移说明',()=>showMigration(level,saved,entry)));}));box.append(consent,buttons,status);
+ }catch(error){box.replaceChildren(node('p',error.message,'status'),action('稍后再试',()=>showLevels(profile)));}
 }
 function showChangeSecret(){
  card.replaceChildren(node('h2','修改暗号'),node('p','修改后，其他设备的登录将失效，并签发新的恢复码。','small'));

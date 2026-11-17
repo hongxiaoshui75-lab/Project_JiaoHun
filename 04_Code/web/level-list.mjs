@@ -1,7 +1,7 @@
 export function renderLevels(container,levels,document){
  container.replaceChildren();
  for(const level of levels){
-  if(!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(level.slug))continue;
+  if(level.archived||!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(level.slug))continue;
   const card=document.createElement('section'),title=document.createElement('h2'),credit=document.createElement('p'),link=document.createElement('a');
   title.textContent=level.title;credit.textContent=`${level.author} · v${level.version} · ${level.license}`;
   link.textContent='打开卷宗';link.href=`./play.html?level=${encodeURIComponent(level.slug)}`;card.append(title,credit,link);container.append(card);
