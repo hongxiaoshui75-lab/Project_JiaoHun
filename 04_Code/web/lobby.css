@@ -11,3 +11,49 @@ button{min-width:44px}
 .form-field input{font-size:16px}.migration-card{border:2px solid var(--gold);border-radius:12px;background:#f6ecd1;padding:16px;margin:12px 0}.migration-card h3{margin:0 0 8px}.migration-card p{font-size:13px;margin:6px 0}.migration-card .form-actions{margin-top:12px}.account-search{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.account-search input{font:inherit;min-height:44px;flex:1;min-width:140px;padding:8px 12px;border:1px solid var(--line);border-radius:8px}.account-row{border-bottom:1px solid var(--line);padding:12px 0}.account-row summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.account-row p{font-size:13px;margin:6px 0}.pagination{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
 .account-row summary{gap:10px}.account-row summary img{border-radius:10px;flex-shrink:0}
 @media(max-width:520px){.migration-card .form-actions{display:grid;grid-template-columns:1fr}.migration-card .form-actions button{width:100%;min-height:48px}.check-row{min-height:44px}}
+
+/* ---------- 共用外观页的秩序层 ----------
+   借 stellar-ui 的方法论（编号、细线、宽体眉标、短硬机械动效、深浅双主题），不借它的皮肤：
+   配色仍是卷宗纸感（米色纸／朱红／金），不引入紫与荧光绿。
+   这一层作用于共用 lobby.css 的四个页面：入场页、主持登录页、检修页、大屏页。
+   深浅由 html[data-theme] 决定，只有这四页加载 theme.js；游戏内 play 页用 style.css，本就是墨底，不在这里。 */
+:root{--snap:cubic-bezier(.16,1,.3,1);--mech:cubic-bezier(.7,0,.2,1);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--btn:#fffcf3;--field:#fff;--card:#f6ecd1;--hover:#eee2c9;--error:#9b3021;--edge:#302e29;--on-accent:#fff9ed;--accent-fill:#a44836;--chip:#e8ddc5;--chip-active:#eaddc4}
+html[data-theme=light]{color-scheme:light}
+/* 深色 token 写两份且必须同值：auto 跟随系统偏好，dark 是页面上手动选的结果。
+   深色里朱红拆成两个值：--accent 要够亮才能在墨底上读（状态文字、印章、细线），
+   --accent-fill 要够深才能托住米色按钮字（一个值同时满足两端做不到，实测 3.68:1 不合格）。 */
+html[data-theme=dark]{color-scheme:dark;background:var(--paper);--paper:#14120f;--cream:#1e1a14;--ink:#ecdfc4;--muted:#a89e88;--line:#ffffff2e;--accent:#d1705a;--accent-fill:#a8492f;--gold:#d4b878;--shadow:5px 6px 0 #000;--btn:#241f17;--field:#100e0b;--card:#241f17;--hover:#302a20;--error:#e89a86;--edge:#000;--on-accent:#fff6e8;--chip:#241f17;--chip-active:#2e281e}
+@media(prefers-color-scheme:dark){
+  html[data-theme=auto]{color-scheme:dark;background:var(--paper);--paper:#14120f;--cream:#1e1a14;--ink:#ecdfc4;--muted:#a89e88;--line:#ffffff2e;--accent:#d1705a;--accent-fill:#a8492f;--gold:#d4b878;--shadow:5px 6px 0 #000;--btn:#241f17;--field:#100e0b;--card:#241f17;--hover:#302a20;--error:#e89a86;--edge:#000;--on-accent:#fff6e8;--chip:#241f17;--chip-active:#2e281e}
+}
+/* 原规则里写死的浅色补成 token，深色下才不会白块压墨底。 */
+button{background:var(--btn)}button:hover{background:var(--hover)}
+button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3px 3px 0 var(--edge)}
+.form-field input{background:var(--field);color:var(--ink);border-color:var(--line)}
+.field-error{color:var(--error)}
+.level-card{background:var(--field)}.migration-card,.room-invite{background:var(--card)}
+.entry-tabs button.active{background:var(--ink);color:var(--cream)}
+/* 秩序：编号眉标、细线字段行、标题下的短朱线、卡片顶沿的三色规线。 */
+.eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.6em;row-gap:4px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.eyebrow-mark{color:var(--accent)}
+.eyebrow-no{color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px;letter-spacing:.08em;white-space:nowrap}
+.intro-fields{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 22px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.intro-fields span+span{border-left:1px solid var(--line);padding-left:12px}
+.intro-stamps span{font-family:var(--mono);letter-spacing:.06em}
+.entry-intro h1{position:relative}
+.entry-intro h1::after{content:"";display:block;width:64px;height:2px;background:var(--accent);margin-top:20px}
+.entry-card{position:relative}
+.entry-card::before{content:"";position:absolute;inset:2px 2px auto;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent) 0 34%,var(--gold) 34% 64%,var(--line) 64% 100%)}
+.entry-header nav button{min-height:44px;padding:6px 12px;font-size:12px;background:transparent;border-color:var(--line)}
+.entry-header nav button:hover{background:var(--hover);border-color:var(--ink)}
+@media(prefers-reduced-motion:no-preference){
+  .entry-intro>.eyebrow{animation:note-snap 420ms var(--snap) both}
+  .entry-intro>h1{animation:note-snap 620ms var(--snap) 80ms both}
+  .entry-intro>.intro-lede,.entry-intro>.intro-fields{animation:note-snap 520ms var(--snap) 180ms both}
+  .entry-intro>.intro-stamps,.entry-intro>.intro-note{animation:note-snap 520ms var(--snap) 280ms both}
+  .entry-card{animation:note-mech 560ms var(--mech) 120ms both}
+  .entry-tabs button{transition:transform 180ms var(--mech),background 180ms}
+  .entry-tabs button:active{transform:translateY(1px)}
+}
+@keyframes note-snap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes note-mech{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}

@@ -14,7 +14,7 @@ function field(form,key,label,{secret=false,min,max,autocomplete}={}){
  wrap.append(error);form.append(wrap);return {input,error};
 }
 function showRecovery(code,next){
- card.replaceChildren(node('h2','先收好你的恢复码'),node('p','暗号忘记时，用它找回存档。恢复码只展示这一次，请勿公开。','small'));
+ card.replaceChildren(node('h2','先收好你的恢复码'),node('p','密码忘记时，用它找回存档。恢复码只展示这一次，请勿公开。','small'));
  const codeBox=node('div',code,'recovery-code'),buttons=node('div',undefined,'form-actions'),status=node('p','','status');codeBox.setAttribute('aria-label','一次性恢复码');
  buttons.append(action('复制恢复码',async()=>{try{await navigator.clipboard.writeText(code);status.textContent='已复制，请保存到你自己的安全位置。';}catch{status.textContent='无法自动复制，请长按上方恢复码复制。';}}),action('下载恢复卡',()=>{const blob=new Blob([`萧山剪辫案 · 恢复卡\n用户名：${values.name||profile?.player?.name||''}\n恢复码：${code}\n请勿公开。使用后旧码失效。\n`],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=node('a');link.href=url;link.download='萧山剪辫案-恢复卡.txt';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}));
  const check=node('label',undefined,'check-row'),checkbox=node('input'),continueButton=action('已保存，继续',async()=>{continueButton.disabled=true;try{await next();codeBox.textContent='恢复码已关闭';}catch(error){status.textContent=error.message;}finally{continueButton.disabled=!checkbox.checked;}});checkbox.type='checkbox';continueButton.disabled=true;checkbox.addEventListener('change',()=>continueButton.disabled=!checkbox.checked);check.append(checkbox,node('span','我已把恢复码保存在自己的设备上'));continueButton.className='primary';
@@ -22,7 +22,7 @@ function showRecovery(code,next){
 }
 function showForm(nextMode='login'){
  mode=nextMode;card.replaceChildren();card.classList.remove('form-switch');void card.offsetWidth;card.classList.add('form-switch');
- const tabs=node('div',undefined,'entry-tabs');for(const [key,title] of [['login','登录存档'],['register','创建账号']]){const tab=action(title,()=>showForm(key));tab.classList.toggle('active',key===mode);tab.setAttribute('aria-pressed',String(key===mode));tabs.append(tab);}card.append(tabs,node('h2',mode==='register'?'选个头像，开始查案':mode==='recover'?'找回你的卷宗':'欢迎回到卷宗'),node('p',mode==='register'?'头像用于辨认，暗号保护游戏进度。':mode==='recover'?'输入恢复码并设置新暗号。原恢复码使用后失效。':'验证后选择进度，继续上次的查问。','small'));
+ const tabs=node('div',undefined,'entry-tabs');for(const [key,title] of [['login','登录存档'],['register','创建账号']]){const tab=action(title,()=>showForm(key));tab.classList.toggle('active',key===mode);tab.setAttribute('aria-pressed',String(key===mode));tabs.append(tab);}card.append(tabs,node('h2',mode==='register'?'选个头像，开始查案':mode==='recover'?'找回你的卷宗':'欢迎回到卷宗'),node('p',mode==='register'?'头像用于辨认，密码保护游戏进度。':mode==='recover'?'输入恢复码并设置新密码。原恢复码使用后失效。':'验证后选择进度，继续上次的查问。','small'));
  const form=node('form');form.noValidate=false;const fields={};
  if(mode==='register'){
   const grid=node('div',undefined,'avatar-grid');grid.setAttribute('role','group');grid.setAttribute('aria-label','选择头像');
@@ -30,13 +30,13 @@ function showForm(nextMode='login'){
  }
  fields.name=field(form,'name','用户名',{min:2,max:24,autocomplete:'username'});
  if(mode==='recover'){
-  fields.recoveryCode=field(form,'recoveryCode','恢复码',{max:128});fields.newSecret=field(form,'newSecret','新暗号',{secret:true,min:8,max:128,autocomplete:'new-password'});
- }else fields.secret=field(form,'secret','暗号',{secret:true,min:8,max:128,autocomplete:mode==='register'?'new-password':'current-password'});
- if(mode==='register'||mode==='recover')fields.confirm=field(form,'confirm','再次输入暗号',{secret:true,min:8,max:128,autocomplete:'new-password'});
- const status=node('p','','status');status.setAttribute('role','status');const submit=node('button',mode==='register'?'创建账号':mode==='recover'?'验证并重设暗号':'验证并继续','primary');submit.type='submit';const row=node('div',undefined,'form-actions');row.append(submit);form.append(row,status);
+  fields.recoveryCode=field(form,'recoveryCode','恢复码',{max:128});fields.newSecret=field(form,'newSecret','新密码',{secret:true,min:8,max:128,autocomplete:'new-password'});
+ }else fields.secret=field(form,'secret','密码',{secret:true,min:8,max:128,autocomplete:mode==='register'?'new-password':'current-password'});
+ if(mode==='register'||mode==='recover')fields.confirm=field(form,'confirm','再次输入密码',{secret:true,min:8,max:128,autocomplete:'new-password'});
+ const status=node('p','','status');status.setAttribute('role','status');const submit=node('button',mode==='register'?'创建账号':mode==='recover'?'验证并重设密码':'验证并继续','primary');submit.type='submit';const row=node('div',undefined,'form-actions');row.append(submit);form.append(row,status);
  form.addEventListener('submit',async event=>{
   event.preventDefault();Object.values(fields).forEach(f=>{f.error.textContent='';f.input.removeAttribute('aria-invalid');});
-  if((mode==='register'||mode==='recover')&&values.confirm!==(mode==='recover'?values.newSecret:values.secret)){fields.confirm.error.textContent='两次输入的暗号不一致。';fields.confirm.input.setAttribute('aria-invalid','true');fields.confirm.input.focus();return;}
+  if((mode==='register'||mode==='recover')&&values.confirm!==(mode==='recover'?values.newSecret:values.secret)){fields.confirm.error.textContent='两次输入的密码不一致。';fields.confirm.input.setAttribute('aria-invalid','true');fields.confirm.input.focus();return;}
   submit.disabled=true;status.textContent='正在核对卷宗……';
   try{
    if(mode==='recover'){const result=await api('auth/recover',{method:'POST',body:{name:values.name,recoveryCode:values.recoveryCode,newSecret:values.newSecret}});values.secret='';values.recoveryCode='';values.newSecret='';values.confirm='';showRecovery(result.recoveryCode,()=>showForm('login'));return;}
@@ -44,7 +44,7 @@ function showForm(nextMode='login'){
    if(mode==='register'){profile={player:result.player,progress:[]};showRecovery(result.recoveryCode,()=>loadProfile());}else await loadProfile();
   }catch(error){status.textContent=error.message;const f=fields[error.field];if(f){f.error.textContent=error.message;f.input.setAttribute('aria-invalid','true');f.input.focus();}}finally{submit.disabled=false;}
  });
- card.append(form);const links=node('div',undefined,'form-actions');links.append(action(mode==='recover'?'返回登录':'忘记暗号？',()=>showForm(mode==='recover'?'login':'recover')));links.firstChild.className='text-button';card.append(links);
+ card.append(form);const links=node('div',undefined,'form-actions');links.append(action(mode==='recover'?'返回登录':'忘记密码？',()=>showForm(mode==='recover'?'login':'recover')));links.firstChild.className='text-button';card.append(links);
 }
 async function logout(){try{await api('auth/logout',{method:'POST',body:{},headers:playerHeaders()});try{sessionStorage.removeItem(roomKey);}catch{}profile=null;for(const key of ['secret','confirm','recoveryCode','newSecret','oldSecret'])values[key]='';showForm('login');}catch(error){setStatus(error.message);}}
 async function showGreeting(result){profile=result;rememberPlayer(result.player);card.replaceChildren();const head=node('div',undefined,'player-heading'),copy=node('div');copy.append(node('h2',`欢迎回来，${result.player.name}`),node('p','你的卷宗已妥善保存。','small'));head.append(avatarImage(result.player.avatarId,72),copy);const buttons=node('div',undefined,'form-actions');const keep=action('继续使用这个账号',()=>showLevels(result));keep.className='primary';buttons.append(keep,action('切换账号',logout));card.append(head,buttons,node('p','','status'));}
@@ -57,7 +57,7 @@ async function roomInvite(container){
   if(room.closed){box.replaceChildren(node('h3','本次展示已结束'),node('p','你仍可私下继续游玩，存档不受影响。'));try{sessionStorage.removeItem(roomKey);}catch{}return;}
   box.replaceChildren(node('h3',room.title||'本次大屏展示'));
   if(roomId()===id){box.append(node('p','已加入。大屏会展示头像、昵称和当前阶段；主持人可只读观察你的场景。'),action('退出展示，继续私下游玩',async()=>{try{await leaveRoom(profile.player.id);inviteDismissed=true;box.replaceChildren(node('p','已退出展示。你的账号和游戏进度保持不变。'));}catch(error){setStatus(error.message);}}));return;}
-  box.append(node('p','加入后，大屏会显示你的头像、昵称与游戏阶段。主持人可以选择只读观察当前场景，不会看到暗号或恢复码。'));
+  box.append(node('p','加入后，大屏会显示你的头像、昵称与游戏阶段。主持人可以选择只读观察当前场景，不会看到密码或恢复码。'));
   const consent=node('label',undefined,'check-row'),check=node('input');check.type='checkbox';consent.append(check,node('span','我同意加入本次展示并展示上述游戏信息'));const join=action('加入本次展示',async()=>{join.disabled=true;try{await api(`rooms/${encodeURIComponent(id)}/join`,{method:'POST',body:{consent:true},headers:playerHeaders()});sessionStorage.setItem(roomKey,id);box.replaceChildren(node('h3','已加入本次展示'),node('p','选择下方卷宗开始，进度将在大屏更新。'));}catch(error){box.append(node('p',error.message,'status'));join.disabled=false;}});join.disabled=true;check.addEventListener('change',()=>join.disabled=!check.checked);box.append(consent,join,action('仅私下游玩',()=>{inviteDismissed=true;box.remove();}));
  }catch(error){box.replaceChildren(node('p','场次暂时无法连接。你可以先私下游玩。'),node('p',error.message,'small'));}
 }
@@ -73,7 +73,7 @@ async function showLevels(result){
   }
   if(!levels.children.length)levels.append(node('p','暂无通过校验的卷宗。'));
  }catch(error){status.textContent=error.message;}
- const actions=node('div',undefined,'form-actions');actions.append(action('切换账号',logout),action('修改暗号',showChangeSecret));card.append(actions);
+ const actions=node('div',undefined,'form-actions');actions.append(action('切换账号',logout),action('修改密码',showChangeSecret));card.append(actions);
 }
 async function showMigration(level,saved,entry){
  const box=node('section',undefined,'migration-card');entry.replaceChildren(node('h3',level.title),box);box.append(node('p','正在核对旧进度……'));
@@ -84,7 +84,7 @@ async function showMigration(level,saved,entry){
  }catch(error){box.replaceChildren(node('p',error.message,'status'),action('稍后再试',()=>showLevels(profile)));}
 }
 function showChangeSecret(){
- card.replaceChildren(node('h2','修改暗号'),node('p','修改后，其他设备的登录将失效，并签发新的恢复码。','small'));
- const form=node('form'),old=field(form,'oldSecret','当前暗号',{secret:true,min:8,max:128,autocomplete:'current-password'}),fresh=field(form,'newSecret','新暗号',{secret:true,min:8,max:128,autocomplete:'new-password'}),confirm=field(form,'confirm','再次输入新暗号',{secret:true,min:8,max:128,autocomplete:'new-password'}),status=node('p','','status'),submit=node('button','修改并签发恢复码','primary');submit.type='submit';form.append(submit,status);form.addEventListener('submit',async event=>{event.preventDefault();if(fresh.input.value!==confirm.input.value){confirm.error.textContent='两次暗号不一致。';return;}submit.disabled=true;try{const r=await api('auth/secret',{method:'POST',body:{oldSecret:old.input.value,newSecret:fresh.input.value},headers:playerHeaders()});values.oldSecret='';values.newSecret='';values.confirm='';showRecovery(r.recoveryCode,()=>loadProfile().catch(()=>showForm('login')));}catch(error){status.textContent=error.message;}finally{submit.disabled=false;}});card.append(form,action('返回卷宗',()=>showLevels(profile)));
+ card.replaceChildren(node('h2','修改密码'),node('p','修改后，其他设备的登录将失效，并签发新的恢复码。','small'));
+ const form=node('form'),old=field(form,'oldSecret','当前密码',{secret:true,min:8,max:128,autocomplete:'current-password'}),fresh=field(form,'newSecret','新密码',{secret:true,min:8,max:128,autocomplete:'new-password'}),confirm=field(form,'confirm','再次输入新密码',{secret:true,min:8,max:128,autocomplete:'new-password'}),status=node('p','','status'),submit=node('button','修改并签发恢复码','primary');submit.type='submit';form.append(submit,status);form.addEventListener('submit',async event=>{event.preventDefault();if(fresh.input.value!==confirm.input.value){confirm.error.textContent='两次密码不一致。';return;}submit.disabled=true;try{const r=await api('auth/secret',{method:'POST',body:{oldSecret:old.input.value,newSecret:fresh.input.value},headers:playerHeaders()});values.oldSecret='';values.newSecret='';values.confirm='';showRecovery(r.recoveryCode,()=>loadProfile().catch(()=>showForm('login')));}catch(error){status.textContent=error.message;}finally{submit.disabled=false;}});card.append(form,action('返回卷宗',()=>showLevels(profile)));
 }
 try{showGreeting(await api('auth/me'));}catch(error){showForm('login');if(error.status!==401)setStatus('暂时无法连接存档服务。可填写账号后重试。');}

@@ -10,7 +10,7 @@ import {createGame,dispatch} from '../core/engine.mjs';
 import {encodeSave,decodeSave} from '../core/save.mjs';
 import {createHash} from 'node:crypto';
 import {previewMigration} from '../core/migrate.mjs';
-const secret='测试暗号123456',password='管理验证123456';
+const secret='测试密码123456',password='管理验证123456';
 test('升级备份损坏时停止打开，不覆盖原数据库或损坏备份',async()=>{
  const {openStore}=await import('../network/store.mjs'),data=await mkdtemp(resolve(tmpdir(),'jiaohun-backup-guard-'));
  try{const db=openStore(data);db.close();const path=resolve(data,'progress-v2.sqlite'),before=await readFile(path),backup=resolve(data,'pre-content-v2-backup.sqlite');for(const broken of ['isolated corrupt backup','']){await writeFile(backup,broken);assert.throws(()=>openStore(data));assert.deepEqual(await readFile(path),before);assert.equal(await readFile(backup,'utf8'),broken);}}finally{await rm(data,{recursive:true,force:true});}
@@ -33,14 +33,14 @@ async function fixture({legacy=false,secureCookies=false}={}){
  const operator=async(role,name)=>{app.createOperator({role,name,password});return request('operator/login',{method:'POST',body:{role,name,password}});};
  return {request,register,operator,get app(){return app;},get base(){return base;},data,site,advance:ms=>{now+=ms;},restart:async()=>{await app.close();await start();},close:async()=>{await app.close();await rm(root,{recursive:true,force:true});}};
 }
-test('新认证：暗号校验、用户名归一化、Cookie保护和旧无密码接口停用',async()=>{
+test('新认证：密码校验、用户名归一化、Cookie保护和旧无密码接口停用',async()=>{
  const f=await fixture({secureCookies:true});try{
   const a=await f.register('Ａlice');assert.equal(a.status,201);assert.ok(a.data.recoveryCode);assert.equal(a.data.token,undefined);assert.deepEqual(Object.keys(a.data.player).sort(),['avatarId','id','name']);
   assert.match(a.cookieHeader,/HttpOnly/);assert.match(a.cookieHeader,/Secure/);assert.match(a.cookieHeader,/SameSite=Lax/);assert.match(a.cookieHeader,/Max-Age=604800/);
   assert.equal((await f.register('alice')).status,409);assert.equal((await f.register('别的头像','avatar-13')).status,400);
-  assert.equal((await f.request('auth/register',{method:'POST',body:{name:'坏格式',secret:'短暗号',avatarId:'avatar-01'}})).status,400);
-  assert.equal((await f.request('auth/login',{method:'POST',body:{name:'Alice',secret:'错误暗号123456'}})).status,401);
-  assert.equal((await f.request('auth/login',{method:'POST',body:{name:'不存在',secret:'错误暗号123456'}})).data.error,(await f.request('auth/login',{method:'POST',body:{name:'Alice',secret:'错误暗号123456'}})).data.error);
+  assert.equal((await f.request('auth/register',{method:'POST',body:{name:'坏格式',secret:'短密码',avatarId:'avatar-01'}})).status,400);
+  assert.equal((await f.request('auth/login',{method:'POST',body:{name:'Alice',secret:'错误密码123456'}})).status,401);
+  assert.equal((await f.request('auth/login',{method:'POST',body:{name:'不存在',secret:'错误密码123456'}})).data.error,(await f.request('auth/login',{method:'POST',body:{name:'Alice',secret:'错误密码123456'}})).data.error);
   const login=await f.request('auth/login',{method:'POST',body:{name:'alice',secret}});assert.equal(login.status,200);
   assert.equal((await f.request('auth/me')).status,401);const me=await f.request('auth/me',{cookie:login.cookie});assert.equal(me.status,200);assert.deepEqual(me.data.progress,[]);
   assert.equal((await f.request('auth/me',{cookie:login.cookie,origin:'https://evil.test'})).status,403);
@@ -50,7 +50,7 @@ test('新认证：暗号校验、用户名归一化、Cookie保护和旧无密�
   await f.request('auth/logout',{method:'POST',body:{},cookie:login.cookie});assert.equal((await f.request('auth/me',{cookie:login.cookie})).status,401);
  }finally{await f.close();}
 });
-test('恢复码一次使用、改暗号撤销其他会话、服务重启不丢进度',async()=>{
+test('恢复码一次使用、改密码撤销其他会话、服务重启不丢进度',async()=>{
  const f=await fixture();try{
   const a=await f.register(),b=await f.register('另一玩家');
   const state=dispatch(demoContent,createGame(demoContent),{type:'NEXT_DIALOGUE'}).state,save=encodeSave(demoContent,state);
@@ -59,11 +59,11 @@ test('恢复码一次使用、改暗号撤销其他会话、服务重启不丢�
   assert.equal((await f.request('saves/xiaoshan-demo',{method:'PUT',cookie:a.cookie,body:{revision:0,save}})).status,409);
   assert.equal((await f.request('saves/xiaoshan-demo',{method:'PUT',cookie:a.cookie,body:{revision:1,save:'{}'}})).status,400);
   await f.restart();const loaded=await f.request('saves/xiaoshan-demo',{cookie:a.cookie});assert.deepEqual(decodeSave(demoContent,loaded.data.save),state);
-  const recovered=await f.request('auth/recover',{method:'POST',body:{name:'测试玩家',recoveryCode:a.data.recoveryCode,newSecret:'新的暗号123456'}});assert.equal(recovered.status,200);assert.notEqual(recovered.data.recoveryCode,a.data.recoveryCode);
+  const recovered=await f.request('auth/recover',{method:'POST',body:{name:'测试玩家',recoveryCode:a.data.recoveryCode,newSecret:'新的密码123456'}});assert.equal(recovered.status,200);assert.notEqual(recovered.data.recoveryCode,a.data.recoveryCode);
   assert.equal((await f.request('auth/me',{cookie:a.cookie})).status,401);
-  assert.equal((await f.request('auth/recover',{method:'POST',body:{name:'测试玩家',recoveryCode:a.data.recoveryCode,newSecret:'另一个暗号123456'}})).status,401);
-  const login=await f.request('auth/login',{method:'POST',body:{name:'测试玩家',secret:'新的暗号123456'}}),second=await f.request('auth/login',{method:'POST',body:{name:'测试玩家',secret:'新的暗号123456'}});
-  const changed=await f.request('auth/secret',{method:'POST',cookie:login.cookie,body:{oldSecret:'新的暗号123456',newSecret:'最终暗号123456'}});assert.equal(changed.status,200);assert.equal((await f.request('auth/me',{cookie:second.cookie})).status,401);assert.equal((await f.request('auth/me',{cookie:changed.cookie})).status,200);
+  assert.equal((await f.request('auth/recover',{method:'POST',body:{name:'测试玩家',recoveryCode:a.data.recoveryCode,newSecret:'另一个密码123456'}})).status,401);
+  const login=await f.request('auth/login',{method:'POST',body:{name:'测试玩家',secret:'新的密码123456'}}),second=await f.request('auth/login',{method:'POST',body:{name:'测试玩家',secret:'新的密码123456'}});
+  const changed=await f.request('auth/secret',{method:'POST',cookie:login.cookie,body:{oldSecret:'新的密码123456',newSecret:'最终密码123456'}});assert.equal(changed.status,200);assert.equal((await f.request('auth/me',{cookie:second.cookie})).status,401);assert.equal((await f.request('auth/me',{cookie:changed.cookie})).status,200);
   f.advance(8*86400000);assert.equal((await f.request('auth/me',{cookie:changed.cookie})).status,401);
  }finally{await f.close();}
 });
