@@ -37,9 +37,11 @@ html[data-theme=dark] .entry-card::before{height:2px}
    否则实测 3.22–3.81:1 不合格（浅色保持原样，纸底上朱红够读）。 */
 html[data-theme=dark] .eyebrow,html[data-theme=dark] .eyebrow-mark{color:var(--gold)}
 html[data-theme=dark] .status{color:var(--error)}
-/* 游戏里的选中态是金色半透明洗底 + 金描边（.selected{background:#e8d8b825;border-color:var(--gold)}），
-   不是整块亮底；照抄过来，页签才像"在同一份卷宗里翻页"。 */
-html[data-theme=dark] .entry-tabs button.active{background:#e8d8b822;border-color:var(--gold);color:var(--paper)}
+/* 游戏里的选中态是金色半透明洗底 + 金描边（.selected{background:#e8d8b825;border-color:var(--gold)}）。
+   深色下未选中的页签压成 muted 文字、选中的用纸色字 + 金描边 + 一点金洗底——靠字色分辨，
+   而不是靠整块亮底（整块亮底读起来像禁用）。 */
+html[data-theme=dark] .entry-tabs button{color:var(--muted)}
+html[data-theme=dark] .entry-tabs button.active{background:#e8d8b812;border-color:var(--gold);color:var(--gold);box-shadow:inset 0 -2px 0 var(--gold)}
 /* 原规则里写死的浅色补成 token，深色下才不会白块压墨底。 */
 button{background:var(--btn)}button:hover{background:var(--hover)}
 button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3px 3px 0 var(--edge)}
@@ -71,3 +73,32 @@ button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3
 }
 @keyframes note-snap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes note-mech{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ---------- 搭边背景与小构件（P1） ----------
+   背景用的是游戏自己的场景图（background_court.webp，48KB），大屏 intro 早就这么做。
+   低不透明度叠在墨底上：既是"卷宗的场景隐约透出来"，也把对比度的最坏情况锁在安全区
+   （合成亮度 ≈ 0.84×#101413 + 0.16×图像，远低于把字压到 4.5:1 的程度）。
+   只在 ≥781px 生效：手机上装饰不能跟字抢，窄屏保持纯墨底。 */
+@media(min-width:781px){
+  /* 满幅铺在 html 上、让 body 让出底色，才不会有"贴上去一块"的硬边；
+     压一层 86%→94% 的墨色 scrim，最坏情况合成亮度仍远低于把字压到 4.5:1 的程度。 */
+  html[data-theme=dark]{background-image:linear-gradient(#101413db,#101413f0),url('./levels/xiaoshan-demo/assets/background_court.webp');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat}
+  html[data-theme=dark] body{background:transparent}
+}
+/* 装订线：intro 栏左侧一道 1px 虚线金（同游戏 .combination-slots 的虚线金）。 */
+@media(min-width:781px){
+  .entry-intro{position:relative;padding-left:26px}
+  .entry-intro::before{content:"";position:absolute;left:0;top:10px;bottom:10px;border-left:1px dashed var(--gold);opacity:.5;pointer-events:none}
+}
+/* 骑缝编号：贴着卡片左缘的竖排小字；窄屏隐藏，别挤掉表单。 */
+@media(min-width:781px){
+  .entry-card::after{content:"NO.001";position:absolute;left:-1.6em;top:16px;writing-mode:vertical-rl;font:600 10px/1 var(--mono);letter-spacing:.3em;color:var(--muted);pointer-events:none}
+}
+/* 裁切标记：卡片右上角一个 10px 的 L 形细线，替代"切角"——切角会和软阴影打架，这里用印刷规矩的手法。 */
+html[data-theme=dark] .entry-card{background-image:linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold));background-size:10px 1px,1px 10px;background-position:right 7px top 7px,right 7px top 7px;background-repeat:no-repeat}
+/* 手机安全区：这四页原先没有 env()，刘海/圆角屏横向时贴边。 */
+body{padding-bottom:env(safe-area-inset-bottom,0px)}
+.entry-header{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}
+@media(max-width:780px){.entry-header{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}}
+/* 一行小字提示（同游戏 .reading-help 的克制）：只讲玩家真正需要知道的一句。 */
+.entry-intro .intro-credential-note{font-size:11px;color:var(--muted);opacity:.9;margin:10px 0 0}

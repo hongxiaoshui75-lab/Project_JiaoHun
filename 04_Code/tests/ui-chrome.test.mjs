@@ -6,7 +6,7 @@
  */
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 
 const codeRoot = resolve(import.meta.dirname, '..');
@@ -61,7 +61,8 @@ test('深色只有一份真值，且逐项与游戏内 style.css 同色', () => 
   const rules = layer.replace(/\/\*[\s\S]*?\*\//g, '');
   assert.equal(/@media[^{]*prefers-color-scheme/.test(rules), false, '秩序层不该再有 prefers-color-scheme 兜底：深色只能有一份真值，两份迟早漂移');
   assert.equal(rules.includes('.entry-page'), false, '作用域已改为按页加载 theme.js，不该再留 .entry-page 前缀');
-  const darkBlocks = [...rules.matchAll(/html\[data-theme=dark\]\{([^{}]*)\}/g)];
+  // 只数"定义了 token 的那一块"：媒体查询里的背景、几何覆盖也会用同一个选择器，但不算第二份真值。
+  const darkBlocks = [...rules.matchAll(/html\[data-theme=dark\]\{([^{}]*)\}/g)].filter(match => /--paper:/.test(match[1]));
   assert.equal(darkBlocks.length, 1, '深色 token 必须只写一处');
   const dark = darkBlocks[0][1];
   // 入场页深色就是"灯下的卷宗"：与 play 页同一套色，不许各画一套。
@@ -95,4 +96,24 @@ test('共用页引用的每个本地文件都在 static-site.mjs 的复制清单
     assert.match(packer, new RegExp(`'${file.replace('.', '\\.')}'`), `${file} 被页面引用但不在复制清单里，上线会 404`);
   }
   assert.match(packer, /copyFile\(resolve\(code,'web\/lobby\.html'\),resolve\(site,'index\.html'\)\)/, '入场页在站点里以 index.html 发布');
+});
+
+test('CSS 里引用的图片都存在，且会被发布出去', () => {
+  // 只用 HTML 守卫不够：背景图是在 CSS 里 url() 引的，断链只有上线才会暴露。
+  const packer = read(resolve(codeRoot, 'tools', 'static-site.mjs'));
+  for (const name of ['lobby.css', 'screen.css', 'operator.css', 'style.css']) {
+    const css = read(resolve(codeRoot, 'web', name));
+    for (const match of css.matchAll(/url\(['"]?(\.[^'")]+)['"]?\)/g)) {
+      const ref = match[1];
+      if (ref.startsWith('./levels/')) {
+        assert.ok(existsSync(resolve(projectRoot, ref.slice(2))), `${name} 引用的关卡图不存在：${ref}`);
+        continue;
+      }
+      const rel = ref.replace(/^\.\//, '');
+      assert.ok(existsSync(resolve(codeRoot, 'web', rel)), `${name} 引用的文件不存在：${ref}`);
+      const top = rel.split('/')[0];
+      assert.ok(packer.includes(`'${rel}'`) || packer.includes(`web/vendor`) && top === 'vendor',
+        `${name} 引用的 ${rel} 没进 static-site.mjs 的复制清单，上线会 404`);
+    }
+  }
 });
