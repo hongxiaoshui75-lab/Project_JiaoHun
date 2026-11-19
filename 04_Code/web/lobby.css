@@ -19,13 +19,27 @@ button{min-width:44px}
    深浅由 html[data-theme] 决定，只有这四页加载 theme.js；游戏内 play 页用 style.css，本就是墨底，不在这里。 */
 :root{--snap:cubic-bezier(.16,1,.3,1);--mech:cubic-bezier(.7,0,.2,1);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--btn:#fffcf3;--field:#fff;--card:#f6ecd1;--hover:#eee2c9;--error:#9b3021;--edge:#302e29;--on-accent:#fff9ed;--accent-fill:#a44836;--chip:#e8ddc5;--chip-active:#eaddc4}
 html[data-theme=light]{color-scheme:light}
-/* 深色 token 写两份且必须同值：auto 跟随系统偏好，dark 是页面上手动选的结果。
-   深色里朱红拆成两个值：--accent 要够亮才能在墨底上读（状态文字、印章、细线），
-   --accent-fill 要够深才能托住米色按钮字（一个值同时满足两端做不到，实测 3.68:1 不合格）。 */
-html[data-theme=dark]{color-scheme:dark;background:var(--paper);--paper:#14120f;--cream:#1e1a14;--ink:#ecdfc4;--muted:#a89e88;--line:#ffffff2e;--accent:#d1705a;--accent-fill:#a8492f;--gold:#d4b878;--shadow:5px 6px 0 #000;--btn:#241f17;--field:#100e0b;--card:#241f17;--hover:#302a20;--error:#e89a86;--edge:#000;--on-accent:#fff6e8;--chip:#241f17;--chip-active:#2e281e}
-@media(prefers-color-scheme:dark){
-  html[data-theme=auto]{color-scheme:dark;background:var(--paper);--paper:#14120f;--cream:#1e1a14;--ink:#ecdfc4;--muted:#a89e88;--line:#ffffff2e;--accent:#d1705a;--accent-fill:#a8492f;--gold:#d4b878;--shadow:5px 6px 0 #000;--btn:#241f17;--field:#100e0b;--card:#241f17;--hover:#302a20;--error:#e89a86;--edge:#000;--on-accent:#fff6e8;--chip:#241f17;--chip-active:#2e281e}
-}
+/* 深色只有一处真值：html[data-theme=dark]。theme.js 在 <head> 里就把 auto 解成 light|dark，
+   而这几页没有 JS 本来就没有表单，所以不再写第二份 @media(prefers-color-scheme:dark) 兜底（两份迟早会漂移）。
+   深色 token 直接采用游戏内 style.css 的值：入场页在深色下就是"灯下的卷宗"，与 play 页同一套色与同一套边框语言。
+   朱红仍拆两值：--accent 够亮供墨底文字与细线，--accent-fill 够深托米色按钮字（单值实测 3.68:1 不合格）。 */
+html[data-theme=dark]{color-scheme:dark;background:var(--paper);--paper:#101413;--cream:#1d2521;--ink:#f5eee1;--muted:#c0bcae;--line:#ffffff35;--accent:#ae5944;--accent-fill:#8f4939;--gold:#ccb886;--hair:#bda67966;--shadow:0 16px 60px #0006;--btn:#1d2521;--field:#151b18;--card:#1d2521;--hover:#2a332e;--error:#e6907a;--edge:#000;--on-accent:#e8d8b8;--chip:#242e29;--chip-active:#2b3733;--ease:cubic-bezier(.2,.8,.3,1)}
+/* 深色的几何：游戏的 1px 细金线、3–4px 直角、软大阴影、不抬起的 hover。浅色保留厚边纸档（封面感）。 */
+html[data-theme=dark] button,html[data-theme=dark] .form-field input,html[data-theme=dark] .account-search input{border-width:1px;border-color:var(--hair)}
+html[data-theme=dark] button{border-radius:3px}html[data-theme=dark] .form-field input,html[data-theme=dark] .account-search input{border-radius:3px}
+html[data-theme=dark] .entry-card{border:1px solid var(--hair);border-radius:4px;box-shadow:var(--shadow)}
+html[data-theme=dark] .inspect-card,html[data-theme=dark] .level-card,html[data-theme=dark] .migration-card,html[data-theme=dark] .room-row,html[data-theme=dark] .screen-qr{border-width:1px;border-color:var(--hair)}
+html[data-theme=dark] .inspect-card,html[data-theme=dark] .level-card{border-radius:4px}html[data-theme=dark] .migration-card{border-radius:3px}
+html[data-theme=dark] button.primary{border-color:#c98d6d}
+html[data-theme=dark] button:hover{transform:none}
+html[data-theme=dark] .entry-card::before{height:2px}
+/* 游戏里朱红是拿画边线与色块的，小字用金与纸色。照这个分工：深色下眉标与状态行不再用朱红作文字，
+   否则实测 3.22–3.81:1 不合格（浅色保持原样，纸底上朱红够读）。 */
+html[data-theme=dark] .eyebrow,html[data-theme=dark] .eyebrow-mark{color:var(--gold)}
+html[data-theme=dark] .status{color:var(--error)}
+/* 游戏里的选中态是金色半透明洗底 + 金描边（.selected{background:#e8d8b825;border-color:var(--gold)}），
+   不是整块亮底；照抄过来，页签才像"在同一份卷宗里翻页"。 */
+html[data-theme=dark] .entry-tabs button.active{background:#e8d8b822;border-color:var(--gold);color:var(--paper)}
 /* 原规则里写死的浅色补成 token，深色下才不会白块压墨底。 */
 button{background:var(--btn)}button:hover{background:var(--hover)}
 button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3px 3px 0 var(--edge)}

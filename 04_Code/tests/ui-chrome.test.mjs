@@ -54,18 +54,30 @@ test('四个共用页都按 html[data-theme] 契约接主题，并各有一个�
   assert.match(read(resolve(codeRoot, 'web', 'style.css')), /:root\{color-scheme:dark/, 'play 页应保持自己的墨底主题');
 });
 
-test('深色 token 只挂在 html[data-theme] 上，不再全局改 :root', () => {
+test('深色只有一份真值，且逐项与游戏内 style.css 同色', () => {
   const css = read(resolve(codeRoot, 'web', 'lobby.css'));
   const layer = css.slice(css.indexOf('/* ---------- 共用外观页的秩序层'));
-  assert.ok(layer.includes(':root{'), '秩序层要有缺省 token');
-  for (const block of [...layer.matchAll(/(?<cond>@media[^{]*\{(?<inner>(?:[^{}]|\{[^{}]*\})*)\})/g)]) {
-    for (const sel of [...block.groups.inner.matchAll(/(?<sel>[^{}]+)\{/g)].map(m => m.groups.sel.trim())) {
-      if (!block.groups.cond.includes('prefers-color-scheme')) continue;
-      assert.match(sel, /^html\[data-theme=auto\]$/, `深色媒体查询里出现了「${sel}」：跨页共用文件里的深色规则必须限定在 html[data-theme=auto]，否则会串到没接主题的页面`);
-    }
+  // 只查规则，不查注释文字（注释里会提到这些词）。
+  const rules = layer.replace(/\/\*[\s\S]*?\*\//g, '');
+  assert.equal(/@media[^{]*prefers-color-scheme/.test(rules), false, '秩序层不该再有 prefers-color-scheme 兜底：深色只能有一份真值，两份迟早漂移');
+  assert.equal(rules.includes('.entry-page'), false, '作用域已改为按页加载 theme.js，不该再留 .entry-page 前缀');
+  const darkBlocks = [...rules.matchAll(/html\[data-theme=dark\]\{([^{}]*)\}/g)];
+  assert.equal(darkBlocks.length, 1, '深色 token 必须只写一处');
+  const dark = darkBlocks[0][1];
+  // 入场页深色就是"灯下的卷宗"：与 play 页同一套色，不许各画一套。
+  const gameCss = read(resolve(codeRoot, 'web', 'style.css'));
+  const gameRoot = (/^:root\{([^{}]*)\}/.exec(gameCss) || [])[1];
+  assert.ok(gameRoot, '游戏内 style.css 应在文件开头声明 :root token');
+  const pick = (decl, name) => {
+    const m = new RegExp('--' + name + ':\\s*(#[0-9a-fA-F]{3,8})').exec(decl);
+    return m ? m[1].toLowerCase() : null;
+  };
+  for (const [gameName, chromeName] of [['bg', 'paper'], ['panel', 'cream'], ['ink', 'ink'], ['muted', 'muted'], ['paper', 'on-accent'], ['accent', 'accent'], ['gold', 'gold']]) {
+    const want = pick(gameRoot, gameName), got = pick(dark, chromeName);
+    assert.equal(got, want, `入场页深色 --${chromeName} 应与游戏内 --${gameName} 同值（游戏内 ${want}，入场页 ${got}）`);
   }
-  assert.match(layer, /html\[data-theme=dark\]\{[^}]*--paper:#14120f/, '手动深色要有与 auto 同值的 token 块');
-  assert.equal(layer.includes('.entry-page'), false, '作用域已改为按页加载 theme.js，不该再留 .entry-page 前缀');
+  assert.equal(pick(dark, 'line'), pick(gameRoot, 'line'), '深色的细线应与游戏内同值');
+  assert.match(dark, /--hair:#bda679/, '深色要用游戏的 1px 细金线（--hair），而不是 2px 墨边');
 });
 
 test('共用页引用的每个本地文件都在 static-site.mjs 的复制清单里', () => {
