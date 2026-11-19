@@ -1,4 +1,4 @@
-﻿import {mkdir,readFile,writeFile,copyFile,cp} from 'node:fs/promises';
+import {mkdir,readFile,writeFile,copyFile,cp} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {buildLevels} from './levels.mjs';
 export async function buildStaticSite(project,build){

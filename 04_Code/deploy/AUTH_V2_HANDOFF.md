@@ -27,3 +27,13 @@ Authenticated save reads and writes also bind the page identity: player saves, r
 Room snapshots distinguish `online`, `away` and `left`. A left member retains only the frozen stage summary visible at exit, not future private progress; observation is denied. Closing the room returns empty members/events and terminates its streams.
 
 Backups and a credential-free receipt are stored under `/home/agent/jiaohun-audit/auth-v2-cutover-<timestamp>/`. After a live v2 release has accepted real accounts, do not blindly roll back to v1: preserve v2 first and decide explicitly how to restore compatibility. Never copy an active SQLite file alone while ignoring its WAL; use the backup API or stop the service.
+
+## Entry redesign batch (2026-11-20)
+
+Frontend-only changes plus one string-only runtime change. Full plan and smoke list: `00_Docs/NAS_DEPLOY_PLAN_20261120.md`.
+
+- `site/` must be a **full rebuild, not an overlay**: `lobby.html`, `static-site.mjs` and all four shared-chrome pages changed, and the build now also ships `theme.js`, `entry-tour.mjs` and `chrome/*.webp`.
+- `runtime/network-server.mjs` changed in five player-facing error strings only. No route, parameter, cookie or schema change; the database is untouched. It still has to be staged, because it lives in `runtime/`.
+- Caddy/CSP unchanged: the new scripts are same-origin files, so `script-src 'self'` still holds. Do not add `unsafe-inline` for this batch.
+- Restart `game-save` as part of the cutover (the existing staging script already stops and starts it), then confirm `GET /game/theme.js`, `/game/entry-tour.mjs`, `/game/chrome/paper.webp` return 200 and that the browser console shows no CSP violation.
+- Rollback: restore the previous `site` and `runtime` directories; the database needs no action. A missing `theme.js` after rollback is expected and only means the old site has no theme toggle.
