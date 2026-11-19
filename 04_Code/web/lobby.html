@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN" data-theme="auto"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>萧山剪辫案 · 入场</title><script src="./theme.js"></script><link rel="stylesheet" href="./lobby.css"><script type="module" src="./network-lobby.mjs"></script></head><body>
+<!doctype html><html lang="zh-CN" data-theme="auto"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="referrer" content="no-referrer"><title>萧山剪辫案 · 入场</title><script src="./theme.js"></script><link rel="stylesheet" href="./lobby.css"><script type="module" src="./network-lobby.mjs"></script><script type="module" src="./entry-tour.mjs"></script></head><body>
 <header class="entry-header"><a class="wordmark" href="../"><span class="seal">案</span><span>萧山剪辫案<small>一场关于风闻与事实的查问</small></span></a><nav><a href="./operator.html?role=presenter">大屏展示</a><a href="./operator.html?role=inspector">检修入口</a><button id="ui-theme" type="button" hidden>深色卷宗</button></nav></header>
 <main class="entry-shell">
   <section class="entry-intro">
@@ -9,6 +9,7 @@
     <div class="intro-stamps"><span>实物调查</span><span>证词查问</span><span>自动存档</span></div>
     <p class="intro-note">用户名和密码用于保护你的游戏进度。<br>退出后回来，仍可从上次的卷宗继续。</p>
     <p class="intro-credential-note">密码只用来找回进度，不记邮箱、不记手机。</p>
+    <button id="tour-start" type="button" class="text-button" hidden>第一次查案？看引导</button>
   </section>
   <section id="entry-card" class="entry-card" aria-live="polite"><p>正在打开卷宗……</p></section>
 </main>

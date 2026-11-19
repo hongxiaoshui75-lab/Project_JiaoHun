@@ -6,7 +6,7 @@ export async function buildStaticSite(project,build){
  const report=await buildLevels(project,site);
  await writeFile(resolve(project,'09_Builds/levels-validation.json'),JSON.stringify(report,null,2));
  await cp(resolve(code,'core'),resolve(site,'core'),{recursive:true});
- const files=['style.css','level-loader.mjs','level-list.mjs','player.mjs','cloud-progress.mjs','network-lobby.mjs','theme.js','network-play.mjs','lobby.css','avatars.mjs','operator.html','operator.css','operator.mjs','screen.html','screen.css','screen.mjs','inspect.html','inspect.mjs'];
+ const files=['style.css','level-loader.mjs','level-list.mjs','player.mjs','cloud-progress.mjs','network-lobby.mjs','theme.js','entry-tour.mjs','network-play.mjs','lobby.css','avatars.mjs','operator.html','operator.css','operator.mjs','screen.html','screen.css','screen.mjs','inspect.html','inspect.mjs'];
  for(const name of files)await copyFile(resolve(code,'web',name),resolve(site,name));
  await cp(resolve(code,'web/vendor'),resolve(site,'vendor'),{recursive:true});
  await copyFile(resolve(code,'web/lobby.html'),resolve(site,'index.html'));
