@@ -11,3 +11,127 @@ button{min-width:44px}
 .form-field input{font-size:16px}.migration-card{border:2px solid var(--gold);border-radius:12px;background:#f6ecd1;padding:16px;margin:12px 0}.migration-card h3{margin:0 0 8px}.migration-card p{font-size:13px;margin:6px 0}.migration-card .form-actions{margin-top:12px}.account-search{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}.account-search input{font:inherit;min-height:44px;flex:1;min-width:140px;padding:8px 12px;border:1px solid var(--line);border-radius:8px}.account-row{border-bottom:1px solid var(--line);padding:12px 0}.account-row summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:700}.account-row p{font-size:13px;margin:6px 0}.pagination{display:flex;gap:12px;align-items:center;margin-top:16px;flex-wrap:wrap}
 .account-row summary{gap:10px}.account-row summary img{border-radius:10px;flex-shrink:0}
 @media(max-width:520px){.migration-card .form-actions{display:grid;grid-template-columns:1fr}.migration-card .form-actions button{width:100%;min-height:48px}.check-row{min-height:44px}}
+
+/* ---------- 共用外观页的秩序层 ----------
+   借 stellar-ui 的方法论（编号、细线、宽体眉标、短硬机械动效、深浅双主题），不借它的皮肤：
+   配色仍是卷宗纸感（米色纸／朱红／金），不引入紫与荧光绿。
+   这一层作用于共用 lobby.css 的四个页面：入场页、主持登录页、检修页、大屏页。
+   深浅由 html[data-theme] 决定，只有这四页加载 theme.js；游戏内 play 页用 style.css，本就是墨底，不在这里。 */
+:root{--snap:cubic-bezier(.16,1,.3,1);--mech:cubic-bezier(.7,0,.2,1);--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--btn:#fffcf3;--field:#fff;--card:#f6ecd1;--hover:#eee2c9;--error:#9b3021;--edge:#302e29;--on-accent:#fff9ed;--accent-fill:#a44836;--chip:#e8ddc5;--chip-active:#eaddc4}
+html[data-theme=light]{color-scheme:light}
+/* 深色只有一处真值：html[data-theme=dark]。theme.js 在 <head> 里就把 auto 解成 light|dark，
+   而这几页没有 JS 本来就没有表单，所以不再写第二份 @media(prefers-color-scheme:dark) 兜底（两份迟早会漂移）。
+   深色 token 直接采用游戏内 style.css 的值：入场页在深色下就是"灯下的卷宗"，与 play 页同一套色与同一套边框语言。
+   朱红仍拆两值：--accent 够亮供墨底文字与细线，--accent-fill 够深托米色按钮字（单值实测 3.68:1 不合格）。 */
+html[data-theme=dark]{color-scheme:dark;background:var(--paper);--paper:#101413;--cream:#1d2521;--ink:#f5eee1;--muted:#c0bcae;--line:#ffffff35;--accent:#ae5944;--accent-fill:#8f4939;--gold:#ccb886;--hair:#bda67966;--shadow:0 16px 60px #0006;--btn:#1d2521;--field:#151b18;--card:#1d2521;--hover:#2a332e;--error:#e6907a;--edge:#000;--on-accent:#e8d8b8;--chip:#242e29;--chip-active:#2b3733;--ease:cubic-bezier(.2,.8,.3,1)}
+/* 深色的几何：游戏的 1px 细金线、3–4px 直角、软大阴影、不抬起的 hover。浅色保留厚边纸档（封面感）。 */
+html[data-theme=dark] button,html[data-theme=dark] .form-field input,html[data-theme=dark] .account-search input{border-width:1px;border-color:var(--hair)}
+html[data-theme=dark] button{border-radius:3px}html[data-theme=dark] .form-field input,html[data-theme=dark] .account-search input{border-radius:3px}
+html[data-theme=dark] .entry-card{border:1px solid var(--hair);border-radius:4px;box-shadow:var(--shadow)}
+html[data-theme=dark] .inspect-card,html[data-theme=dark] .level-card,html[data-theme=dark] .migration-card,html[data-theme=dark] .room-row,html[data-theme=dark] .screen-qr{border-width:1px;border-color:var(--hair)}
+html[data-theme=dark] .inspect-card,html[data-theme=dark] .level-card{border-radius:4px}html[data-theme=dark] .migration-card{border-radius:3px}
+html[data-theme=dark] button.primary{border-color:#c98d6d}
+html[data-theme=dark] button:hover{transform:none}
+html[data-theme=dark] .entry-card::before{height:2px}
+/* 游戏里朱红是拿画边线与色块的，小字用金与纸色。照这个分工：深色下眉标与状态行不再用朱红作文字，
+   否则实测 3.22–3.81:1 不合格（浅色保持原样，纸底上朱红够读）。 */
+html[data-theme=dark] .eyebrow,html[data-theme=dark] .eyebrow-mark{color:var(--gold)}
+html[data-theme=dark] .status{color:var(--error)}
+/* 游戏里的选中态是金色半透明洗底 + 金描边（.selected{background:#e8d8b825;border-color:var(--gold)}）。
+   深色下未选中的页签压成 muted 文字、选中的用纸色字 + 金描边 + 一点金洗底——靠字色分辨，
+   而不是靠整块亮底（整块亮底读起来像禁用）。 */
+html[data-theme=dark] .entry-tabs button{color:var(--muted)}
+html[data-theme=dark] .entry-tabs button.active{background:#e8d8b812;border-color:var(--gold);color:var(--gold);box-shadow:inset 0 -2px 0 var(--gold)}
+/* 原规则里写死的浅色补成 token，深色下才不会白块压墨底。 */
+button{background:var(--btn)}button:hover{background:var(--hover)}
+button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3px 3px 0 var(--edge)}
+.form-field input{background:var(--field);color:var(--ink);border-color:var(--line)}
+.field-error{color:var(--error)}
+.level-card{background:var(--field)}.migration-card,.room-invite{background:var(--card)}
+.entry-tabs button.active{background:var(--ink);color:var(--cream)}
+/* 秩序：编号眉标、细线字段行、标题下的短朱线、卡片顶沿的三色规线。 */
+.eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.6em;row-gap:4px;font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.eyebrow-mark{color:var(--accent)}
+.eyebrow-no{color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 6px;letter-spacing:.08em;white-space:nowrap}
+.intro-fields{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:0 0 22px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.intro-fields span+span{border-left:1px solid var(--line);padding-left:12px}
+.intro-stamps span{font-family:var(--mono);letter-spacing:.06em}
+.entry-intro h1{position:relative}
+.entry-intro h1::after{content:"";display:block;width:64px;height:2px;background:var(--accent);margin-top:20px}
+.entry-card{position:relative}
+.entry-card::before{content:"";position:absolute;inset:2px 2px auto;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent) 0 34%,var(--gold) 34% 64%,var(--line) 64% 100%)}
+.entry-header nav button{min-height:44px;padding:6px 12px;font-size:12px;background:transparent;border-color:var(--line)}
+.entry-header nav button:hover{background:var(--hover);border-color:var(--ink)}
+@media(prefers-reduced-motion:no-preference){
+  .entry-intro>.eyebrow{animation:note-snap 420ms var(--snap) both}
+  .entry-intro>h1{animation:note-snap 620ms var(--snap) 80ms both}
+  .entry-intro>.intro-lede,.entry-intro>.intro-fields{animation:note-snap 520ms var(--snap) 180ms both}
+  .entry-intro>.intro-stamps,.entry-intro>.intro-note{animation:note-snap 520ms var(--snap) 280ms both}
+  .entry-card{animation:note-mech 560ms var(--mech) 120ms both}
+  .entry-tabs button{transition:transform 180ms var(--mech),background 180ms}
+  .entry-tabs button:active{transform:translateY(1px)}
+}
+@keyframes note-snap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes note-mech{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+/* ---------- 搭边背景与小构件（P1） ----------
+   背景用的是游戏自己的场景图（background_court.webp，48KB），大屏 intro 早就这么做。
+   低不透明度叠在墨底上：既是"卷宗的场景隐约透出来"，也把对比度的最坏情况锁在安全区
+   （合成亮度 ≈ 0.84×#101413 + 0.16×图像，远低于把字压到 4.5:1 的程度）。
+   只在 ≥781px 生效：手机上装饰不能跟字抢，窄屏保持纯墨底。 */
+/* 深色：所有宽度都铺场景图，满幅铺在 html 上、让 body 让出底色，才不会有"贴上去一块"的硬边。
+   窄屏按 cover 裁切（竖长窗口只会取中间一条），并用更强的竖向渐变压暗——
+   卡片本身不透明，压在图上的是 intro 的眉标与标题，靠压暗保可读性。 */
+html[data-theme=dark]{background-image:linear-gradient(#101413db,#101413f0),url('./levels/xiaoshan-demo/assets/background_court.webp');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat}
+html[data-theme=dark] body{background:transparent}
+@media(max-width:780px){
+  html[data-theme=dark]{background-image:linear-gradient(180deg,#101413c4 0%,#101413ea 38%,#101413f8 100%),url('./levels/xiaoshan-demo/assets/background_court.webp');background-position:center 26%,center 26%}
+}
+/* 装订线：intro 栏左侧一道 1px 虚线金（同游戏 .combination-slots 的虚线金）。 */
+@media(min-width:781px){
+  .entry-intro{position:relative;padding-left:26px}
+  .entry-intro::before{content:"";position:absolute;left:0;top:10px;bottom:10px;border-left:1px dashed var(--gold);opacity:.5;pointer-events:none}
+}
+/* 骑缝编号：贴着卡片左缘的竖排小字；窄屏隐藏，别挤掉表单。 */
+@media(min-width:781px){
+  .entry-card::after{content:"NO.001";position:absolute;left:-1.6em;top:16px;writing-mode:vertical-rl;font:600 10px/1 var(--mono);letter-spacing:.3em;color:var(--muted);pointer-events:none}
+}
+/* 裁切标记：卡片右上角一个 10px 的 L 形细线，替代"切角"——切角会和软阴影打架，这里用印刷规矩的手法。 */
+html[data-theme=dark] .entry-card{background-image:linear-gradient(var(--gold),var(--gold)),linear-gradient(var(--gold),var(--gold));background-size:10px 1px,1px 10px;background-position:right 7px top 7px,right 7px top 7px;background-repeat:no-repeat}
+/* 手机安全区：这四页原先没有 env()，刘海/圆角屏横向时贴边。 */
+body{padding-bottom:env(safe-area-inset-bottom,0px)}
+.entry-header{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}
+@media(max-width:780px){.entry-header{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}}
+/* 一行小字提示（同游戏 .reading-help 的克制）：只讲玩家真正需要知道的一句。 */
+.entry-intro .intro-credential-note{font-size:11px;color:var(--muted);opacity:.9;margin:10px 0 0}
+
+/* ---------- 新手引导（P3） ----------
+   遮罩与高亮环不吃点击（pointer-events:none），只有提示牌可点 —— 被指的输入框照常能点能打字。
+   环 = 游戏 .hotspot:hover 那套 1px 金 + 纸色洗底；牌 = 游戏 dialog 的 1px #bda67966 + 3px 直角 + panel 底。
+   牌用绝对定位锚在目标旁（不用 fixed）：手机键盘弹起时不会脱位。 */
+.tour-layer{position:absolute;inset:0;pointer-events:none;z-index:60}
+.tour-ring{position:absolute;border:1px solid var(--gold);border-radius:3px;background:#fff9ed55;box-shadow:0 0 0 9999px #241f1a99;pointer-events:none;transition:left .18s var(--snap),top .18s var(--snap),width .18s var(--snap),height .18s var(--snap)}
+html[data-theme=dark] .tour-ring{background:#e8d8b81a;box-shadow:0 0 0 9999px #070b09cc}
+.tour-card{position:absolute;pointer-events:auto;max-width:380px;padding:16px 18px;background:var(--cream);color:var(--ink);border:1px solid #bda67966;border-radius:3px;box-shadow:0 16px 60px #0006}
+.tour-card .tour-step-number{margin:0 0 6px;font:600 10px/1 var(--mono);letter-spacing:.2em;color:var(--gold)}
+.tour-card h2{margin:0 0 6px;font:700 18px/1.45 "SimSun",serif}
+.tour-card .tour-copy{margin:0 0 12px;font-size:13px;line-height:1.7;color:var(--muted)}
+.tour-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tour-actions button{min-height:48px;flex:1;min-width:88px}
+.tour-actions .text-button{flex:0 0 auto;min-width:0;min-height:44px}
+/* ---------- 生成的纸纹与磨摊（P2） ----------
+   两张图都出在本机 5060 Ti 的 Qwen-Image 2.1 上（照实例里现成工作流的生图分支：int8 UNET +
+   qwen3vl_8b 编码器 + TextEncodeQwenImage21 + 30 步 / cfg 1 / euler+simple），灰度、轻量、可追溯：
+   源图 02_Art/chrome/*.png，运行副本 04_Code/web/chrome/*.webp。详见 02_Art/CHROME_MANIFEST.json。
+   纸纹只在浅色用（深色已有场景图，两套底不要打架）；污渍不平铺——它本来就该是一整块晕染，
+   平铺会露出重复。 */
+html[data-theme=light] body{background-image:url('./chrome/paper.webp');background-size:384px 384px;background-repeat:repeat}
+@media(min-width:781px){
+  .entry-shell{position:relative}
+  .entry-intro,.entry-card{position:relative;z-index:1}
+  html[data-theme=light] .entry-shell::after{content:"";position:absolute;inset:-40px;background:url('./chrome/stain.webp') center/cover no-repeat;opacity:.55;mix-blend-mode:multiply;pointer-events:none;z-index:0;mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%);-webkit-mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%)}
+}
+/* 引导入口：做成看得见的大按钮，而不是一行小字链接（引导讲的是创建账号那一段，值得被找到）。 */
+.tour-start{min-height:48px;margin-top:14px;padding:10px 16px;font-size:14px;font-weight:700;border:1px solid var(--gold);border-radius:3px;background:transparent;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
+.tour-start:hover{background:#e8d8b822;border-color:var(--ink)}
+@media(max-width:520px){.tour-start{width:100%;justify-content:center}}

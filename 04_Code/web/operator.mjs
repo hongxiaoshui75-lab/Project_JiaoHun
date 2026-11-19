@@ -4,7 +4,7 @@ let operatorName='';
 const operatorApi=(path,options={})=>api(path,{...options,headers:{...options.headers,'X-Operator-Name':encodeURIComponent(operatorName)}});
 const roleName=role==='presenter'?'大屏展示':'检修验证';document.title=roleName+' · 萧山剪辫案';
 function login(){
- card.replaceChildren(node('p','独立权限入口','eyebrow'),node('h2',roleName+'登录'),node('p','使用维护者在 NAS 本机创建的专用账号，不使用玩家暗号或 NAS 系统账号。','small'));
+ card.replaceChildren(node('p','独立权限入口','eyebrow'),node('h2',roleName+'登录'),node('p','使用维护者在 NAS 本机创建的专用账号，不使用玩家密码或 NAS 系统账号。','small'));
  const switches=node('nav',undefined,'operator-tabs');for(const [r,label] of [['presenter','大屏展示'],['inspector','检修验证']]){const link=node('a',label);link.href='./operator.html?role='+r;switches.append(link);}card.append(switches);
  const form=node('form'),name=node('input'),password=node('input'),userLabel=node('label',undefined,'form-field'),passwordLabel=node('label',undefined,'form-field');name.autocomplete='username';name.name='name';name.required=true;password.type='password';password.name='password';password.autocomplete='current-password';password.required=true;userLabel.append(node('span','专用账号'),name);passwordLabel.append(node('span','密码'),password);
  const submit=node('button','验证并进入','primary'),status=node('p','','status');submit.type='submit';status.setAttribute('role','status');form.append(userLabel,passwordLabel,submit,status);card.append(form);

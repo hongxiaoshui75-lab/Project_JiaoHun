@@ -66,7 +66,7 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
  function playerChanged(id){for(const row of db.prepare('SELECT room FROM memberships WHERE player=? AND active=1').all(id))emitRoom(row.room);}
  async function passwordTask(fn){if(passwordJobs>=4)fail(429,'验证繁忙，请稍后再试');passwordJobs++;try{return await fn();}finally{passwordJobs--;}}
  async function passwordMatch(secret,hash){return passwordTask(()=>checkSecret(secret,hash));}
- function validCredentials(body){if(!validName(body.name))fail(400,'用户名需为2—24字符，不含控制符或尖括号','name');if(!validSecret(body.secret))fail(400,'暗号需为8—128字符','secret');}
+ function validCredentials(body){if(!validName(body.name))fail(400,'用户名需为2—24字符，不含控制符或尖括号','name');if(!validSecret(body.secret))fail(400,'密码需为8—128字符','secret');}
  async function bodyOf(req){
   if(!['POST','PUT'].includes(req.method))return {};
   if(!req.headers['content-type']?.startsWith('application/json'))fail(415,'仅接受 JSON');
@@ -91,7 +91,7 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
   try{
    const url=new URL(req.url,'http://localhost'),path=url.pathname;
    if(['/api/v1/health','/api/v2/health'].includes(path)&&req.method==='GET')return send(200,{ok:true,release:'content-v2',contentVersion:contents.get('xiaoshan-demo')?.version??null,upgradeBackupReady:existsSync(resolve(data,'pre-content-v2-backup.sqlite'))});
-   if(path.startsWith('/api/v1/'))return send(410,{error:'旧的无暗号入口已停用，请刷新后创建或登录账号'});
+   if(path.startsWith('/api/v1/'))return send(410,{error:'旧的无密码入口已停用，请刷新后创建或登录账号'});
    if(!path.startsWith('/api/v2/'))return send(404,{error:'没有这个接口'});
    if(req.headers.origin&&!allowedOrigins.includes(req.headers.origin))fail(403,'来源不允许');if(req.headers['sec-fetch-site']==='cross-site')fail(403,'请从游戏页面操作');
    const address=req.socket.remoteAddress||'local';if(!rate('all:'+address,2400))fail(429,'操作过于频繁，请稍后再试');const body=await bodyOf(req);
@@ -104,17 +104,17 @@ export function createSaveService({site,data,allowedOrigins=[],clock=Date.now,se
     setSession(res,'player',id);return send(201,{player:playerInfo(db.prepare('SELECT * FROM players WHERE id=?').get(id)),recoveryCode:recovery});
    }
    if(path==='/api/v2/auth/login'&&req.method==='POST'){
-    validCredentials(body);const player=db.prepare('SELECT * FROM players WHERE normalized=?').get(normalize(body.name));if(!await passwordMatch(body.secret,player?.secret_hash)||!player||db.prepare('SELECT secret_hash FROM players WHERE id=?').get(player.id)?.secret_hash!==player.secret_hash)fail(401,'用户名或暗号不正确','secret');setSession(res,'player',player.id);return send(200,{player:playerInfo(player)});
+    validCredentials(body);const player=db.prepare('SELECT * FROM players WHERE normalized=?').get(normalize(body.name));if(!await passwordMatch(body.secret,player?.secret_hash)||!player||db.prepare('SELECT secret_hash FROM players WHERE id=?').get(player.id)?.secret_hash!==player.secret_hash)fail(401,'用户名或密码不正确','secret');setSession(res,'player',player.id);return send(200,{player:playerInfo(player)});
    }
    if(path==='/api/v2/auth/recover'&&req.method==='POST'){
-    if(!validName(body.name)||!validSecret(body.newSecret)||typeof body.recoveryCode!=='string')fail(400,'请填写用户名、恢复码和8—128字符的新暗号');const player=db.prepare('SELECT * FROM players WHERE normalized=?').get(normalize(body.name));
+    if(!validName(body.name)||!validSecret(body.newSecret)||typeof body.recoveryCode!=='string')fail(400,'请填写用户名、恢复码和8—128字符的新密码');const player=db.prepare('SELECT * FROM players WHERE normalized=?').get(normalize(body.name));
     const supplied=Buffer.from(sha(body.recoveryCode),'hex'),expected=Buffer.from(player?.recovery_hash||'0'.repeat(64),'hex');if(!timingSafeEqual(supplied,expected)||!player)fail(401,'用户名或恢复码不正确');
     const hash=await passwordTask(()=>hashSecret(body.newSecret)),recovery=recoveryCode(),updated=db.prepare('UPDATE players SET secret_hash=?,recovery_hash=? WHERE id=? AND recovery_hash=?').run(hash,sha(recovery),player.id,player.recovery_hash);if(updated.changes!==1)fail(401,'用户名或恢复码不正确');db.prepare("DELETE FROM sessions WHERE role='player' AND subject_id=?").run(player.id);return send(200,{recoveryCode:recovery});
    }
    if(path==='/api/v2/auth/me'&&req.method==='GET'){const player=auth(req,'player');return send(200,{player:playerInfo(player),progress:progress(player.id)});}
    if(path==='/api/v2/auth/logout'&&req.method==='POST'){clearSession(req,res,'player');return send(200,{ok:true});}
    if(path==='/api/v2/auth/secret'&&req.method==='POST'){
-    const player=auth(req,'player',true);if(!validSecret(body.oldSecret)||!validSecret(body.newSecret)||!await passwordMatch(body.oldSecret,player.secret_hash))fail(400,'原暗号不正确或新暗号格式无效');const hash=await passwordTask(()=>hashSecret(body.newSecret)),recovery=recoveryCode();if(db.prepare('UPDATE players SET secret_hash=?,recovery_hash=? WHERE id=? AND secret_hash=?').run(hash,sha(recovery),player.id,player.secret_hash).changes!==1)fail(401,'暗号已在其他操作中改变，请重新登录');db.prepare("DELETE FROM sessions WHERE role='player' AND subject_id=?").run(player.id);setSession(res,'player',player.id);return send(200,{recoveryCode:recovery});
+    const player=auth(req,'player',true);if(!validSecret(body.oldSecret)||!validSecret(body.newSecret)||!await passwordMatch(body.oldSecret,player.secret_hash))fail(400,'原密码不正确或新密码格式无效');const hash=await passwordTask(()=>hashSecret(body.newSecret)),recovery=recoveryCode();if(db.prepare('UPDATE players SET secret_hash=?,recovery_hash=? WHERE id=? AND secret_hash=?').run(hash,sha(recovery),player.id,player.secret_hash).changes!==1)fail(401,'密码已在其他操作中改变，请重新登录');db.prepare("DELETE FROM sessions WHERE role='player' AND subject_id=?").run(player.id);setSession(res,'player',player.id);return send(200,{recoveryCode:recovery});
    }
    if(path==='/api/v2/operator/login'&&req.method==='POST'){
     if(!['presenter','inspector'].includes(body.role)||!validName(body.name)||!validSecret(body.password))fail(400,'请填写有效角色、账号和密码');const op=db.prepare('SELECT * FROM operators WHERE normalized=? AND role=?').get(normalize(body.name),body.role);if(!await passwordMatch(body.password,op?.secret_hash)||!op||db.prepare('SELECT secret_hash FROM operators WHERE id=?').get(op.id)?.secret_hash!==op.secret_hash)fail(401,'账号或密码不正确');setSession(res,body.role,op.id);return send(200,{operator:{name:op.name,role:body.role}});

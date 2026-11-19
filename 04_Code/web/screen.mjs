@@ -16,7 +16,7 @@ async function renderMode(){
  if(mode==='intro'){$('screen-caption').textContent='介绍待机 · 玩家在各自手机游玩';showIntro();return;}
  if(mode==='demo'){$('screen-caption').textContent='独立演示 · 不影响真实玩家存档或本场人数';const slug=levels[0]?.slug;if(!slug){placeholder('暂无可演示的卷宗','请维护者检查关卡构建。');return;}setFrame('demo:'+slug,'./play.html?demo=1&level='+encodeURIComponent(slug)+'&operator='+encodeURIComponent(operatorName));return;}
  const member=(snapshot?.members||[]).find(m=>String(m.id)===String(selected));
- if(!member){$('screen-caption').textContent='只读观察 · 从本场玩家中选择';const panel=placeholder('选择一位本场玩家','只展示当前场景，不替玩家操作，也不读取暗号。'),picker=node('div',undefined,'observe-picker');for(const m of snapshot?.members||[])picker.append(action(m.name,()=>selectPlayer(m.id)));panel.append(picker);return;}
+ if(!member){$('screen-caption').textContent='只读观察 · 从本场玩家中选择';const panel=placeholder('选择一位本场玩家','只展示当前场景，不替玩家操作，也不读取密码。'),picker=node('div',undefined,'observe-picker');for(const m of snapshot?.members||[])picker.append(action(m.name,()=>selectPlayer(m.id)));panel.append(picker);return;}
  $('screen-caption').textContent=`正在观察 ${member.name} · 只读画面，不能替玩家推进`;
  try{const observed=await hostApi(`rooms/${encodeURIComponent(id)}/observe/${encodeURIComponent(member.id)}`),slug=observed.slug||member.slug;if(!slug||!observed.view){placeholder('这位玩家尚未开始卷宗','开始游玩后，观察画面会在这里出现。');return;}setFrame('observe:'+member.id+':'+slug,'./play.html?observe='+encodeURIComponent(member.id)+'&room='+encodeURIComponent(id)+'&level='+encodeURIComponent(slug)+'&operator='+encodeURIComponent(operatorName));}catch(error){placeholder('暂时无法观察',error.message);}
 }

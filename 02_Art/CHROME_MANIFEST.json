@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "direction": "古旧写实绘画（灰度纹理与纸面）",
+  "generator": {
+    "engine": "ComfyUI 0.45.5",
+    "instance": "E:/comfyui-launcher/ComfyUI/instances/nv",
+    "device": "NVIDIA GeForce RTX 5060 Ti 16GB（AMD 7600M XT 留给 index-tts 2.5，本轮未使用）",
+    "workflowBorrowed": "E:/comfyui-launcher/ComfyUI/instances/nv/ComfyUI/user/default/workflows/Qwen-Image-2.1/▶▷Qwen-image21-图像编辑+生图流（整合）.json —— 取其生图分支",
+    "stack": {
+      "unet": "diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
+      "clip": "text_encoders/qwen3vl_8b_int8_convrot.safetensors（type=qwen_image）",
+      "vae": "vae/qwen_image_2.1_vae_bf16.safetensors",
+      "encoderNode": "TextEncodeQwenImage21（该节点自身输出 positive/negative/latent）"
+    },
+    "settings": {
+      "steps": 30,
+      "cfg": 1,
+      "sampler": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "resolution": 512
+    },
+    "timingSeconds": {
+      "firstSample": 18,
+      "afterWarmup": 6
+    }
+  },
+  "postprocess": "先缩放到目标尺寸，再做\"半幅滚动 + 窄带（size/4）羽化\"的无缝化；转灰度；webp quality 78–84。未做无缝的图一律 cover 使用、不平铺。",
+  "seamCheck": "跨环绕边界的像素差中位数 vs 内部相邻差中位数：paper 为 1.0（同分布）。P99 受单行噪声影响，不作判据。",
+  "notes": [
+    "先试的镜像是错的：值接缝为 0，但留下万花筒对称与四道镜像缝，纸纹一眼可见，已弃用。",
+    "先试的手写图也是错的：用 EmptySD3LatentImage + 8 步 + bf16 权重，出的是彩色噪声；照实例现成工作流改成 int8 权重 + TextEncodeQwenImage21 + 30 步才正确。",
+    "stitch / seal 两张只留源图作候选，不进站点（未使用不发布）。"
+  ],
+  "assets": [
+    {
+      "id": "chrome.paper",
+      "runtimePath": "04_Code/web/chrome/paper.webp",
+      "sourcePath": "02_Art/chrome/paper.png",
+      "size": 384,
+      "runtimeBytes": 5796,
+      "runtimeSha256": "331677e366df89c8b77d0f890c94f51850de8c6ec09efbf0174244ab4114ad63",
+      "sourceBytes": 68166,
+      "sourceSha256": "73e8c1604c3f657098531efdc2df0a009878532b782e2759f3e047d6422cfc09",
+      "prompt": "flat overhead scan of aged chinese rice paper, fine vegetable fibers, faint mottling, even flat lighting, monochrome grayscale, no shadows, no objects, seamless texture tile, no text",
+      "seed": 20261120,
+      "usage": "浅色主题整页纸纹（平铺，384px）",
+      "shipped": true,
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "chrome.stain",
+      "runtimePath": "04_Code/web/chrome/stain.webp",
+      "sourcePath": "02_Art/chrome/stain.png",
+      "size": 512,
+      "runtimeBytes": 12290,
+      "runtimeSha256": "54a87c3f85424a7e2b1e6ef5636d0699a1557cfe9aab443b8232d58c796f0f35",
+      "sourceBytes": 120008,
+      "sourceSha256": "43282bdc2e50fc61bdfbbe60797b41b72d28b20e7bcb6fe12833bbe99367f802",
+      "prompt": "flat overhead scan of aged chinese paper with faint dark ink wash blot and uneven oxidation stains near edges, monochrome grayscale, even flat lighting, no objects, seamless texture tile, no text",
+      "seed": 7741,
+      "usage": "浅色主题边缘磨摊（桌面 ≥781px，径向遮罩，不平铺）",
+      "shipped": true,
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "chrome.stitch",
+      "runtimePath": null,
+      "sourcePath": "02_Art/chrome/stitch.png",
+      "size": 320,
+      "runtimeBytes": null,
+      "runtimeSha256": null,
+      "sourceBytes": 72881,
+      "sourceSha256": "9ab42159101f5e79fa56bccafbd6f3e455a81c728f5bf7a9b884dc7675e689ec",
+      "prompt": "macro flat scan of coarse linen thread binding stitch over aged paper, monochrome grayscale, even flat lighting, seamless texture tile, no text",
+      "seed": 9917,
+      "usage": "未启用（候选：可做装订带）",
+      "shipped": false,
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    },
+    {
+      "id": "chrome.seal",
+      "runtimePath": null,
+      "sourcePath": "02_Art/chrome/seal.png",
+      "size": 448,
+      "runtimeBytes": null,
+      "runtimeSha256": null,
+      "sourceBytes": 119824,
+      "sourceSha256": "e93b2bd6db2c962b5abc32e4b5b9d6c792cc559ae781b0a17894b26450612538",
+      "prompt": "flat scan of a worn chinese seal impression border on aged paper, monochrome grayscale, even flat lighting, seamless texture tile, no text",
+      "seed": 5523,
+      "usage": "未启用（候选：可做印章磨损）",
+      "shipped": false,
+      "status": "generated-working-art; user-artistic-acceptance-pending"
+    }
+  ]
+}

@@ -184,6 +184,21 @@ test('手机竖屏全屏在锁定不受支持时旋转布局，退出还原，�
  assert.equal(app.node('fullscreen').attributes['aria-pressed'],'true');
 });
 
+test('竖屏建议卡点一下即进横屏全屏，继续竖屏则放行',async()=>{
+ const app=boot();app.window.innerWidth=390;app.window.innerHeight=844;
+ await app.node('orientation-landscape').click();
+ assert.match(app.document.body.className,/fullscreen-landscape/,'竖屏下点“横屏展开”应进入横屏布局');
+ assert.equal(app.node('fullscreen').attributes['aria-pressed'],'true','建议卡与全屏按钮要共用同一状态，不能分叉');
+ await app.node('orientation-landscape').click();
+ assert.doesNotMatch(app.document.body.className,/fullscreen-landscape/,'再点一次应退回');
+ await app.node('portrait-continue').click();
+ assert.match(app.document.body.className,/portrait-accepted/,'继续竖屏要能放行');
+ assert.doesNotMatch(app.document.body.className,/fullscreen-landscape/);
+ app.window.innerWidth=844;app.window.innerHeight=390;
+ await app.node('orientation-landscape').click();
+ assert.doesNotMatch(app.document.body.className,/fullscreen-landscape/,'物理横屏不需要旋转兜底');
+});
+
 function descendants(node) {
   return node.children.flatMap((child) => [child, ...descendants(child)]);
 }
