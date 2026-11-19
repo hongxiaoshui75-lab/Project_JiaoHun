@@ -168,8 +168,25 @@ function init() {
     if (event.key === 'ArrowLeft') { event.preventDefault(); next(-1); }
   }
 
+  let tabSwitched = false;
+  // 引导要讲的是"创建账号"这一段（用户名→密码→头像→再次输入→提交→恢复码→选卷宗）。
+  // 在登录表单上点开始，先替玩家切到注册页签，否则只剩三步，头像与恢复码根本讲不到。
+  function ensureRegisterTab() {
+    const tab = [...host.querySelectorAll('button')].find(button => (button.textContent || '').includes('创建账号'));
+    if (!tab) return false;
+    tab.click();
+    return true;
+  }
+
   function begin({ force = false } = {}) {
     if (active) return;
+    if (!host.querySelector('.avatar-grid')) {
+      if (!tabSwitched && ensureRegisterTab()) {
+        tabSwitched = true;
+        setTimeout(() => waitAndBegin(force), 150);
+      }
+      return;
+    }
     steps = resolveSteps(has);
     if (!steps.length) return;
     if (!force && dismissed()) return;

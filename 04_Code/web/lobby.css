@@ -79,11 +79,13 @@ button.primary{background:var(--accent-fill);color:var(--on-accent);box-shadow:3
    低不透明度叠在墨底上：既是"卷宗的场景隐约透出来"，也把对比度的最坏情况锁在安全区
    （合成亮度 ≈ 0.84×#101413 + 0.16×图像，远低于把字压到 4.5:1 的程度）。
    只在 ≥781px 生效：手机上装饰不能跟字抢，窄屏保持纯墨底。 */
-@media(min-width:781px){
-  /* 满幅铺在 html 上、让 body 让出底色，才不会有"贴上去一块"的硬边；
-     压一层 86%→94% 的墨色 scrim，最坏情况合成亮度仍远低于把字压到 4.5:1 的程度。 */
-  html[data-theme=dark]{background-image:linear-gradient(#101413db,#101413f0),url('./levels/xiaoshan-demo/assets/background_court.webp');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat}
-  html[data-theme=dark] body{background:transparent}
+/* 深色：所有宽度都铺场景图，满幅铺在 html 上、让 body 让出底色，才不会有"贴上去一块"的硬边。
+   窄屏按 cover 裁切（竖长窗口只会取中间一条），并用更强的竖向渐变压暗——
+   卡片本身不透明，压在图上的是 intro 的眉标与标题，靠压暗保可读性。 */
+html[data-theme=dark]{background-image:linear-gradient(#101413db,#101413f0),url('./levels/xiaoshan-demo/assets/background_court.webp');background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat}
+html[data-theme=dark] body{background:transparent}
+@media(max-width:780px){
+  html[data-theme=dark]{background-image:linear-gradient(180deg,#101413c4 0%,#101413ea 38%,#101413f8 100%),url('./levels/xiaoshan-demo/assets/background_court.webp');background-position:center 26%,center 26%}
 }
 /* 装订线：intro 栏左侧一道 1px 虚线金（同游戏 .combination-slots 的虚线金）。 */
 @media(min-width:781px){
@@ -129,3 +131,7 @@ html[data-theme=light] body{background-image:url('./chrome/paper.webp');backgrou
   .entry-intro,.entry-card{position:relative;z-index:1}
   html[data-theme=light] .entry-shell::after{content:"";position:absolute;inset:-40px;background:url('./chrome/stain.webp') center/cover no-repeat;opacity:.55;mix-blend-mode:multiply;pointer-events:none;z-index:0;mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%);-webkit-mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%)}
 }
+/* 引导入口：做成看得见的大按钮，而不是一行小字链接（引导讲的是创建账号那一段，值得被找到）。 */
+.tour-start{min-height:48px;margin-top:14px;padding:10px 16px;font-size:14px;font-weight:700;border:1px solid var(--gold);border-radius:3px;background:transparent;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
+.tour-start:hover{background:#e8d8b822;border-color:var(--ink)}
+@media(max-width:520px){.tour-start{width:100%;justify-content:center}}
