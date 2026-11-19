@@ -117,3 +117,15 @@ html[data-theme=dark] .tour-ring{background:#e8d8b81a;box-shadow:0 0 0 9999px #0
 .tour-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .tour-actions button{min-height:48px;flex:1;min-width:88px}
 .tour-actions .text-button{flex:0 0 auto;min-width:0;min-height:44px}
+/* ---------- 生成的纸纹与磨摊（P2） ----------
+   两张图都出在本机 5060 Ti 的 Qwen-Image 2.1 上（照实例里现成工作流的生图分支：int8 UNET +
+   qwen3vl_8b 编码器 + TextEncodeQwenImage21 + 30 步 / cfg 1 / euler+simple），灰度、轻量、可追溯：
+   源图 02_Art/chrome/*.png，运行副本 04_Code/web/chrome/*.webp。详见 02_Art/CHROME_MANIFEST.json。
+   纸纹只在浅色用（深色已有场景图，两套底不要打架）；污渍不平铺——它本来就该是一整块晕染，
+   平铺会露出重复。 */
+html[data-theme=light] body{background-image:url('./chrome/paper.webp');background-size:384px 384px;background-repeat:repeat}
+@media(min-width:781px){
+  .entry-shell{position:relative}
+  .entry-intro,.entry-card{position:relative;z-index:1}
+  html[data-theme=light] .entry-shell::after{content:"";position:absolute;inset:-40px;background:url('./chrome/stain.webp') center/cover no-repeat;opacity:.55;mix-blend-mode:multiply;pointer-events:none;z-index:0;mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%);-webkit-mask-image:radial-gradient(120% 92% at 50% 50%,transparent 54%,#000 100%)}
+}

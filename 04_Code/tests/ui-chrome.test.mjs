@@ -112,7 +112,8 @@ test('CSS 里引用的图片都存在，且会被发布出去', () => {
       const rel = ref.replace(/^\.\//, '');
       assert.ok(existsSync(resolve(codeRoot, 'web', rel)), `${name} 引用的文件不存在：${ref}`);
       const top = rel.split('/')[0];
-      assert.ok(packer.includes(`'${rel}'`) || packer.includes(`web/vendor`) && top === 'vendor',
+      const copiedByDirectory = (top === 'vendor' && packer.includes('web/vendor')) || (top === 'chrome' && packer.includes('web/chrome'));
+      assert.ok(packer.includes(`'${rel}'`) || copiedByDirectory,
         `${name} 引用的 ${rel} 没进 static-site.mjs 的复制清单，上线会 404`);
     }
   }
